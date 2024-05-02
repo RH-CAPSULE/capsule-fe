@@ -8,8 +8,6 @@ export const _appRelated = ['Chrome', 'Drive', 'Dropbox', 'Evernote', 'Github'].
     id: _mock.id(index),
     name,
     system: (index === 2 && 'Windows') || (index === 4 && 'Windows') || 'Mac',
-    price: index === 0 || index === 2 || index === 4 ? 0 : _mock.number.price(index),
-    rating: _mock.number.rating(index),
     review: randomNumberRange(999, 99999),
     shortcut:
       (name === 'Chrome' && '/assets/icons/apps/ic_chrome.svg') ||
@@ -44,7 +42,6 @@ export const _appAuthors = [...Array(3)].map((_, index) => ({
 
 export const _appInvoices = [...Array(5)].map((_, index) => ({
   id: `${Date.now() + index}`,
-  price: _mock.number.price(index),
   category: randomInArray(['Android', 'Mac', 'Windows']),
   status: randomInArray(['paid', 'out_of_date', 'in_progress']),
 }));
