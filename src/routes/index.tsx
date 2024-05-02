@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import {
   // APP
   SignUpPage,
+  HomePage,
 } from './elements';
 // ----------------------------------------------------------------------
 
@@ -12,7 +13,11 @@ export default function Router() {
     {
       // element: <MainLayout />,
       path: '',
-      children: [{ path: 'sign-up', element: <SignUpPage /> }],
+      element: <HomePage />,
+      children: [
+        { path: 'home', element: <HomePage /> },
+        { path: 'sign-up', element: <SignUpPage /> },
+      ],
     },
     { path: '*', element: <Navigate to="/" replace /> },
   ]);
