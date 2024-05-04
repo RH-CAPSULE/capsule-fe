@@ -1,7 +1,7 @@
 import React from 'react';
 
-const LoginPage = () => {
-  return <div>LoginPage</div>;
-};
-
+const LoginPage = () => (
+  // eslint-disable-next-line no-console
+  <div>LoginPage</div>
+);
 export default LoginPage;
