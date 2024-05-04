@@ -5,6 +5,7 @@ import {
   SignUpPage,
   HomePage,
 } from './elements';
+import TestPage from '../_mock/TestPage';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -13,10 +14,11 @@ export default function Router() {
     {
       // element: <MainLayout />,
       path: '',
-      element: <HomePage />,
       children: [
+        { path: '', element: <HomePage /> },
         { path: 'home', element: <HomePage /> },
         { path: 'sign-up', element: <SignUpPage /> },
+        { path: 'api', element: <TestPage /> },
       ],
     },
     { path: '*', element: <Navigate to="/" replace /> },

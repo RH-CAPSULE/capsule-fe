@@ -5,6 +5,7 @@ import { Suspense, lazy, ElementType } from 'react';
 // ----------------------------------------------------------------------
 
 const Loadable = (Component: ElementType) => (props: any) => (
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   <Suspense fallback={<></>}>
     <Component {...props} />
   </Suspense>
