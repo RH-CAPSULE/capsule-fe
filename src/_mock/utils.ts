@@ -11,3 +11,9 @@ export function randomNumberRange(min: number, max: number) {
 export function randomInArray<T>(array: T[]) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+export async function sleep(timeout: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
