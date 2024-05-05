@@ -1,7 +1,8 @@
 // routes
+import { handleAlert } from 'react-handle-alert';
 import { axiosInstance } from '../apis/axios';
-import { TOKEN_KEY } from '../static';
-import localStorageAvailable from '../utils/localStorageAvailable';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../static';
+import { IToken } from './types';
 // utils
 
 // ----------------------------------------------------------------------
@@ -48,20 +49,31 @@ export const tokenExpired = (exp: number) => {
 
   clearTimeout(expiredTimer);
 
+  // 1일보다 많이 남으면 실행하지 않음
+  if (timeLeft >= 86400000) {
+    return;
+  }
+
   expiredTimer = setTimeout(() => {
-    alert('Token expired');
+    handleAlert('로그인이 만료되었습니다.');
 
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(ACCESS_TOKEN_KEY!);
+    localStorage.removeItem(REFRESH_TOKEN_KEY!);
 
+    // window.location.reload();
     // window.location.href = PATH.login;
   }, timeLeft);
 };
 
 // ----------------------------------------------------------------------
 
-export const setSession = (accessToken: string | null) => {
-  if (accessToken) {
-    localStorage.setItem('accessToken', accessToken);
+export const setSession = (token: IToken) => {
+  const { accessToken, refreshToken } = token;
+  if (accessToken && refreshToken) {
+    localStorage.setItem(ACCESS_TOKEN_KEY!, accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY!, refreshToken);
+
+    console.log('setSession', accessToken, refreshToken);
 
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
@@ -69,40 +81,8 @@ export const setSession = (accessToken: string | null) => {
     const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
     tokenExpired(exp);
   } else {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(ACCESS_TOKEN_KEY!);
 
     delete axiosInstance.defaults.headers.common.Authorization;
   }
-};
-
-// ----------------------------------------------------------------------
-
-export const getTokens = () => {
-  if (!localStorageAvailable()) {
-    return null;
-  }
-
-  const tokenString = localStorage.getItem(TOKEN_KEY!);
-  const tokenObj = tokenString ? JSON.parse(tokenString) : null;
-
-  return tokenObj;
-};
-
-export const getAccessToken = () => {
-  if (!localStorageAvailable()) {
-    return '';
-  }
-
-  return getTokens()?.accessToken || '';
-};
-
-export const setAccessToken = (accessToken: string) => {
-  if (!localStorageAvailable()) {
-    return;
-  }
-
-  const tokenObj = getTokens() || {};
-  tokenObj.accessToken = accessToken;
-
-  localStorage.setItem(TOKEN_KEY!, JSON.stringify(tokenObj));
 };
