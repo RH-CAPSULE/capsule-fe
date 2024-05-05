@@ -1,0 +1,100 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.layout {
+  min-height: 100vh;
+  background-image: url('../../assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+  animation: background 60s ease infinite;
+
+  .capsule {
+    margin-block: px(32);
+  }
+
+  main {
+    height: 100%;
+    padding: px(32);
+    min-height: 100vh;
+    max-width: px(500);
+    @include flexLayout(column, center, center, 0);
+    margin-inline: auto;
+    border-inline: 1px solid $borderColor;
+
+    h1 {
+      font-size: px(32);
+      color: $white;
+    }
+
+    section {
+      width: px(232);
+      @include flexLayout(column, center, center, 0);
+    }
+
+    .formSection {
+      width: 100%;
+      @include flexLayout(column, center, center, 0);
+
+      form {
+        width: px(232);
+        @include flexLayout(column, center, center, 8);
+
+        .description {
+          color: $gray-200;
+          font-weight: 600;
+          font-size: px(11);
+          text-align: center;
+        }
+      }
+    }
+
+    .authOptions {
+      @include flexLayout(row, center, center, 12);
+      margin-block: px(16);
+      a {
+        color: $gray-200;
+        font-weight: 700;
+        font-size: px(11);
+        text-decoration: underline;
+      }
+      span {
+        width: px(1);
+        height: px(11);
+        background-color: $gray-100;
+      }
+    }
+
+    .or {
+      width: 100%;
+      @include flexLayout(row, center, center, 12);
+      color: $gray-200;
+      font-weight: 700;
+      font-size: px(11);
+      margin-block: px(16);
+      white-space: nowrap;
+      &::before,
+      &::after {
+        content: '';
+        width: 100%;
+        height: px(1);
+        background-color: $gray-100;
+      }
+    }
+
+    .socialLoginButton {
+      @include flexLayout(row, center, center, 8);
+    }
+  }
+
+  @keyframes background {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
