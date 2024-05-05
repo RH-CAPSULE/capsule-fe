@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { http, HttpResponse } from 'msw';
 import { sleep } from '../utils';
 import { API_DOMAIN } from '../../static';
