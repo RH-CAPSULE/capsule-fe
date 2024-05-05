@@ -77,7 +77,11 @@ const LoginForm = () => {
           8자리 이상이어야 합니다.
         </p>
 
-        <Button type="submit" disabled={!isValid}>
+        <Button
+          type="submit"
+          disabled={!isValid}
+          loading={signInMutation.isPending}
+        >
           로그인
         </Button>
       </FormProvider>
