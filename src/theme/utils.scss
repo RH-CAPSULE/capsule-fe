@@ -1,5 +1,5 @@
-@mixin fontStyle($size, $weight, $spacing) {
-  font-size: $size;
+@mixin fontStyle($size, $weight, $spacing: $spacingDefalt) {
+  font-size: px($size);
   font-style: normal;
   font-weight: $weight;
   letter-spacing: $spacing;
