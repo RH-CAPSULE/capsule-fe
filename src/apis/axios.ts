@@ -3,15 +3,13 @@ import { API_DOMAIN } from '../static';
 
 const TIMEOUT_TIME = 10_000;
 
-export const AxiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: API_DOMAIN,
   headers: {
     'Content-Type': 'application/vnd.api+json',
   },
   // withCredentials:true, // 쿠키 cors 통신 설정
 });
-
-export default AxiosInstance;
 
 // 취소 토큰을 생성하는 함수
 const cancelTokenSource = () => {
@@ -25,7 +23,7 @@ const cancelTokenSource = () => {
 let firstRequestCancelToken = null;
 // Request interceptor for API calls
 
-AxiosInstance.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem('capsule_token') as any;
     config.headers.Authorization = `Bearer ${token?.access}`;
@@ -41,7 +39,7 @@ AxiosInstance.interceptors.request.use(
     Promise.reject(error)
 );
 
-AxiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     // error handling
