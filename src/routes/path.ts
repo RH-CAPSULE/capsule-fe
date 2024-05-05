@@ -1,5 +1,5 @@
 export const PATH = {
-  DEFAULT: '/',
+  root: '/',
   HOME: '/home',
   SIGN_UP: '/sign-up',
 };
