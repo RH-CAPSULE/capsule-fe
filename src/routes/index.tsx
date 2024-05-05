@@ -9,6 +9,7 @@ import {
 import TestPage from '../_mock/TestPage';
 import MainLayout from '../layouts/main/MainLayout';
 import AuthGuard from '../auth/AuthGuard';
+import { PATH } from './path';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -31,7 +32,7 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        // { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { element: <Navigate to={PATH.HOME} replace />, index: true },
         { path: 'api', element: <TestPage /> },
         { path: 'home', element: <HomePage /> },
       ],
