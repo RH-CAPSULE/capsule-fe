@@ -5,16 +5,18 @@
   all: initial;
   width: 100%;
   padding: px(8);
-  box-sizing: border-box;
-  text-align: center;
-  background-color: $white;
+  transition: 0.2s;
   font-weight: 600;
-  border-radius: px(8);
   color: $gray-200;
+  font-size: px(13);
+  text-align: center;
+  border-radius: px(8);
   box-shadow: $boxShadow;
+  box-sizing: border-box;
+  background-color: $white;
 
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
