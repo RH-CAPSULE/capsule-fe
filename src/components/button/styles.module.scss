@@ -1,2 +1,43 @@
+@import 'src/theme/utils.scss';
+@import 'src/theme/variables.scss';
+
 .button {
+  all: initial;
+  width: 100%;
+  padding: px(8);
+  transition: 0.2s;
+  font-weight: 600;
+  color: $gray-200;
+  font-size: px(13);
+  text-align: center;
+  border-radius: px(8);
+  box-shadow: $boxShadow;
+  box-sizing: border-box;
+  background-color: $white;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &[data-color='AQUA'] {
+    background-color: $aqua;
+    color: $white;
+  }
+  &[data-color='MAGENTA'] {
+    background-color: $magenta;
+    color: $white;
+  }
+  &[data-color='PURPLE'] {
+    background-color: $purple;
+    color: $white;
+  }
+  &[data-color='BROWN'] {
+    background-color: $brown;
+    color: $white;
+  }
+  &[data-color='GREIGE'] {
+    background-color: $greige;
+    color: $white;
+  }
 }
