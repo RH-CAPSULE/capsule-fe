@@ -1,0 +1,41 @@
+import { useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+// components
+import LoadingScreen from '../pages/splash';
+//
+import Login from '../pages/login';
+import { useAuthStore } from '../store';
+
+// ----------------------------------------------------------------------
+
+type AuthGuardProps = {
+  children: React.ReactNode;
+};
+
+export default function AuthGuard({ children }: AuthGuardProps) {
+  const { isLoggedIn, isInitialized } = useAuthStore();
+
+  const { pathname } = useLocation();
+
+  const [requestedLocation, setRequestedLocation] = useState<string | null>(
+    null
+  );
+
+  if (!isInitialized) {
+    return <LoadingScreen />;
+  }
+
+  if (!isLoggedIn) {
+    if (pathname !== requestedLocation) {
+      setRequestedLocation(pathname);
+    }
+    return <Login />;
+  }
+
+  if (requestedLocation && pathname !== requestedLocation) {
+    setRequestedLocation(null);
+    return <Navigate to={requestedLocation} />;
+  }
+
+  return <> {children} </>;
+}
