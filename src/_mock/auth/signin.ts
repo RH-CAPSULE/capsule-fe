@@ -1,9 +1,10 @@
 import { http, HttpResponse } from 'msw';
+import { PATH_API } from 'src/apis/path';
 import { sleep } from '../utils';
 import { API_DOMAIN } from '../../static';
 
 export const signInHandler = http.post(
-  `${API_DOMAIN}/auth/signin`,
+  `${API_DOMAIN}${PATH_API.SIGN_IN}`,
   async ({ request, params, cookies }) => {
     // const { email, password } = (await request.json()) as any;
 
@@ -12,9 +13,9 @@ export const signInHandler = http.post(
     return HttpResponse.json(
       {
         accessToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiLrsJXrj4TrpZzsnZjsiojtjbzthqDtgbAiLCJpYXQiOjE1MTYyMzkwMjJ9.j9YVMqzebeAsKhNuTTTFTRuFMndbZ1tNmod3-duDbZo',
+          'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IuuwleuPhOulnOydmOyKiO2NvO2GoO2BsCIsImlhdCI6MTcxNDkwMDExMiwiZXhwIjoxOTE0OTAzNzEyfQ._P5nsbxyq0g7UCKMQT3h20bJVXTOLLNJ6Su7E6EX5fY',
         refreshToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiLrsJXrj4TrpZzsnZjsiojtjbzthqDtgbAiLCJpYXQiOjE1MTYyMzkwMjJ9.j9YVMqzebeAsKhNuTTTFTRuFMndbZ1tNmod3-duDbZo',
+          'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IuuwleuPhOulnOydmOyKiO2NvO2GoO2BsCIsImlhdCI6MTcxNDkwMDExMiwiZXhwIjoxOTE0OTAzNzEyfQ._P5nsbxyq0g7UCKMQT3h20bJVXTOLLNJ6Su7E6EX5fY',
       },
       {
         status: 200,

@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.32.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -25,6 +26,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-handle-alert": "^0.3.3",
+    "react-helmet-async": "^2.0.4",
+    "react-hook-form": "^7.51.4",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "sass": "^1.75.0",
@@ -43,6 +46,7 @@
     "workbox-routing": "^6.6.0",
     "workbox-strategies": "^6.6.0",
     "workbox-streams": "^6.6.0",
+    "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
   "eslintConfig": {
