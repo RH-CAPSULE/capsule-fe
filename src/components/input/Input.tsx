@@ -5,8 +5,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   // add props
 }
 
-const Input = ({ className = '', ...other }: Props) => {
-  return <input className={`${styles.input} ${className}`} {...other} />;
-};
+const Input = ({ className = '', ...other }: Props) => (
+  <input className={`${styles.input} ${className}`} {...other} />
+);
 
 export default Input;
