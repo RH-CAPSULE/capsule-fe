@@ -11,7 +11,8 @@ const enableMocking = async () => {
 
   const { worker } = await import('./_mock/browser');
 
-  worker.start();
+  // eslint-disable-next-line consistent-return
+  return worker.start();
 };
 
 enableMocking().then(() => {
