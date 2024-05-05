@@ -6,6 +6,7 @@ import {
   HomePage,
 } from './elements';
 import TestPage from '../_mock/TestPage';
+import MainLayout from '../layouts/main/MainLayout';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -14,6 +15,7 @@ export default function Router() {
     {
       // element: <MainLayout />,
       path: '',
+      element: <MainLayout />,
       children: [
         { path: '', element: <HomePage /> },
         { path: 'home', element: <HomePage /> },
