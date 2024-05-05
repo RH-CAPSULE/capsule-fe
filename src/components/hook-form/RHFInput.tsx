@@ -28,6 +28,8 @@ export default function RHFInput({
 
   const isError = !!errors[name];
 
+  const errorMessage = (errors[name]?.message as string) || '';
+
   if (loading) {
     return (
       <div className="RHFInput">
@@ -50,6 +52,7 @@ export default function RHFInput({
         {...register(name, { required })}
         {...other}
       />
+      {isError && <p className="RHFHelperText">{errorMessage}</p>}
     </div>
   );
 }
