@@ -21,6 +21,10 @@
     cursor: not-allowed;
   }
 
+  &[data-loading='true'] {
+    pointer-events: none;
+  }
+
   &[data-color='AQUA'] {
     background-color: $aqua;
     color: $white;
