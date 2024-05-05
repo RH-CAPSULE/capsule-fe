@@ -1,0 +1,23 @@
+@mixin fontStyle($size, $weight, $spacing) {
+  font-size: $size;
+  font-style: normal;
+  font-weight: $weight;
+  letter-spacing: $spacing;
+}
+
+@mixin flexLayout(
+  $direction: row,
+  $justifyContent: center,
+  $alignItems: center,
+  $gap: 0
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  gap: px($gap);
+}
+
+@function px($rem) {
+  @return calc(($rem / 16) * 1rem);
+}

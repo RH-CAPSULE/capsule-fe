@@ -1,0 +1,15 @@
+@import 'src/theme/colors.scss';
+@import 'src/theme/utils.scss';
+
+.mainLayout {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.mainLayout > main {
+  min-height: 100vh;
+  max-width: px(500);
+  margin-inline: auto;
+  border-inline: 1px solid $borderColor;
+}
