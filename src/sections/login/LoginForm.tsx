@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
 import styles from './styles.module.scss';
 
+// ----------------------------------------------------------------------
+
 interface IFormValues {
   email: string;
   password: string;
@@ -29,6 +31,8 @@ const defaultValues = {
   email: '',
   password: '',
 };
+
+// ----------------------------------------------------------------------
 
 const LoginForm = () => {
   const { enqueueSnackbar } = useSnackbar();
