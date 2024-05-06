@@ -3,9 +3,7 @@ import styles from './styles.module.scss';
 
 const MainLayout = () => (
   <div className={styles.mainLayout}>
-    <main>
-      <Outlet />
-    </main>
+    <Outlet />
   </div>
 );
 
