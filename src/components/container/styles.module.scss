@@ -1,0 +1,10 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.container {
+  min-height: 100vh;
+  max-width: px(500);
+  margin-inline: auto;
+  @include flexLayout(column, center, center, 0);
+  border-inline: 1px solid $borderColor;
+}
