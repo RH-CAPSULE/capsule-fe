@@ -1,29 +1,53 @@
 import React from 'react';
 import { IconCapsuleBox, IconCapsuleBoxOpen } from 'src/assets/icons';
-import { Theme } from 'src/types/theme';
-import { themeColor } from 'src/utils/styles';
+import { px, themeColor } from 'src/utils/styles';
+import { ICapsuleBox } from 'src/types/capsule';
 import styles from './styles.module.scss';
+import Capsule from '../capsule/Capsule';
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  theme?: Theme;
-  open: boolean;
-  closedAt?: string;
-  openedAt?: string;
-}
+type Props = ICapsuleBox & React.HTMLAttributes<HTMLDivElement>;
 
-const CapsuleBox = ({ theme, closedAt, open, openedAt, ...other }: Props) => {
-  const color = themeColor(theme);
+const CapsuleBox = ({
+  theme,
+  closedAt,
+  openedAt,
+  capsules,
+  ...other
+}: Props) => {
+  const boxColor = themeColor(theme);
+
+  const isOpen = new Date() <= new Date(closedAt);
 
   return (
     <div className={styles.capsuleBox} {...other}>
-      {open ? (
-        <IconCapsuleBoxOpen fill={color} />
+      {isOpen ? (
+        <IconCapsuleBoxOpen fill={boxColor} />
       ) : (
-        <IconCapsuleBox fill={color} />
+        <IconCapsuleBox fill={boxColor} />
       )}
       <div className={styles.textBox}>
-        {closedAt && <p>{closedAt}</p>}
-        {openedAt && <p>{openedAt}</p>}
+        {closedAt && (
+          <p>
+            봉인일자
+            <br />[{closedAt}]
+          </p>
+        )}
+        {openedAt && (
+          <p>
+            개봉일자
+            <br />[{openedAt}]
+          </p>
+        )}
+      </div>
+      <div className={styles.capsules}>
+        {capsules.map((color, i) => (
+          <Capsule
+            key={i}
+            color={color}
+            width={px(80)}
+            className={styles.capsule}
+          />
+        ))}
       </div>
     </div>
   );
