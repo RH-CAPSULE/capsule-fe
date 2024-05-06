@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import localStorageAvailable from 'src/utils/localStorageAvailable';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from 'src/static';
-import { isValidToken, setSession } from './utils';
+import { getUserId, isValidToken, setSession } from './utils';
 import { axiosInstance } from '../apis/axios';
 import { useAuthStore } from '../store';
 import { PATH_API } from '../apis/path';
@@ -35,7 +35,12 @@ export const AuthProvider = ({ children }: Props) => {
 
       const response = await axiosInstance.get(PATH_API.USER_INFO);
 
-      setUser(response.data);
+      const user = {
+        ...response.data,
+        id: getUserId(),
+      };
+
+      setUser(user);
       setIsLoggedIn(true);
       setIsInitialized(true);
     } catch {
