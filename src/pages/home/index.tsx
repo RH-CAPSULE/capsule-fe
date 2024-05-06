@@ -1,13 +1,20 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { CapsuleBox } from 'src/components/capsule-box';
-import { Theme } from 'src/types/theme';
-import { Button } from 'src/components/button';
+// layouts
 import { Container } from 'src/components/container';
 import { Header } from 'src/layouts/header';
+// sections
+import {
+  HomeHeader,
+  HomeCapsuleBox,
+  HomeBottomButtons,
+} from 'src/sections/home';
+import { useCapsuleBox } from 'src/apis/queries/capsule/capsule-box';
+import { ICapsuleBox } from 'src/types/capsule';
 
 const Home = () => {
-  const theme = Theme.AQUA;
+  const { data: capsuleBox } = useCapsuleBox<ICapsuleBox>();
+
   return (
     <>
       <Helmet>
@@ -15,14 +22,11 @@ const Home = () => {
       </Helmet>
       <Header />
       <Container>
-        <h1>박도륜님의 캡슐함</h1>
-        <CapsuleBox
-          open
-          theme={theme}
-          closedAt="2024-05-06"
-          openedAt="2024-05-06"
-        />
-        <Button theme={theme}>캡슐 쓰기</Button>
+        <HomeHeader />
+
+        <HomeCapsuleBox theme={capsuleBox?.theme!} capsuleBox={capsuleBox} />
+
+        <HomeBottomButtons theme={capsuleBox?.theme!} />
       </Container>
     </>
   );
