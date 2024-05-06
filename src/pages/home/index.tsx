@@ -4,6 +4,7 @@ import { CapsuleBox } from 'src/components/capsule-box';
 import { Theme } from 'src/types/theme';
 import { Button } from 'src/components/button';
 import { Container } from 'src/components/container';
+import { Header } from 'src/layouts/header';
 
 const Home = () => {
   const theme = Theme.AQUA;
@@ -12,6 +13,7 @@ const Home = () => {
       <Helmet>
         <title> Home | Capsule</title>
       </Helmet>
+      <Header />
       <Container>
         <h1>박도륜님의 캡슐함</h1>
         <CapsuleBox
