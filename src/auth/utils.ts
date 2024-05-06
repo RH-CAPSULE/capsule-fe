@@ -73,8 +73,6 @@ export const setSession = (token: IToken) => {
     localStorage.setItem(ACCESS_TOKEN_KEY!, accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY!, refreshToken);
 
-    console.log('setSession', accessToken, refreshToken);
-
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
     // This function below will handle when token is expired
@@ -85,4 +83,17 @@ export const setSession = (token: IToken) => {
 
     delete axiosInstance.defaults.headers.common.Authorization;
   }
+};
+
+// ----------------------------------------------------------------------
+
+export const getUserId = () => {
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY!);
+  if (!accessToken) {
+    return '';
+  }
+
+  const { id } = jwtDecode(accessToken);
+
+  return id;
 };
