@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Time Capsule",
+  "name": "적어줘 타임캡슐!",
   "icons": [
     {
       "src": "favicon.ico",
