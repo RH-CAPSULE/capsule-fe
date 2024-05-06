@@ -7,7 +7,7 @@ import {
   LoginPage,
 } from './elements';
 import TestPage from '../_mock/TestPage';
-import MainLayout from '../layouts/main/MainLayout';
+import BackgroundLayout from '../layouts/background/BackgroundLayout';
 import AuthGuard from '../auth/AuthGuard';
 import { PATH } from './path';
 // ----------------------------------------------------------------------
@@ -24,11 +24,11 @@ export default function Router() {
     },
     // App
     {
-      // element: <MainLayout />,
+      // element: <BackgroundLayout />,
       path: '',
       element: (
         <AuthGuard>
-          <MainLayout />
+          <BackgroundLayout />
         </AuthGuard>
       ),
       children: [
