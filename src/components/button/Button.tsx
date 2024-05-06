@@ -4,30 +4,43 @@ import styles from './styles.module.scss';
 import { Loading } from '../loading';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string;
-  loading?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  size?: 'small' | 'medium' | 'large';
+  full?: boolean;
   theme?: Theme | string;
+  loading?: boolean;
+  className?: string;
 }
 
 const Button = ({
-  children,
-  theme = '',
-  loading = false,
-  className = '',
   type = 'button',
+  size = 'medium',
+  theme = '',
+  full = false,
+  loading = false,
+  children,
+  className = '',
   ...other
-}: Props) => (
-  <button
-    // eslint-disable-next-line react/button-has-type
-    type={type}
-    className={`${styles.button} ${className}`}
-    {...other}
-    data-loading={loading}
-    data-theme={theme}
-  >
-    {loading ? <Loading /> : children}
-  </button>
-);
+}: Props) => {
+  const classes = () => {
+    const classArr = [styles.button, styles[size]];
+    if (full) classArr.push(styles.full);
+    if (className) classArr.push(className);
+    return classArr.join(' ');
+  };
+
+  return (
+    <button
+      // eslint-disable-next-line react/button-has-type
+      type={type}
+      className={classes()}
+      {...other}
+      data-loading={loading}
+      data-theme={theme}
+    >
+      {loading ? <Loading /> : children}
+    </button>
+  );
+};
 
 export default Button;
