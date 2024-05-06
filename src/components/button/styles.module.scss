@@ -21,6 +21,29 @@
     cursor: not-allowed;
   }
 
+  // size
+  &.small {
+    width: px(80);
+    height: px(40);
+    font-size: px(13);
+  }
+
+  &.medium {
+    width: px(232);
+    height: px(36);
+  }
+
+  &.large {
+    width: px(330);
+    height: px(48);
+    font-size: px(16);
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  // theme
   &[data-loading='true'] {
     pointer-events: none;
   }
