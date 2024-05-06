@@ -25,23 +25,23 @@
     pointer-events: none;
   }
 
-  &[data-color='AQUA'] {
+  &[data-theme='AQUA'] {
     background-color: $aqua;
     color: $white;
   }
-  &[data-color='MAGENTA'] {
+  &[data-theme='MAGENTA'] {
     background-color: $magenta;
     color: $white;
   }
-  &[data-color='PURPLE'] {
+  &[data-theme='PURPLE'] {
     background-color: $purple;
     color: $white;
   }
-  &[data-color='BROWN'] {
+  &[data-theme='BROWN'] {
     background-color: $brown;
     color: $white;
   }
-  &[data-color='GREIGE'] {
+  &[data-theme='GREIGE'] {
     background-color: $greige;
     color: $white;
   }
