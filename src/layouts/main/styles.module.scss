@@ -8,13 +8,6 @@
   background-position: center;
   animation: background 60s ease infinite;
 
-  & > main {
-    min-height: 100vh;
-    max-width: px(500);
-    margin-inline: auto;
-    border-inline: 1px solid $borderColor;
-  }
-
   @keyframes background {
     0% {
       background-position: 0% 50%;
