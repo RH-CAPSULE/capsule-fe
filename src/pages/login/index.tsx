@@ -7,6 +7,7 @@ import {
   LoginWithSocial,
 } from 'src/sections/login';
 // styles
+import { Container } from 'src/components/container';
 import styles from './styles.module.scss';
 
 /**
@@ -19,7 +20,7 @@ const LoginPage = () => {
       <Helmet>
         <title> Sign in | Capsule</title>
       </Helmet>
-      <main>
+      <Container>
         <LoginHeader />
 
         <LoginForm />
@@ -27,7 +28,7 @@ const LoginPage = () => {
         <LoginAuthOption />
 
         <LoginWithSocial />
-      </main>
+      </Container>
     </div>
   );
 };

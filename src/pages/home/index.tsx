@@ -1,12 +1,28 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { CapsuleBox } from 'src/components/capsule-box';
+import { Theme } from 'src/types/theme';
+import { Button } from 'src/components/button';
+import { Container } from 'src/components/container';
 
-const Home = () => (
-  // eslint-disable-next-line no-console
-  <div>
-    <Helmet>
-      <title> Home | Capsule</title>
-    </Helmet>
-  </div>
-);
+const Home = () => {
+  const theme = Theme.AQUA;
+  return (
+    <>
+      <Helmet>
+        <title> Home | Capsule</title>
+      </Helmet>
+      <Container>
+        <h1>박도륜님의 캡슐함</h1>
+        <CapsuleBox
+          open
+          theme={theme}
+          closedAt="2024-05-06"
+          openedAt="2024-05-06"
+        />
+        <Button theme={theme}>캡슐 쓰기</Button>
+      </Container>
+    </>
+  );
+};
 export default Home;

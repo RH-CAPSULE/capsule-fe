@@ -8,25 +8,15 @@
   background-position: center;
   animation: background 60s ease infinite;
 
-  main {
-    height: 100%;
-    padding: px(32);
-    min-height: 100vh;
-    max-width: px(500);
-    @include flexLayout(column, center, center, 0);
-    margin-inline: auto;
-    border-inline: 1px solid $borderColor;
-
-    @keyframes background {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+  @keyframes background {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 }
