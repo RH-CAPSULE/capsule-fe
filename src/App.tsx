@@ -37,7 +37,7 @@ function App() {
                 닫기
               </button>
             )}
-            autoHideDuration={5000}
+            autoHideDuration={3000}
           >
             <BrowserRouter>
               <Router />

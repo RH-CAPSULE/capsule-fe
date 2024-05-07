@@ -25,8 +25,8 @@ let firstRequestCancelToken = null;
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem('capsule_token') as any;
-    config.headers.Authorization = `Bearer ${token?.access}`;
+    // const token = localStorage.getItem('capsule_token') as any;
+    // config.headers.Authorization = `Bearer ${token?.access}`;
 
     firstRequestCancelToken = cancelTokenSource();
     config.cancelToken = firstRequestCancelToken.token;
