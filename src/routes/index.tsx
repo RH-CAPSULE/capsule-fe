@@ -37,6 +37,6 @@ export default function Router() {
         { path: 'home', element: <HomePage /> },
       ],
     },
-    { path: '*', element: <Navigate to="/" replace /> },
+    // { path: '*', element: <Navigate to="/" replace /> },
   ]);
 }
