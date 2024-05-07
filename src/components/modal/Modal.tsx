@@ -11,12 +11,13 @@ const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
   const bgRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
 
+  const [innerOpenState, setInnerOpenState] = React.useState(false);
+
   const onBackgroundClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target === bgRef.current) {
-      modalRef.current!.style.animation = `${styles.fadeOut} 0.2s ease forwards`;
-      modalRef.current!.onanimationend = () => onClose();
+      onClose();
     }
   };
 
@@ -26,7 +27,20 @@ const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
     }
   };
 
-  if (!open) return null;
+  React.useEffect(() => {
+    if (open) {
+      setInnerOpenState(open);
+    } else {
+      if (!modalRef.current) return;
+      modalRef.current.style.animation = `${styles.fadeOut} 0.2s ease forwards`;
+      modalRef.current.onanimationend = () => {
+        setInnerOpenState(false);
+        modalRef.current!.onanimationend = null;
+      };
+    }
+  }, [open]);
+
+  if (!innerOpenState) return null;
 
   return (
     <div
@@ -66,8 +80,12 @@ Modal.Content = ({ children }: ModalContentProps) => {
 
 // ----------------------------------------------------------------------
 
-Modal.Action = () => {
-  return <div>Modal Action</div>;
+interface ModalActionProps {
+  children: React.ReactNode;
+}
+
+Modal.Action = ({ children }: ModalActionProps) => {
+  return <div className={styles.modalAction}>{children}</div>;
 };
 
 // ----------------------------------------------------------------------
