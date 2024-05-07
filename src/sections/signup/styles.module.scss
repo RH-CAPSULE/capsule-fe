@@ -5,6 +5,16 @@
   width: px(232);
   @include flexLayout(column, center, center, 0);
 
+  // login-header
+  h1 {
+    font-size: px(32);
+    color: $white;
+  }
+
+  .capsule {
+    margin-block: px(32);
+  }
+
   // signup-form
   form {
     width: px(232);
@@ -15,6 +25,8 @@
       font-weight: 600;
       font-size: px(11);
       text-align: center;
+      margin-bottom: px(16);
+
     }
   }
 
