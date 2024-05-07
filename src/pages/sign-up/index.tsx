@@ -15,9 +15,9 @@ const SignUpPage = () => (
   // eslint-disable-next-line no-console
   <div className={styles.layout}>
     <Container>
-    <LoginHeader />
-    <SignupForm />
-    <SignupLoginReturn />
+      <LoginHeader />
+      <SignupForm />
+      <SignupLoginReturn />
     </Container>
   </div>
 );

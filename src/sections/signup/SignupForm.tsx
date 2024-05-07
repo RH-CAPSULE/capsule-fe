@@ -1,7 +1,7 @@
 import { FieldErrors, useForm } from 'react-hook-form';
 import { Button } from 'src/components/button';
 import { RHFInput, FormProvider } from 'src/components/hook-form';
-import { useSignIn } from 'src/apis/queries/auth/sign-in';
+import { useSignUp } from 'src/apis/queries/auth/sign-up';
 import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +12,7 @@ import styles from './styles.module.scss';
 
 interface IFormValues {
   name : string;
-  email: string;
+  userEmail: string;
   password: string;
   passwordConfirm: string;
 }
@@ -20,8 +20,8 @@ interface IFormValues {
 const signupSchema = Yup.object().shape({
   name: Yup.string()
     .required('이름을 입력해주세요.')
-    .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이름 형식이 아닙니다.'),
-  email: Yup.string()
+    .max(12, '이름은 12자 이하여야 합니다.'),
+  userEmail: Yup.string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이메일 형식이 아닙니다.'),
   password: Yup.string()
@@ -37,7 +37,7 @@ const signupSchema = Yup.object().shape({
 
 const defaultValues = {
   name: '',
-  email: '',
+  userEmail: '',
   password: '',
   passwordConfirm: '',
 };
@@ -47,7 +47,7 @@ const defaultValues = {
 const SignupForm = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const signInMutation = useSignIn<IFormValues>();
+  const signUpMutation = useSignUp<IFormValues>();
 
   const methods = useForm<IFormValues>({
     defaultValues,
@@ -60,10 +60,11 @@ const SignupForm = () => {
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
-    const { name, email, password, passwordConfirm } = data;
-    signInMutation.mutate({
+    const { name, userEmail, password } = data;
+    
+    signUpMutation.mutate({
       name,
-      email,
+      userEmail,
       password: sha256(password),
       passwordConfirm: sha256(password),
     });
@@ -73,11 +74,14 @@ const SignupForm = () => {
     if (error.name) {
       enqueueSnackbar(error.name.message, { variant: 'error' });
     }
-    if (error.email) {
-      enqueueSnackbar(error.email.message, { variant: 'error' });
+    if (error.userEmail) {
+      enqueueSnackbar(error.userEmail.message, { variant: 'error' });
     }
     if (error.password) {
       enqueueSnackbar(error.password.message, { variant: 'error' });
+    }
+    if (error.passwordConfirm) {
+      enqueueSnackbar(error.passwordConfirm.message, { variant: 'error' });
     }
   };
 
@@ -88,7 +92,7 @@ const SignupForm = () => {
         onSubmit={handleSubmit(onSubmit, onInvalid)}
       >
         <RHFInput name="name" placeholder="이름" inputMode="email" autoComplete="username"/>
-        <RHFInput name="email" placeholder="이메일" inputMode="email" autoComplete="useremail"/>
+        <RHFInput name="userEmail" placeholder="이메일" inputMode="email" autoComplete="userEmail"/>
         <RHFInput type="password" name="password" placeholder="비밀번호" autoComplete="current-password"/>
         <RHFInput type="password" name="passwordConfirm" placeholder="비밀번호 확인"/>
 
@@ -100,8 +104,8 @@ const SignupForm = () => {
 
         <Button
           type="submit"
-          disabled={!isValid}
-          loading={signInMutation.isPending}
+          // disabled={!isValid}
+          loading={signUpMutation.isPending}
         >
           회원가입
         </Button>
@@ -110,4 +114,6 @@ const SignupForm = () => {
   );
 };
 
+
 export default SignupForm;
+
