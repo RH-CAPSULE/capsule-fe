@@ -1,0 +1,38 @@
+.drawerContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #000000cc;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+  color: #000;
+
+  .drawerBox {
+    width: 100%;
+    min-height: 100vh;
+    max-width: 500px;
+    animation: 0.2s rightIn ease forwards;
+    background-color: #fff;
+  }
+
+  @keyframes rightIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes rightOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}

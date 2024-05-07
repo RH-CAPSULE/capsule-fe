@@ -5,6 +5,7 @@
   all: initial;
   width: 100%;
   padding: px(8);
+  cursor: pointer;
   transition: 0.2s;
   font-weight: 600;
   color: $gray-200;
@@ -37,6 +38,11 @@
     width: px(330);
     height: px(48);
     font-size: px(16);
+
+    &:disabled {
+      opacity: 1;
+      background-color: $gray-100;
+    }
   }
 
   &.full {

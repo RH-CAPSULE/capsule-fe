@@ -6,7 +6,7 @@ import { API_DOMAIN } from '../../static';
 export const capsuleBoxHandler = http.get(
   `${API_DOMAIN}${PATH_API.CAPSULE_BOX}`,
   async ({ request, params, cookies }) => {
-    await sleep(3000);
+    await sleep(1000);
 
     return HttpResponse.json(
       {
