@@ -7,6 +7,16 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * @example
+ * <Modal open={open} onClose={onClose}>
+ *   <Modal.Title>Test</Modal.Title>
+ *   <Modal.Content>Hi!</Modal.Content>
+ *   <Modal.Action>
+ *     <Button onClick={() => setOpen(false)}>Close</Button>
+ *   </Modal.Action>
+ * </Modal>
+ */
 const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
   const bgRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
