@@ -72,7 +72,7 @@ const LoginForm = () => {
         methods={methods}
         onSubmit={handleSubmit(onSubmit, onInvalid)}
       >
-        <RHFInput name="email" placeholder="이메일" inputMode="email" />
+        <RHFInput name="email" placeholder="이메일" inputMode="email"/>
         <RHFInput type="password" name="password" placeholder="비밀번호"/>
 
         <p className={styles.description}>
@@ -83,7 +83,7 @@ const LoginForm = () => {
 
         <Button
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
           loading={signInMutation.isPending}
         >
           로그인
