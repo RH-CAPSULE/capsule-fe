@@ -18,5 +18,21 @@
     }
   }
 
+  // Signup-login-return
+  .authOptions {
+    @include flexLayout(row, center, center, 12);
+    margin-block: px(16);
+    a {
+      color: $gray-200;
+      font-weight: 700;
+      font-size: px(11);
+      text-decoration: underline;
+    }
+    span {
+      width: px(1);
+      height: px(11);
+      background-color: $gray-100;
+    }
+  }
 
 }
