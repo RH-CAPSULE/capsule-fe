@@ -15,3 +15,55 @@
     cursor: pointer;
   }
 }
+
+/* Drawer menu */
+.navMobile {
+  height: 100%;
+  padding: px(16);
+  @include flexLayout(column, flex-start, center, 16);
+
+  .userInfo {
+    margin-top: px(16);
+    color: $gray-200;
+    font-weight: 600;
+    @include flexLayout(column, center, flex-start, 8);
+  }
+
+  .divider {
+    width: 100%;
+    height: px(1);
+    background-color: $gray-100;
+  }
+
+  ul {
+    width: 100%;
+    list-style: none;
+
+    li {
+      margin-block: px(8);
+      padding: px(8);
+      cursor: pointer;
+      transition: background 200ms;
+    }
+
+    li.active {
+      color: #000;
+      background-color: $background;
+      border-radius: px(8);
+      font-weight: 600;
+    }
+
+    a {
+      color: $gray-200;
+      font-weight: 600;
+      text-decoration: none;
+      @include flexLayout(row, flex-start, center, 8);
+    }
+  }
+
+  .copyright {
+    font-size: 0.9rem !important;
+    text-align: center;
+    margin-bottom: px(16);
+  }
+}

@@ -1,3 +1,6 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
 .drawerContainer {
   position: fixed;
   left: 0;
@@ -11,11 +14,11 @@
   color: #000;
 
   .drawerBox {
-    width: 100%;
+    min-width: px(220);
+    max-width: px(500);
     min-height: 100vh;
-    max-width: 500px;
     animation: 0.2s rightIn ease forwards;
-    background-color: #fff;
+    background-color: $white;
   }
 
   @keyframes rightIn {
