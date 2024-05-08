@@ -15,7 +15,7 @@ interface IFormValues {
   password: string;
 }
 
-const loginSchema = Yup.object().shape({
+const signupSchema = Yup.object().shape({
   email: Yup.string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이메일 형식이 아닙니다.'),
@@ -41,7 +41,7 @@ const LoginForm = () => {
 
   const methods = useForm<IFormValues>({
     defaultValues,
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(signupSchema),
   });
 
   const {
@@ -72,8 +72,8 @@ const LoginForm = () => {
         methods={methods}
         onSubmit={handleSubmit(onSubmit, onInvalid)}
       >
-        <RHFInput name="email" placeholder="이메일" inputMode="email" />
-        <RHFInput type="password" name="password" placeholder="비밀번호" />
+        <RHFInput name="email" placeholder="이메일" inputMode="email"/>
+        <RHFInput type="password" name="password" placeholder="비밀번호"/>
 
         <p className={styles.description}>
           * 비밀번호는 특수문자, 숫자를 포함하여
@@ -83,7 +83,7 @@ const LoginForm = () => {
 
         <Button
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
           loading={signInMutation.isPending}
         >
           로그인
