@@ -7,4 +7,8 @@ export const PATH = {
   HOME: '/home',
   // capsule
   WRITE: 'capsule/write',
+  // 캡슐 내역
+  HISTORY: '/history',
+  // 문의하기
+  INQUIRY: '/inquiry',
 };

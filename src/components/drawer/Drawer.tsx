@@ -1,5 +1,8 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import styles from './styles.module.scss';
+
+const drawerRoot = document.getElementById('drawer-root')!;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -26,7 +29,7 @@ const Drawer = ({ children, open, onClose, ...other }: Props) => {
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div
       ref={bgRef}
       tabIndex={0}
@@ -38,7 +41,8 @@ const Drawer = ({ children, open, onClose, ...other }: Props) => {
       <div ref={drawerRef} className={styles.drawerBox} {...other}>
         {children}
       </div>
-    </div>
+    </div>,
+    drawerRoot
   );
 };
 
