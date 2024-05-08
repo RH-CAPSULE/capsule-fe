@@ -19,17 +19,16 @@ const signupSchema = Yup.object().shape({
   email: Yup.string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이메일 형식이 아닙니다.'),
-  password: Yup.string()
-    .required('비밀번호를 입력해주세요.')
-    .matches(
-      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{8,}$/,
-      '비밀번호는 특수문자, 숫자를 포함하여 8자리 이상이어야 합니다.'
-    ),
+  password: Yup.string().required('비밀번호를 입력해주세요.'),
+  // .matches(
+  //   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{8,}$/,
+  //   '비밀번호는 특수문자, 숫자를 포함하여 8자리 이상이어야 합니다.'
+  // ),
 });
 
 const defaultValues = {
-  email: '',
-  password: '',
+  email: 'dohun8758@naver.com',
+  password: '1234',
 };
 
 // ----------------------------------------------------------------------
@@ -52,8 +51,9 @@ const LoginForm = () => {
   const onSubmit = (data: IFormValues) => {
     const { email, password } = data;
     signInMutation.mutate({
-      email,
-      password: sha256(password),
+      // @ts-ignore
+      userEmail: email,
+      password,
     });
   };
 
@@ -72,8 +72,8 @@ const LoginForm = () => {
         methods={methods}
         onSubmit={handleSubmit(onSubmit, onInvalid)}
       >
-        <RHFInput name="email" placeholder="이메일" inputMode="email"/>
-        <RHFInput type="password" name="password" placeholder="비밀번호"/>
+        <RHFInput name="email" placeholder="이메일" inputMode="email" />
+        <RHFInput type="password" name="password" placeholder="비밀번호" />
 
         <p className={styles.description}>
           * 비밀번호는 특수문자, 숫자를 포함하여
