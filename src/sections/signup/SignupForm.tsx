@@ -53,20 +53,24 @@ const SignupForm = () => {
     defaultValues,
     resolver: yupResolver(signupSchema),
   });
-
+  
   const {
     handleSubmit,
     formState: { isValid },
+    watch,
+    setError,
+    clearErrors,
   } = methods;
-
+  
+  
   const onSubmit = (data: IFormValues) => {
-    const { name, userEmail, password } = data;
+    const { name, userEmail, password, passwordConfirm } = data;
     
     signUpMutation.mutate({
       name,
       userEmail,
       password: sha256(password),
-      passwordConfirm: sha256(password),
+      passwordConfirm: sha256(passwordConfirm),
     });
   };
 
@@ -84,7 +88,22 @@ const SignupForm = () => {
       enqueueSnackbar(error.passwordConfirm.message, { variant: 'error' });
     }
   };
-
+  
+  const handleChangePasswordConfirm = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const password = watch('password');
+    const passwordConfirm = watch('passwordConfirm');
+    if (password !== e.target.value) {
+      setError('passwordConfirm', {
+        type: 'manual',
+        message: '비밀번호가 일치하지 않습니다.',
+      });
+    } else {
+      clearErrors('passwordConfirm');
+    }
+  };
+  
+  
+  
   return (
     <section className={styles.section}>
       <FormProvider
@@ -94,7 +113,9 @@ const SignupForm = () => {
         <RHFInput name="name" placeholder="이름" inputMode="email" autoComplete="username"/>
         <RHFInput name="userEmail" placeholder="이메일" inputMode="email" autoComplete="userEmail"/>
         <RHFInput type="password" name="password" placeholder="비밀번호" autoComplete="current-password"/>
-        <RHFInput type="password" name="passwordConfirm" placeholder="비밀번호 확인"/>
+        <RHFInput type="password" name="passwordConfirm" placeholder="비밀번호 확인" onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
+          handleChangePasswordConfirm(e)
+        }}/>
 
         <p className={styles.description}>
           * 비밀번호는 특수문자, 숫자를 포함하여
