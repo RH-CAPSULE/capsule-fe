@@ -8,7 +8,7 @@ import {
 } from 'src/assets/icons';
 import { Drawer } from 'src/components/drawer';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from 'src/store';
+import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
 import styles from './styles.module.scss';
 

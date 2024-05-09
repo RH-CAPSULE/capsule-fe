@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 // components
 import { PATH } from 'src/routes/path';
-import LoadingScreen from '../pages/splash';
+import LoadingScreen from 'src/pages/splash';
 //
-import Login from '../pages/login';
-import { useAuthStore } from '../store';
+import Login from 'src/pages/login';
+import { useAuthStore } from 'src/store/auth';
 
 // ----------------------------------------------------------------------
 

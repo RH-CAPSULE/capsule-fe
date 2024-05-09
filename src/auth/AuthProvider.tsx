@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import localStorageAvailable from 'src/utils/localStorageAvailable';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from 'src/static';
+import { axiosInstance } from 'src/apis/axios';
+import { useAuthStore } from 'src/store/auth';
+import { PATH_API } from 'src/apis/path';
 import { getUserId, isValidToken, setSession } from './utils';
-import { axiosInstance } from '../apis/axios';
-import { useAuthStore } from '../store';
-import { PATH_API } from '../apis/path';
 
 interface Props {
   children: React.ReactNode;
