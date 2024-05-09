@@ -1,6 +1,7 @@
 export const PATH = {
   root: '/',
   // auth
+  LOGIN: '/auth/sign-in',
   SIGN_UP: '/auth/sign-up',
   PASSWORD_INIT: '/password-init',
   // main
