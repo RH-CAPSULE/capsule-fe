@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthStore } from 'src/store';
+import { useAuthStore } from 'src/store/auth';
 import styles from './styles.module.scss';
 
 const HomeHeader = () => {
