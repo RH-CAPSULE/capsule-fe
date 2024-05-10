@@ -1,0 +1,11 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.section {
+  width: px(232);
+  @include flexLayout(column, center, center, 0);
+
+  // login-header
+
+
+}
