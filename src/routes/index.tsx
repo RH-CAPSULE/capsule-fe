@@ -10,6 +10,7 @@ import TestPage from '../_mock/TestPage';
 import BackgroundLayout from '../layouts/background/BackgroundLayout';
 import AuthGuard from '../auth/AuthGuard';
 import { PATH } from './path';
+import WritePage from '../pages/write';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -34,7 +35,11 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH.HOME} replace />, index: true },
         { path: 'api', element: <TestPage /> },
-        { path: 'home', element: <HomePage /> },
+        {
+          path: 'home',
+          element: <HomePage />,
+          children: [{ path: 'write', element: <WritePage /> }],
+        },
       ],
     },
     // { path: '*', element: <Navigate to="/" replace /> },
