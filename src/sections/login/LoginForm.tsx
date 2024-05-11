@@ -11,12 +11,12 @@ import styles from './styles.module.scss';
 // ----------------------------------------------------------------------
 
 interface IFormValues {
-  email: string;
+  userEmail: string;
   password: string;
 }
 
 const signupSchema = Yup.object().shape({
-  email: Yup.string()
+  userEmail: Yup.string()
     .required('이메일을 입력해주세요.')
     .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이메일 형식이 아닙니다.'),
   password: Yup.string()
@@ -28,7 +28,7 @@ const signupSchema = Yup.object().shape({
 });
 
 const defaultValues = {
-  email: '',
+  userEmail: '',
   password: '',
 };
 
@@ -50,16 +50,16 @@ const LoginForm = () => {
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
-    const { email, password } = data;
+    const { userEmail, password } = data;
     signInMutation.mutate({
-      email,
+      userEmail,
       password: sha256(password),
     });
   };
 
   const onInvalid = (error: FieldErrors<IFormValues>) => {
-    if (error.email) {
-      enqueueSnackbar(error.email.message, { variant: 'error' });
+    if (error.userEmail) {
+      enqueueSnackbar(error.userEmail.message, { variant: 'error' });
     }
     if (error.password) {
       enqueueSnackbar(error.password.message, { variant: 'error' });
@@ -72,8 +72,8 @@ const LoginForm = () => {
         methods={methods}
         onSubmit={handleSubmit(onSubmit, onInvalid)}
       >
-        <RHFInput name="email" placeholder="이메일" inputMode="email"/>
-        <RHFInput type="password" name="password" placeholder="비밀번호"/>
+        <RHFInput name="userEmail" placeholder="이메일" inputMode="email" />
+        <RHFInput type="password" name="password" placeholder="비밀번호" />
 
         <p className={styles.description}>
           * 비밀번호는 특수문자, 숫자를 포함하여

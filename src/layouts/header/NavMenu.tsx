@@ -45,8 +45,8 @@ const NavMenu = () => {
       <Drawer open={open} onClose={onClose}>
         <nav className={styles.navMobile}>
           <div className={styles.userInfo}>
-            <p>{user?.name}</p>
-            <p>{user?.email}</p>
+            <p>{user?.userName}</p>
+            <p>{user?.userEmail}</p>
           </div>
           <div className={styles.divider} />
           <ul>

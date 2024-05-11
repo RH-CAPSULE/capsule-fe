@@ -7,7 +7,7 @@ const HomeHeader = () => {
 
   return (
     <section className={styles.section}>
-      <h1>{user?.name}님의 캡슐함</h1>
+      <h1>{user?.userName}님의 캡슐함</h1>
     </section>
   );
 };
