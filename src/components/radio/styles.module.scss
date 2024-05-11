@@ -1,0 +1,14 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.radio {
+  @include flexLayout(row, center, center, 4);
+
+  input[type='radio'] {
+    accent-color: $gray-200;
+  }
+
+  span {
+    font-size: px(13);
+  }
+}
