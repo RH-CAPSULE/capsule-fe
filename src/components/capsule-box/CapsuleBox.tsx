@@ -11,7 +11,7 @@ const CapsuleBox = ({
   theme,
   closedAt,
   openedAt,
-  capsules,
+  capsules = [],
   ...other
 }: Props) => {
   const boxColor = themeColor(theme);
