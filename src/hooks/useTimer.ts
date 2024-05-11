@@ -3,12 +3,16 @@ import { Time } from 'src/types/auth';
 
 export const useTimer = (endTime: Time) => {
   const [timer, setTimer] = React.useState<number | null>(null);
-  const [isTimerCompleted, setIsTimerCompleted] = React.useState<boolean>(true);
+  const [isTimerCompleted, setIsTimerCompleted] =
+    React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (!endTime) return;
     // 종료 시간까지의 밀리초 계산
     const end = new Date(endTime).getTime();
+
+    // 시작시 바로 실행
+    setTimer(end - new Date().getTime());
 
     const intervalId = setInterval(() => {
       const now = new Date().getTime();
