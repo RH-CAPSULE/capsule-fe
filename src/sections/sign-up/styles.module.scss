@@ -15,7 +15,7 @@
     margin-block: px(32);
   }
 
-  // signup-form
+  // SignUp-form
   form {
     width: px(232);
     @include flexLayout(column, center, center, 8);
@@ -29,7 +29,7 @@
     }
   }
 
-  // Signup-login-return
+  // SignUp-login-return
   .authOptions {
     @include flexLayout(row, center, center, 12);
     margin-block: px(16);
