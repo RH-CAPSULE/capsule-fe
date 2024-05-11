@@ -3,12 +3,12 @@ import { Button } from 'src/components/button';
 import { Modal } from 'src/components/modal';
 import { useTimer } from 'src/hooks/useTimer';
 import { useEmailAuthStore } from 'src/store/auth';
-import { handleConfirm } from 'react-handle-alert';
 import { useVerifyEmail } from 'src/apis/queries/auth/verify-email';
 import { useSendEmail } from 'src/apis/queries/auth/send-email';
 import { useFormContext } from 'react-hook-form';
 import { EmailVerifyPurpose } from 'src/types/auth';
 import { useSnackbar } from 'notistack';
+import { onConfirm } from 'src/utils/rha-alert';
 import styles from './styles.module.scss';
 import useOTP from './useOTP';
 
@@ -74,7 +74,7 @@ const OTPModal = ({ open, purpose, onClose }: Props) => {
   };
 
   const reSendEmail = async () => {
-    if (!(await handleConfirm('인증번호를 다시 보내시겠습니까?'))) return;
+    if (!(await onConfirm('인증번호를 다시 보내시겠습니까?'))) return;
 
     sendEmailMutation.mutate(
       {
