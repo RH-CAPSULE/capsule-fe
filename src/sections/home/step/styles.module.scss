@@ -1,0 +1,19 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.radioBox {
+  margin-block: px(24);
+  @include flexLayout(row, space-around, center, 8);
+}
+
+.modalActionBox {
+  @include flexLayout(column, center, center, 8);
+
+  .modalButton {
+    position: relative;
+    input {
+      position: absolute;
+      opacity: 0;
+    }
+  }
+}
