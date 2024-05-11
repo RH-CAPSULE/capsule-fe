@@ -8,4 +8,5 @@ export const PATH_API = {
   USER_INFO: '/api/user',
   // capsule
   CAPSULE_BOX: '/api/capsule-box',
+  MAKE_CAPSULE_BOX: '/api/capsule-box/create',
 };

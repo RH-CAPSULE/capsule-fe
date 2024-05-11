@@ -9,17 +9,25 @@ export const capsuleBoxHandler = http.get(
     await sleep(1000);
 
     return HttpResponse.json(
+      {},
       {
-        capsuleBoxId: 1,
-        theme: 'PURPLE',
-        openedAt: new Date(2024, 7, 31).toISOString(),
-        closedAt: new Date(2024, 6, 30).toISOString(),
-        capsules: ['#aabbcc', '#ddeeff'],
-      },
-      {
-        status: 200,
+        status: 404,
         statusText: 'Mocked status',
       }
     );
+
+    // return HttpResponse.json(
+    //   {
+    //     capsuleBoxId: 1,
+    //     theme: 'PURPLE',
+    //     openedAt: new Date(2024, 7, 31).toISOString(),
+    //     closedAt: new Date(2024, 6, 30).toISOString(),
+    //     capsules: ['#aabbcc', '#ddeeff'],
+    //   },
+    //   {
+    //     status: 200,
+    //     statusText: 'Mocked status',
+    //   }
+    // );
   }
 );

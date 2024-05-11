@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
 }
 
@@ -32,12 +32,14 @@ const Modal = ({
   const onBackgroundClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
+    if (!onClose) return;
     if (e.target === bgRef.current) {
       onClose();
     }
   };
 
   const onkeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!onClose) return;
     if (e.key === 'Escape') {
       onClose();
     }

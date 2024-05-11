@@ -18,6 +18,12 @@
   gap: px($gap);
 }
 
-@function px($rem) {
-  @return calc(($rem / 16) * 1rem);
+/** pixel to rem */
+@function px($px) {
+  @return calc(($px / 16) * 1rem);
+}
+
+/** pixel to em */
+@function em($px) {
+  @return calc(($px / 16) * 1em);
 }
