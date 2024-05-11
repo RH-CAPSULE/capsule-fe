@@ -2,8 +2,6 @@
 @import '/src/theme/utils.scss';
 
 .otpModal {
-  width: px(300);
-
   .otpBox {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -12,7 +10,7 @@
 
     input {
       width: 100%;
-      height: px(64);
+      height: px(68);
       border: px(1) solid $gray-100;
       border-radius: px(8);
       text-align: center;
