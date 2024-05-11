@@ -2,10 +2,19 @@
 @import 'src/theme/utils.scss';
 
 .section {
-  width: px(232);
+  width: 100%;
+  padding: px(32);
   @include flexLayout(column, center, center, 0);
 
-  // login-header
-
+  // heading
+  .type {
+    margin: px(31) 0;
+    @include flexLayout(row, center, center, 50);
+    .item{ // 임시 생성 추후 보완
+      width: px(65);
+      height: px(65);
+      background-color: $gray-100;
+    }
+  }
 
 }

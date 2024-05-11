@@ -1,12 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { ICapsuleBox } from 'src/types/capsule';
 // layouts
 import { Container } from 'src/components/container';
-import { Header } from 'src/layouts/header';
+import { BackHeader } from 'src/layouts/header';
 // sections
-import { WritePad } from 'src/sections/write';
 import { useCapsuleBox } from 'src/apis/queries/capsule/capsule-box';
-import { ICapsuleBox } from 'src/types/capsule';
+import { WritePad } from 'src/sections/write';
+import { HomeHeader } from '../../sections/home';
 
 const WritePage = () => {
   const { data: capsuleBox } = useCapsuleBox<ICapsuleBox>();
@@ -16,11 +17,12 @@ const WritePage = () => {
       <Helmet>
         <title> Home | Capsule</title>
       </Helmet>
-      <Header />
+      <BackHeader />
       <Container>
         <WritePad />
       </Container>
     </>
   );
 };
+
 export default WritePage;
