@@ -81,9 +81,10 @@
 
   // iconbutton
   &.image{
+    @include flexLayout(row, center, center, 5);
     padding: 0;
-    display: block;
-    width: 120px;
+    padding: 0 px(10);
+    width: fit-content;
     height: 27px;
     border-radius: px(30);
   }

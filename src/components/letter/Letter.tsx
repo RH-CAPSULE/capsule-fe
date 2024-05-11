@@ -32,7 +32,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
     <div className={classes()}>
       <div className={styles.top}>TO..</div>
       <div className={styles.contents}>
-        <RHFTextArea name="letter" />
+        <RHFTextArea name="letter" placeholder="내용을 입력해주세요." />
       </div>
       <div className={styles.bottom}>
         <IconButton
@@ -42,6 +42,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
           prevIcon={IconImagePlus}
         />
         <IconButton theme="AQUA" className="image" prevIcon={IconMike} />
+        <div className={`${styles.top} ${styles.right}`}>From..</div>
       </div>
     </div>
   );
