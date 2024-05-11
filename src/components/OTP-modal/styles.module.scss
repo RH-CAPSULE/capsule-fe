@@ -1,0 +1,45 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.otpModal {
+  .otpBox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: px(8);
+    margin-block: px(8);
+
+    input {
+      width: 100%;
+      height: px(68);
+      border: px(1) solid $gray-100;
+      border-radius: px(8);
+      text-align: center;
+      font-size: px(24);
+      font-weight: 600;
+    }
+  }
+
+  .timer {
+    margin-top: px(12);
+    text-align: right;
+    color: $error;
+  }
+}
+
+.actionsBox {
+  @include flexLayout(column, center, center, 16);
+  padding: px(16);
+
+  .verifyButton {
+    width: 100%;
+    background-color: $background;
+  }
+
+  .resendButton {
+    all: initial;
+    cursor: pointer;
+    color: $gray-200;
+    font-size: px(13);
+    text-decoration: underline;
+  }
+}
