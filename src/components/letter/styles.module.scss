@@ -38,8 +38,8 @@
     }
   }
 
-  // type == LETTER
-  &.LETTER {
+  // type == BORDER
+  &.BORDER {
     background-color: $white;
     border: px(4) solid $aqua;
     .top{
@@ -51,6 +51,23 @@
     }
     .right{
       width: px(140);
+    }
+    .bottom {
+      @include flexLayout(row, flex-start, center, 6);
+    }
+  }
+
+  // type == LETTER
+  &.LETTER {
+    background-color: $white;
+    .top {
+      @include fontStyle(20, 700, $aqua);
+      color: $aqua;
+      padding-bottom: px(10);
+    }
+    .right {
+      width: px(140);
+      @include flexLayout(row, flex-end, center, 0);
     }
     .bottom {
       @include flexLayout(row, flex-start, center, 6);
