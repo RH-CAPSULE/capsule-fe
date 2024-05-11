@@ -22,7 +22,7 @@ interface IFormValues {
   passwordConfirm: string;
 }
 
-const signupSchema = Yup.object().shape({
+const signUpSchema = Yup.object().shape({
   userName: Yup.string()
     .required('이름을 입력해주세요.')
     .max(12, '이름은 12자 이하여야 합니다.'),
@@ -49,7 +49,7 @@ const defaultValues = {
 
 // ----------------------------------------------------------------------
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [isOtpModalOpen, setIsOtpModalOpen] = React.useState<boolean>(false);
 
@@ -60,7 +60,7 @@ const SignupForm = () => {
 
   const methods = useForm<IFormValues>({
     defaultValues,
-    resolver: yupResolver(signupSchema),
+    resolver: yupResolver(signUpSchema),
     mode: 'onChange',
   });
 
@@ -173,4 +173,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;
