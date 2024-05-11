@@ -10,8 +10,8 @@ export const userInfoHandler = http.get(
 
     return HttpResponse.json(
       {
-        name: '김민륜',
-        email: 'dmd77@gmail.com',
+        userName: '김민륜',
+        userEmail: 'dmd77@gmail.com',
       },
       {
         status: 200,
