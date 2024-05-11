@@ -35,11 +35,8 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH.HOME} replace />, index: true },
         { path: 'api', element: <TestPage /> },
-        {
-          path: 'home',
-          element: <HomePage />,
-          children: [{ path: 'write', element: <WritePage /> }],
-        },
+        { path: 'home', element: <HomePage /> },
+        { path: 'home/write', element: <WritePage /> },
       ],
     },
     // { path: '*', element: <Navigate to="/" replace /> },
