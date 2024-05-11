@@ -15,12 +15,10 @@
 
   .modalBox {
     position: relative;
+    max-width: px(340);
     padding: px(16);
-    width: 100%;
-    max-width: 400px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: px(8);
+    background-color: $white;
     animation: fadeIn 0.2s ease forwards;
   }
 
@@ -48,16 +46,19 @@
 }
 
 .modalTitle {
-  font-size: 24px;
+  font-size: px(18);
   font-weight: 600;
-  margin-bottom: 16px;
+  text-align: center;
+  margin-top: px(32);
+  margin-bottom: px(16);
 }
 
 .modalContent {
   width: 100%;
-  max-width: 400px;
-  padding: 24px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: px(16);
+  border-radius: px(8);
+}
+
+.modalAction {
+  width: 100%;
 }
