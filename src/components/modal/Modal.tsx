@@ -17,7 +17,13 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
  *   </Modal.Action>
  * </Modal>
  */
-const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
+const Modal = ({
+  open,
+  onClose,
+  children,
+  className = '',
+  ...other
+}: ModalProps) => {
   const bgRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
 
@@ -61,7 +67,11 @@ const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
       onClick={onBackgroundClick}
       className={styles.modalContainer}
     >
-      <div ref={modalRef} className={styles.modalBox} {...other}>
+      <div
+        ref={modalRef}
+        className={`${styles.modalBox} ${className}`}
+        {...other}
+      >
         {children}
       </div>
     </div>
@@ -70,32 +80,38 @@ const Modal = ({ open, onClose, children, ...other }: ModalProps) => {
 
 // ----------------------------------------------------------------------
 
-interface ModalTitleProps {
+interface ModalTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-Modal.Title = ({ children }: ModalTitleProps) => {
-  return <div className={styles.modalTitle}>{children}</div>;
+Modal.Title = ({ children, className = '' }: ModalTitleProps) => {
+  return <div className={`${styles.modalTitle} ${className}`}>{children}</div>;
 };
 
 // ----------------------------------------------------------------------
 
-interface ModalContentProps {
+interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-Modal.Content = ({ children }: ModalContentProps) => {
-  return <div className={styles.modalContent}>{children}</div>;
+Modal.Content = ({ children, className = '' }: ModalContentProps) => {
+  return (
+    <div className={`${styles.modalContent} ${className}`}>{children}</div>
+  );
 };
 
 // ----------------------------------------------------------------------
 
-interface ModalActionProps {
+interface ModalActionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-Modal.Action = ({ children }: ModalActionProps) => {
-  return <div className={styles.modalAction}>{children}</div>;
+Modal.Action = ({ children, className = '', ...other }: ModalActionProps) => {
+  return (
+    <div className={`${styles.modalAction} ${className}`} {...other}>
+      {children}
+    </div>
+  );
 };
 
 // ----------------------------------------------------------------------

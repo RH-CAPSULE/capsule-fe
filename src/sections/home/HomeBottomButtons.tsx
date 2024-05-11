@@ -4,7 +4,7 @@ import { Button } from 'src/components/button';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { copyToClipboard } from 'src/utils/clipboard';
-import { useAuthStore } from 'src/store';
+import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
 import styles from './styles.module.scss';
 

@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
 
 // components
-import LoadingScreen from '../pages/splash';
+import LoadingScreen from 'src/pages/splash';
 //
-import { PATH } from '../routes/path';
-import { useAuthStore } from '../store';
+import { PATH } from 'src/routes/path';
+import { useAuthStore } from 'src/store/auth';
 
 // ----------------------------------------------------------------------
 

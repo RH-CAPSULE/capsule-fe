@@ -10,3 +10,4 @@ export { ReactComponent as IconHistory } from './icon-history.svg';
 export { ReactComponent as IconFacebook } from './icon-facebook.svg';
 export { ReactComponent as IconCapsuleBox } from './icon-capsule-box.svg';
 export { ReactComponent as IconCapsuleBoxOpen } from './icon-capsule-box-open.svg';
+export { ReactComponent as IconCapsuleBoxBlank } from './icon-capsule-box-blank.svg';
