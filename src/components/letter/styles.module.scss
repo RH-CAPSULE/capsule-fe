@@ -1,35 +1,42 @@
 @import 'src/theme/variables.scss';
 @import 'src/theme/utils.scss';
 
-.capsuleBox {
-  position: relative;
-  @include flexLayout(column, center, center, 8);
-  & > svg {
-    filter: drop-shadow(px(8) px(8) px(8) rgba(0, 0, 0, 50%));
-    z-index: 1;
-  }
+.container {
+  //width: 100%;
+  //height: 100%;
+  width: 326px;
+  height: 533px;
+  border-radius: px(15);
+  padding: px(27) px(23);
 
-  .textBox {
-    position: absolute;
-    font-size: px(16);
-    font-weight: 600;
-    color: $gray-200;
-    margin-top: px(16);
-    text-align: center;
-    z-index: 2;
-  }
-
-  .capsules {
-    position: absolute;
-    z-index: 0;
-
-    .capsule {
-      // rotate 랜덤으로
-      @for $i from 1 through 10 {
-        &:nth-child(#{$i}) {
-          transform: rotate(random(360) * 1deg);
+  // type == PRIMARY
+  &.PRIMARY {
+    background-color: $white;
+    .top {
+      @include fontStyle(20, 600, $aqua);
+      color: $aqua
+    }
+    .contents{
+      margin: px(15) 0;
+      //height: calc(100% - 30px);
+      & > div {
+        //height: 100%;
+        & > textarea {
+          display: block;
+          //height: 100%;
         }
       }
     }
+  }
+
+  &[type='PRIMARY'] {
+    @include fontStyle(20, 600, $aqua);
+
+  }
+  &[type='LETTER'] {
+
+  }
+  &[type='BORDER'] {
+
   }
 }

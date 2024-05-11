@@ -78,4 +78,16 @@
     background-color: $gray-100;
     color: $white;
   }
+
+  // iconbutton
+  &.image{
+    padding: 0;
+    display: block;
+    width: 120px;
+    height: 27px;
+    border-radius: px(30);
+  }
+
 }
+
+
