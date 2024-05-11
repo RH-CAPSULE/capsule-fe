@@ -1,0 +1,37 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.swiperCapsule {
+  .swiper-pagination-bullet {
+    &-active {
+      transform: scale(1.1);
+    }
+    width: px(12);
+    height: px(12);
+    background-color: #fff;
+    border: px(0.5) solid #c5ccd3;
+    box-sizing: border-box;
+    opacity: 1;
+
+    // AQUA
+    &:nth-child(1) {
+      background-color: $aqua;
+    }
+    // MAGENTA
+    &:nth-child(2) {
+      background-color: $magenta;
+    }
+    // PURPLE
+    &:nth-child(3) {
+      background-color: $purple;
+    }
+    // BROWN
+    &:nth-child(4) {
+      background-color: $brown;
+    }
+    // GREIGE
+    &:nth-child(5) {
+      background-color: $greige;
+    }
+  }
+}

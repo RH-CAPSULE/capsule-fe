@@ -1,20 +1,26 @@
-@import 'src/theme/variables.scss';
-@import 'src/theme/utils.scss';
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.makingCapsuleBox {
+  font-size: px(10);
+}
 
 .capsuleBox {
   position: relative;
   @include flexLayout(column, center, center, 8);
   & > svg {
-    filter: drop-shadow(px(8) px(8) px(8) rgba(0, 0, 0, 50%));
+    width: em(220);
+    height: em(360);
+    filter: drop-shadow(em(8) em(8) em(8) rgba(0, 0, 0, 50%));
     z-index: 1;
   }
 
   .textBox {
     position: absolute;
-    font-size: px(16);
+    font-size: em(16);
     font-weight: 600;
     color: $gray-200;
-    margin-top: px(16);
+    margin-top: em(16);
     text-align: center;
     z-index: 2;
   }
