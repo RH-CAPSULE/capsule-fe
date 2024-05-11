@@ -39,7 +39,7 @@ const IconButton = ({
   className = '',
   prevIcon: PrevIcon,
   icon: Icon,
-  label = '버튼',
+  label = '',
   ...other
 }: Props) => {
   const classes = React.useCallback(() => {

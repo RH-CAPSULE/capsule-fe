@@ -4,39 +4,37 @@
 .container {
   //width: 100%;
   //height: 100%;
-  width: 326px;
-  height: 533px;
+  width: 356px;
   border-radius: px(15);
   padding: px(27) px(23);
+  box-shadow: $boxShadow;
+
+  .top {
+    @include fontStyle(20, 700, $aqua);
+    color: $aqua
+  }
+
+  .right {
+    width: px(150);
+    @include flexLayout(row, flex-end, center, 0);
+  }
 
   // type == PRIMARY
   &.PRIMARY {
     background-color: $white;
-    .top {
-      @include fontStyle(20, 600, $aqua);
-      color: $aqua
-    }
+
     .contents{
       margin: px(15) 0;
-      //height: calc(100% - 30px);
       & > div {
-        //height: 100%;
         & > textarea {
           display: block;
-          //height: 100%;
+          height: px(420);
         }
       }
     }
+    .bottom {
+      @include flexLayout(row, flex-start, center, 6);
+    }
   }
 
-  &[type='PRIMARY'] {
-    @include fontStyle(20, 600, $aqua);
-
-  }
-  &[type='LETTER'] {
-
-  }
-  &[type='BORDER'] {
-
-  }
 }
