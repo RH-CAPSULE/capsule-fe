@@ -1,17 +1,9 @@
 import React from 'react';
-import {
-  IconArrowLeft,
-  IconCapsuleBox,
-  IconCapsuleBoxOpen,
-  IconImagePlus,
-  IconMike,
-} from 'src/assets/icons';
-import { px, themeColor } from 'src/utils/styles';
-import { ICapsuleBox } from 'src/types/capsule';
-import styles from './styles.module.scss';
-import Capsule from '../capsule/Capsule';
-import { Theme } from '../../types/theme';
+import { IconImagePlus, IconMike } from 'src/assets/icons';
 import { RHFInput, RHFTextArea } from '../hook-form';
+
+import styles from './styles.module.scss';
+
 import { IconButton } from '../button';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -30,19 +22,33 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
 
   return (
     <div className={classes()}>
-      <div className={styles.top}>TO..</div>
+      <div className={`${styles.top} ${styles.toFrom}`}>TO..</div>
       <div className={styles.contents}>
         <RHFTextArea name="letter" placeholder="내용을 입력해주세요." />
       </div>
       <div className={styles.bottom}>
-        <IconButton
-          label="이미지 첨부"
-          theme="AQUA"
-          className="image"
-          prevIcon={IconImagePlus}
-        />
-        <IconButton theme="AQUA" className="image" prevIcon={IconMike} />
-        <div className={`${styles.top} ${styles.right}`}>From..</div>
+        {type === 'PRIMARY' ? (
+          <>
+            <IconButton
+              label="이미지 첨부"
+              theme="WHITE"
+              className="image"
+              prevIcon={IconImagePlus}
+            />
+            <IconButton theme="WHITE" className="image" prevIcon={IconMike} />
+          </>
+        ) : (
+          <>
+            <IconButton
+              label="이미지 첨부"
+              theme="AQUA"
+              className="image"
+              prevIcon={IconImagePlus}
+            />
+            <IconButton theme="AQUA" className="image" prevIcon={IconMike} />
+          </>
+        )}
+        <div className={`${styles.toFrom} ${styles.right}`}>From..</div>
       </div>
     </div>
   );
