@@ -53,9 +53,8 @@ const SignupForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [isOtpModalOpen, setIsOtpModalOpen] = React.useState<boolean>(false);
 
-  const { isAuthenticated, setEndAt, setIsAuthenticated } = useEmailAuthStore(
-    (state) => state
-  );
+  const { endAt, isAuthenticated, setEndAt, setIsAuthenticated } =
+    useEmailAuthStore((state) => state);
 
   const signUpMutation = useSignUp<Omit<IFormValues, 'passwordConfirm'>>();
 
@@ -67,7 +66,7 @@ const SignupForm = () => {
 
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
     watch,
   } = methods;
 
@@ -89,6 +88,12 @@ const SignupForm = () => {
   const sendEmailMutation = useSendEmail();
 
   const sendEmail = () => {
+    // 보낸지 3분이 안 지났으면 모달 다시 열기
+    if (endAt && new Date() < new Date(endAt)) {
+      setIsOtpModalOpen(true);
+      return;
+    }
+
     sendEmailMutation.mutate(
       {
         userEmail: watch('userEmail'),
@@ -142,7 +147,7 @@ const SignupForm = () => {
         {isAuthenticated ? (
           <Button
             type="submit"
-            // disabled={!isValid}
+            disabled={!isValid}
             loading={signUpMutation.isPending}
           >
             회원가입
@@ -150,7 +155,7 @@ const SignupForm = () => {
         ) : (
           <Button
             onClick={sendEmail}
-            disabled={!watch('userEmail')}
+            disabled={!!errors.userEmail || !watch('userEmail')}
             loading={sendEmailMutation.isPending}
           >
             이메일 인증하기
