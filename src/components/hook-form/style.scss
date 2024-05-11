@@ -25,16 +25,6 @@
       color: $placeholder;
     }
   }
-
-  .RHFHelperText {
-    padding: 0;
-    color: $error;
-    font-size: px(11);
-    font-weight: 600;
-    margin-top: px(6);
-    padding-left: px(8);
-    box-sizing: border-box;
-  }
 }
 
 .RHFTextarea {
@@ -48,4 +38,14 @@
     overflow: hidden;
     resize: none;
   }
+}
+
+.RHFHelperText {
+  padding: 0;
+  color: $error;
+  font-size: px(11);
+  font-weight: 600;
+  margin-top: px(6);
+  padding-left: px(8);
+  box-sizing: border-box;
 }
