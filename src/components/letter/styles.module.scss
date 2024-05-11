@@ -9,28 +9,48 @@
   padding: px(27) px(23);
   box-shadow: $boxShadow;
 
-  .top {
-    @include fontStyle(20, 700, $aqua);
-    color: $aqua
-  }
 
-  .right {
-    width: px(150);
-    @include flexLayout(row, flex-end, center, 0);
+  .contents{
+    margin: px(15) 0;
+    & > div {
+      & > textarea {
+        display: block;
+        height: px(420);
+        box-shadow: unset;
+      }
+    }
   }
 
   // type == PRIMARY
   &.PRIMARY {
     background-color: $white;
+    .top {
+      @include fontStyle(20, 700, $aqua);
+      color: $aqua;
+      padding-bottom: px(10);
+    }
+    .right {
+      width: px(140);
+      @include flexLayout(row, flex-end, center, 0);
+    }
+    .bottom {
+      @include flexLayout(row, flex-start, center, 6);
+    }
+  }
 
-    .contents{
-      margin: px(15) 0;
-      & > div {
-        & > textarea {
-          display: block;
-          height: px(420);
-        }
-      }
+  // type == LETTER
+  &.LETTER {
+    background-color: $white;
+    border: px(4) solid $aqua;
+    .top{
+      @include fontStyle(20, 700, $aqua);
+      color: $aqua;
+      padding-bottom: px(8);
+      border-bottom: px(2) solid $aqua;
+      width: px(180);
+    }
+    .right{
+      width: px(140);
     }
     .bottom {
       @include flexLayout(row, flex-start, center, 6);

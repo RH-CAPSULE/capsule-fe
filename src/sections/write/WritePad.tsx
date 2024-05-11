@@ -63,7 +63,7 @@ const WritePad = () => {
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
-        <Letter type="PRIMARY" />
+        <Letter type="LETTER" />
         <div className={styles.type}>
           <div className={styles.item}>1</div>
           <div className={styles.item}>2</div>
