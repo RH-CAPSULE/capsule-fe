@@ -13,3 +13,5 @@ export { ReactComponent as IconArrowBack } from './icon-arrow-back.svg';
 export { ReactComponent as IconCapsuleBox } from './icon-capsule-box.svg';
 export { ReactComponent as IconCapsuleBoxOpen } from './icon-capsule-box-open.svg';
 export { ReactComponent as IconCapsuleBoxBlank } from './icon-capsule-box-blank.svg';
+export { ReactComponent as IconImagePlus } from './icon-image-plus.svg';
+export { ReactComponent as IconMike } from './icon-mike.svg';
