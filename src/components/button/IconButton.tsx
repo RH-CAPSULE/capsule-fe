@@ -49,8 +49,6 @@ const IconButton = ({
     return classArr.join(' ');
   }, [full, size, className]);
 
-  console.log(classes());
-
   return (
     <button
       // eslint-disable-next-line react/button-has-type
