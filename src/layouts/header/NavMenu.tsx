@@ -8,7 +8,7 @@ import {
 } from 'src/assets/icons';
 import { Drawer } from 'src/components/drawer';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from 'src/store';
+import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
 import styles from './styles.module.scss';
 
@@ -45,8 +45,8 @@ const NavMenu = () => {
       <Drawer open={open} onClose={onClose}>
         <nav className={styles.navMobile}>
           <div className={styles.userInfo}>
-            <p>{user?.name}</p>
-            <p>{user?.email}</p>
+            <p>{user?.userName}</p>
+            <p>{user?.userEmail}</p>
           </div>
           <div className={styles.divider} />
           <ul>

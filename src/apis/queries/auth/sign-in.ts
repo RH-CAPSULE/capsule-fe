@@ -1,5 +1,5 @@
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
-import { useAuthStore } from 'src/store';
+import { useAuthStore } from 'src/store/auth';
 import { useSnackbar } from 'notistack';
 import { setSession } from 'src/auth/utils';
 import { PATH_API } from '../../path';
