@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { PATH } from 'src/routes/path';
 import styles from './styles.module.scss';
 
-const SignupLoginReturn = () => {
+const SignUpLoginReturn = () => {
   return (
     <section className={styles.section}>
       <div className={styles.authOptions}>
@@ -12,4 +12,4 @@ const SignupLoginReturn = () => {
   );
 };
 
-export default SignupLoginReturn;
+export default SignUpLoginReturn;

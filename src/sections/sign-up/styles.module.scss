@@ -15,7 +15,7 @@
     margin-block: px(32);
   }
 
-  // signup-form
+  // SignUp-form
   form {
     width: px(232);
     @include flexLayout(column, center, center, 8);
@@ -26,11 +26,10 @@
       font-size: px(11);
       text-align: center;
       margin-bottom: px(16);
-
     }
   }
 
-  // Signup-login-return
+  // SignUp-login-return
   .authOptions {
     @include flexLayout(row, center, center, 12);
     margin-block: px(16);
@@ -46,5 +45,4 @@
       background-color: $gray-100;
     }
   }
-
 }

@@ -1,4 +1,4 @@
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button } from 'src/components/button';
 import { RHFInput, FormProvider } from 'src/components/hook-form';
 import { useSignUp } from 'src/apis/queries/auth/sign-up';
@@ -6,19 +6,24 @@ import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
+import React from 'react';
+import { useEmailAuthStore } from 'src/store/auth';
+import { OTPModal } from 'src/components/OTP-modal';
+import { useSendEmail } from 'src/apis/queries/auth/send-email';
+import { EmailVerifyPurpose } from 'src/types/auth';
 import styles from './styles.module.scss';
 
 // ----------------------------------------------------------------------
 
 interface IFormValues {
-  name: string;
+  userName: string;
   userEmail: string;
   password: string;
   passwordConfirm: string;
 }
 
-const signupSchema = Yup.object().shape({
-  name: Yup.string()
+const signUpSchema = Yup.object().shape({
+  userName: Yup.string()
     .required('이름을 입력해주세요.')
     .max(12, '이름은 12자 이하여야 합니다.'),
   userEmail: Yup.string()
@@ -44,73 +49,73 @@ const defaultValues = {
 
 // ----------------------------------------------------------------------
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const [isOtpModalOpen, setIsOtpModalOpen] = React.useState<boolean>(false);
 
-  const signUpMutation = useSignUp<IFormValues>();
+  const { endAt, isAuthenticated, setEndAt, setIsAuthenticated } =
+    useEmailAuthStore((state) => state);
+
+  const signUpMutation = useSignUp<Omit<IFormValues, 'passwordConfirm'>>();
 
   const methods = useForm<IFormValues>({
     defaultValues,
-    resolver: yupResolver(signupSchema),
+    resolver: yupResolver(signUpSchema),
+    mode: 'onChange',
   });
 
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
     watch,
-    setError,
-    clearErrors,
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
-    const { name, userEmail, password, passwordConfirm } = data;
+    const { userName, userEmail, password } = data;
 
-    signUpMutation.mutate({
-      name,
-      userEmail,
-      password: sha256(password),
-      passwordConfirm: sha256(passwordConfirm),
-    });
+    signUpMutation.mutate(
+      {
+        userName,
+        userEmail,
+        password: sha256(password),
+      },
+      {
+        onSuccess: () => setIsAuthenticated(false),
+      }
+    );
   };
 
-  const onInvalid = (error: FieldErrors<IFormValues>) => {
-    if (error.name) {
-      enqueueSnackbar(error.name.message, { variant: 'error' });
-    }
-    if (error.userEmail) {
-      enqueueSnackbar(error.userEmail.message, { variant: 'error' });
-    }
-    if (error.password) {
-      enqueueSnackbar(error.password.message, { variant: 'error' });
-    }
-    if (error.passwordConfirm) {
-      enqueueSnackbar(error.passwordConfirm.message, { variant: 'error' });
-    }
-  };
+  const sendEmailMutation = useSendEmail();
 
-  const handleChangePasswordConfirm = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const password = watch('password');
-    const passwordConfirm = watch('passwordConfirm');
-    if (password !== e.target.value) {
-      setError('passwordConfirm', {
-        type: 'manual',
-        message: '비밀번호가 일치하지 않습니다.',
-      });
-    } else {
-      clearErrors('passwordConfirm');
+  const sendEmail = () => {
+    // 보낸지 3분이 안 지났으면 모달 다시 열기
+    if (endAt && new Date() < new Date(endAt)) {
+      setIsOtpModalOpen(true);
+      return;
     }
+
+    sendEmailMutation.mutate(
+      {
+        userEmail: watch('userEmail'),
+        purpose: EmailVerifyPurpose.SIGN_UP,
+      },
+      {
+        onSuccess: () => {
+          setIsOtpModalOpen(true);
+          enqueueSnackbar('이메일로 인증번호가 전송되었습니다.', {
+            variant: 'success',
+          });
+          setEndAt(Date.now() + 1000 * 60 * 3);
+        },
+      }
+    );
   };
 
   return (
     <section className={styles.section}>
-      <FormProvider
-        methods={methods}
-        onSubmit={handleSubmit(onSubmit, onInvalid)}
-      >
+      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <RHFInput
-          name="name"
+          name="userName"
           placeholder="이름"
           inputMode="email"
           autoComplete="username"
@@ -119,7 +124,7 @@ const SignupForm = () => {
           name="userEmail"
           placeholder="이메일"
           inputMode="email"
-          autoComplete="userEmail"
+          autoComplete="email"
         />
         <RHFInput
           type="password"
@@ -131,9 +136,6 @@ const SignupForm = () => {
           type="password"
           name="passwordConfirm"
           placeholder="비밀번호 확인"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            handleChangePasswordConfirm(e);
-          }}
         />
 
         <p className={styles.description}>
@@ -142,16 +144,33 @@ const SignupForm = () => {
           8자리 이상이어야 합니다.
         </p>
 
-        <Button
-          type="submit"
-          // disabled={!isValid}
-          loading={signUpMutation.isPending}
-        >
-          회원가입
-        </Button>
+        {isAuthenticated ? (
+          <Button
+            type="submit"
+            disabled={!isValid}
+            loading={signUpMutation.isPending}
+          >
+            회원가입
+          </Button>
+        ) : (
+          <Button
+            onClick={sendEmail}
+            disabled={!!errors.userEmail || !watch('userEmail')}
+            loading={sendEmailMutation.isPending}
+          >
+            이메일 인증하기
+          </Button>
+        )}
+
+        {/* OTP Modal */}
+        <OTPModal
+          open={isOtpModalOpen}
+          purpose={EmailVerifyPurpose.SIGN_UP}
+          onClose={() => setIsOtpModalOpen(false)}
+        />
       </FormProvider>
     </section>
   );
 };
 
-export default SignupForm;
+export default SignUpForm;
