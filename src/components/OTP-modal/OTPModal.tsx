@@ -83,6 +83,9 @@ const OTPModal = ({ open, purpose, onClose }: Props) => {
       },
       {
         onSuccess: () => {
+          enqueueSnackbar('이메일로 인증번호가 재전송되었습니다.', {
+            variant: 'success',
+          });
           setEndAt(Date.now() + 1000 * 60 * 3);
         },
       }
