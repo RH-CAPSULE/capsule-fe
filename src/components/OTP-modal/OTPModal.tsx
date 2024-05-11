@@ -121,11 +121,15 @@ const OTPModal = ({ open, purpose, onClose }: Props) => {
             <span>{formatTimer(timer)}</span>
           </div>
         )}
+        {isTimerCompleted && (
+          <p className={styles.timer}>인증번호가 만료되었습니다.</p>
+        )}
       </Modal.Content>
       <Modal.Action className={styles.actionsBox}>
         <Button
           className={styles.verifyButton}
           onClick={verifyEmail}
+          disabled={code.some((digit) => digit === '')}
           loading={verifyEmailMutation.isPending}
         >
           인증하기
