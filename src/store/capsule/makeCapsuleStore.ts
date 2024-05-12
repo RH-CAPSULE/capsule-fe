@@ -1,13 +1,13 @@
-import { MakeCapsuleStep } from 'src/types/capsule';
+import { MakeCapsuleStep, MakeCapsuleStepType } from 'src/types';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface State {
-  currentStep: MakeCapsuleStep;
+  currentStep: MakeCapsuleStepType;
   isMakeModalOpen: boolean;
 }
 interface Action {
-  setCurrentStep: (currentStep: MakeCapsuleStep) => void;
+  setCurrentStep: (currentStep: MakeCapsuleStepType) => void;
   setIsMakeModalOpen: (isMakeModalOpen: boolean) => void;
 }
 
