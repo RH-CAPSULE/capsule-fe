@@ -1,12 +1,12 @@
 import React from 'react';
-import { Theme } from 'src/types/theme';
+import { ThemeType } from 'src/types/theme';
 import { CapsuleBox } from 'src/components/capsule-box';
 import { ICapsuleBox } from 'src/types/capsule';
 import { formatDate } from 'src/utils/date';
 import styles from './styles.module.scss';
 
 interface Props {
-  theme?: Theme;
+  theme?: ThemeType;
   capsuleBox?: ICapsuleBox;
 }
 

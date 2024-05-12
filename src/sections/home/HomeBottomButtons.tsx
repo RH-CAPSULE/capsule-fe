@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme } from 'src/types/theme';
+import { ThemeType } from 'src/types/theme';
 import { Button } from 'src/components/button';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
@@ -17,7 +17,7 @@ const getDomain = () => {
 };
 
 interface Props {
-  theme: Theme;
+  theme: ThemeType;
 }
 
 // ----------------------------------------------------------------------
