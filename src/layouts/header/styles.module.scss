@@ -16,20 +16,6 @@
   }
 }
 
-.backHeader {
-  width: 100%;
-  max-width: px(500);
-  position: fixed;
-  padding: px(16);
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  @include flexLayout(row, flex-start, center, 16);
-  & > svg {
-    cursor: pointer;
-  }
-}
-
 /* Drawer menu */
 .navMobile {
   height: 100%;

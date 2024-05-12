@@ -11,7 +11,6 @@ interface Props
     HTMLTextAreaElement
   > {
   name: string;
-  placeholder?: string;
   required?: boolean;
   readonly?: boolean;
   loading?: boolean;
@@ -20,7 +19,6 @@ interface Props
 
 export default function RHFTextarea({
   name,
-  placeholder,
   readonly = false,
   required = false,
   loading = false,
@@ -65,7 +63,6 @@ export default function RHFTextarea({
             value={value}
             onChange={onChange}
             ref={ref}
-            placeholder={placeholder}
             {...other}
             {...props}
             onInput={(e: any) => handleResizeHeight(e.target)}
