@@ -4,8 +4,10 @@
 .container {
   padding: px(27) px(23);
   width: 356px;
+  height: 569px;
   border-radius: px(15);
   box-shadow: $boxShadow;
+  box-sizing: border-box;
 
   .toFrom {
     @include fontStyle(20, 700, $aqua);
@@ -28,10 +30,11 @@
     background-color: $white;
     padding: 0;
     border-radius: px(15);
+    position: relative;
 
     .top {
       border-radius: px(15) px(15) 0 0;
-      padding: px(14);
+      padding: px(17);
       background-color: $aqua;
       color: $white;
     }
@@ -41,6 +44,9 @@
       color: $white;
     }
     .bottom {
+      position: absolute;
+      bottom:0;
+      width:100%;
       padding: px(14) px(18);
       background-color: $aqua;
       border-radius: 0 0 px(15) px(15);
@@ -49,12 +55,14 @@
     .contents{
       margin: px(15);
     }
-    }
+  }
 
   // type == BORDER
   &.BORDER {
     background-color: $white;
     border: px(4) solid $aqua;
+    position: relative;
+
     .top, .toFrom{
       padding-bottom: px(8);
       border-bottom: px(2) solid $aqua;
@@ -64,6 +72,10 @@
       width: px(140);
     }
     .bottom {
+      position: absolute;
+      bottom:0;
+      padding: px(18) 0;
+
       @include flexLayout(row, flex-start, center, 6);
     }
   }
@@ -71,6 +83,8 @@
   // type == LETTER
   &.LETTER {
     background-color: $white;
+    position: relative;
+
     .top {
       padding-bottom: px(10);
     }
@@ -79,6 +93,9 @@
       @include flexLayout(row, flex-end, center, 0);
     }
     .bottom {
+      position: absolute;
+      bottom:0;
+      padding: px(18) 0;
       @include flexLayout(row, flex-start, center, 6);
     }
   }

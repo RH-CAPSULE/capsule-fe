@@ -6,6 +6,10 @@
   padding: px(32);
   @include flexLayout(column, center, center, 0);
 
+  .div:first-child{
+    height: 569px;
+  }
+
   // heading
   .type {
     margin: px(31) 0;
