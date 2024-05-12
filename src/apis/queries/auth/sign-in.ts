@@ -1,4 +1,8 @@
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
+import {
+  UseMutationOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useAuthStore } from 'src/store/auth';
 import { useSnackbar } from 'notistack';
 import { setSession } from 'src/auth/utils';
@@ -12,6 +16,7 @@ export const useSignIn = <T>(
   options?: Omit<UseMutationOptions<any, any, T>, 'mutationKey'>
 ) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
 
@@ -24,6 +29,7 @@ export const useSignIn = <T>(
     onSuccess: (data) => {
       setSession(data);
       setIsLoggedIn(true);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.USER_INFO] });
       navigate(PATH.HOME);
     },
     onError: (error) => {
