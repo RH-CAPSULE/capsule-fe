@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FieldErrors, FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -31,6 +31,8 @@ interface IFormValues {
   content: string;
 }
 
+export type LetterType = 'PRIMARY' | 'LETTER' | 'BORDER';
+
 const defaultValues = {
   content: '',
 };
@@ -40,6 +42,7 @@ const letterSchema = Yup.object().shape({
 });
 
 const WritePad = () => {
+  const [type, setType] = useState<LetterType>('PRIMARY');
   const methods = useForm<IFormValues>({
     defaultValues,
     resolver: yupResolver(letterSchema),
@@ -54,20 +57,57 @@ const WritePad = () => {
     console.log(data);
   };
 
+  const handleTypeChange = (newType: LetterType) => {
+    setType(newType);
+  };
+
   const onInvalid = (error: FieldErrors<IFormValues>) => {
     if (error.content) {
       enqueueSnackbar(error.content.message, { variant: 'error' });
     }
   };
 
+  const handleKeyPress = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    newType: LetterType
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleTypeChange(newType);
+    }
+  };
+
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
-        <Letter type="PRIMARY" />
+        <Letter type={type} />
         <div className={styles.type}>
-          <div className={styles.item}>1</div>
-          <div className={styles.item}>2</div>
-          <div className={styles.item}>3</div>
+          <div
+            className={styles.item}
+            role="button"
+            tabIndex={0}
+            onClick={() => handleTypeChange('PRIMARY')}
+            onKeyDown={(event) => handleKeyPress(event, 'PRIMARY')}
+          >
+            1
+          </div>
+          <div
+            className={styles.item}
+            role="button"
+            tabIndex={0}
+            onClick={() => handleTypeChange('BORDER')}
+            onKeyDown={(event) => handleKeyPress(event, 'BORDER')}
+          >
+            2
+          </div>
+          <div
+            className={styles.item}
+            role="button"
+            tabIndex={0}
+            onClick={() => handleTypeChange('LETTER')}
+            onKeyDown={(event) => handleKeyPress(event, 'LETTER')}
+          >
+            3
+          </div>
         </div>
         <Button
           type="submit"

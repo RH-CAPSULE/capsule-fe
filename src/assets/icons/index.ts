@@ -14,4 +14,6 @@ export { ReactComponent as IconCapsuleBox } from './icon-capsule-box.svg';
 export { ReactComponent as IconCapsuleBoxOpen } from './icon-capsule-box-open.svg';
 export { ReactComponent as IconCapsuleBoxBlank } from './icon-capsule-box-blank.svg';
 export { ReactComponent as IconImagePlus } from './icon-image-plus.svg';
+export { ReactComponent as IconImagePlusAqua } from './icon-image-plus-aqua.svg';
 export { ReactComponent as IconMike } from './icon-mike.svg';
+export { ReactComponent as IconMikeAqua } from './icon-mike-aqua.svg';
