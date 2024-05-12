@@ -77,7 +77,7 @@ const NavMenu = () => {
               </Link>
             </li>
             <li>
-              <Link to={PATH.LOGIN} onClick={handleSignOut}>
+              <Link to="" onClick={handleSignOut}>
                 <IconLogout />
                 로그아웃
               </Link>
