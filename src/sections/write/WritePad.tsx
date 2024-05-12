@@ -15,12 +15,12 @@ import { Letter } from '../../components/letter';
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
  * {
  *   "capsule": {
- *     "userId": 0,
- *     "capsuleBoxId": 0,
- *     "color": "string",
- *     "title": "string",
+ *     "userId": 0,  -> 빠질 것임
+ *     "capsuleBoxId": 0, -> 쿼리에서 가져오면 됨
+ *     "color": "string",  -> 캡슐 색
+ *     "title": "string",  -> to (유저 작성)
  *     "content": "string",
- *     "writer": "string"
+ *     "writer": "string"  -> from (유저 작성)
  *   },
  *   "image": "string",
  *   "audio": "string"
@@ -111,10 +111,10 @@ const WritePad = () => {
         </div>
         <Button
           type="submit"
-          theme="GRAY"
           size="large"
           full
           onClick={handleSubmit(onSubmit, onInvalid)}
+          disabled
         >
           타임캡슐 만들기
         </Button>
