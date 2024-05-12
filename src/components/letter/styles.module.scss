@@ -44,6 +44,13 @@
 
   .audio{
     margin-bottom: px(10);
+    & > button {
+      padding: 0 px(15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+    }
   }
 
 

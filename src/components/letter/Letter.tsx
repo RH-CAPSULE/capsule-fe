@@ -7,6 +7,7 @@ import {
   IconMike,
   IconMikeAqua,
   IconPlay,
+  IconStop,
 } from 'src/assets/icons';
 import { RHFInput, RHFTextArea } from '../hook-form';
 
@@ -99,8 +100,8 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
             <IconButton
               label="녹음 중지"
               onClick={handleStopButtonClick}
-              theme={Theme.AQUA}
-              prevIcon={IconMike}
+              theme="AQUA-gray"
+              prevIcon={IconStop}
               full
             />
           )}
@@ -108,7 +109,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
             <IconButton
               label={`재생 (${audioDuration})`}
               onClick={handlePlaybackButtonClick}
-              theme={Theme.AQUA}
+              theme="AQUA-gray"
               prevIcon={IconPlay}
               full
             />

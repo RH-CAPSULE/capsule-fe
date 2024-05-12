@@ -4,17 +4,7 @@ import styles from './styles.module.scss';
 import { Loading } from '../loading';
 
 /**
- * @description 아이콘이 포함된 버튼
- * @param {string} type
- * @param {string} size
- * @param {string} theme
- * @param {boolean} full
- * @param {boolean} loading
- * @param {string} children
- * @param {string} className 클래스명
- * @param {string} prevIcon 앞 아이콘
- * @param {string} icon 뒷 아이콘
- * @param {string} label  버튼 라벨
+ * @description 아이콘이 포함된 버튼 컴포넌트
  */
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
