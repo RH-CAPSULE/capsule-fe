@@ -1,11 +1,11 @@
 import React from 'react';
 import { IconCapsuleBoxOpen } from 'src/assets/icons';
 import { themeColor } from 'src/utils/styles';
-import { Theme } from 'src/types/theme';
+import { ThemeType } from 'src/types/theme';
 import styles from './styles.module.scss';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  theme: Theme;
+  theme: ThemeType;
   openedAt: string | null;
   closedAt: string | null;
 }
