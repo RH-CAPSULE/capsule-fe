@@ -28,9 +28,12 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
 
   return (
     <div className={classes()}>
-      <div className={`${styles.top} ${styles.toFrom}`}>TO..</div>
+      <div className={`${styles.top} ${styles.toFrom}`}>
+        TO..
+        <RHFInput name="title" placeholder="캡슐에게.." />
+      </div>
       <div className={styles.contents}>
-        <RHFTextArea name="letter" placeholder="내용을 입력해주세요." />
+        <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
       </div>
       <div className={styles.bottom}>
         {type === 'PRIMARY' ? (
@@ -58,7 +61,10 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
             <IconButton theme="AQUA" className="image" prevIcon={IconMike} />
           </>
         )}
-        <div className={`${styles.toFrom} ${styles.right}`}>From..</div>
+        <div className={`${styles.toFrom} ${styles.right}`}>
+          From..
+          <RHFInput name="title" placeholder="캡슐이가" />
+        </div>
       </div>
     </div>
   );
