@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme } from 'src/types/theme';
+import { ThemeType } from 'src/types/theme';
 import styles from './styles.module.scss';
 import { Loading } from '../loading';
 
@@ -21,7 +21,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   size?: 'small' | 'medium' | 'large';
   full?: boolean;
-  theme?: Theme | string;
+  theme?: ThemeType | string;
   loading?: boolean;
   className?: string;
   prevIcon?: React.ComponentType;
