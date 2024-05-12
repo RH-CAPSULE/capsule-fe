@@ -14,6 +14,7 @@ import styles from './styles.module.scss';
 
 import { IconButton } from '../button';
 import { LetterType } from '../../types/letter';
+import ImageUpload from '../image-upload/ImageUpload';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
@@ -29,27 +30,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
     return classArr.join(' ');
   }, [type, className]);
 
-  const { register } = useFormContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageURL, setImageURL] = useState<string | null>(null);
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImage = event.target.files?.[0];
-    if (selectedImage) {
-      const imageUrl = URL.createObjectURL(selectedImage);
-      setImageURL(imageUrl);
-      register('image', { value: selectedImage });
-    }
-  };
-
-  const handleImageDelte = () => {
-    setImageURL(null);
-    register('image', { value: null });
-    // 파일 입력 필드 비우기
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
 
   const handleButtonClick = () => {
     // 파일 입력 필드 클릭
@@ -62,30 +43,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
         TO..
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <div className={styles.image}>
-        {/* 이미지를 보여줄 div */}
-        {imageURL && (
-          <>
-            <img
-              src={imageURL}
-              alt="Uploaded"
-              className={styles.uploadedImage}
-            />
-            <IconClose
-              onClick={handleImageDelte}
-              className={styles.removeImage}
-            />
-          </>
-        )}
-        {/* 파일 입력 필드 */}
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleImageChange}
-          className={styles.disable}
-        />
-      </div>
+      <ImageUpload fileInputRef={fileInputRef} />
       <div className={styles.contents}>
         <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
       </div>
