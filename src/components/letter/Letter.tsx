@@ -31,11 +31,16 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
   }, [type, className]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
 
+  const handleImageUpload = () => {
+    setImageUploaded(true);
+  };
   const handleButtonClick = () => {
-    // 파일 입력 필드 클릭
     fileInputRef.current?.click();
   };
+
+  console.log(imageUploaded);
 
   return (
     <div className={classes()}>
@@ -43,9 +48,13 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
         TO..
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <ImageUpload fileInputRef={fileInputRef} />
+      <ImageUpload fileInputRef={fileInputRef} onUpload={handleImageUpload} />
       <div className={styles.contents}>
-        <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
+        <RHFTextArea
+          name="content"
+          placeholder="내용을 입력해주세요."
+          style={{ height: imageUploaded ? '200px' : '420px' }}
+        />
       </div>
       <div className={styles.bottom}>
         <IconButton
