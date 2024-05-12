@@ -10,6 +10,8 @@ import { Drawer } from 'src/components/drawer';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
+import { useSignOut } from 'src/apis/queries/auth/sign-out';
+import { onConfirm } from 'src/utils/rha-alert';
 import styles from './styles.module.scss';
 
 const NavMenu = () => {
@@ -18,6 +20,8 @@ const NavMenu = () => {
   const { pathname } = useLocation();
 
   const [open, setOpen] = React.useState(false);
+
+  const signOutMutation = useSignOut();
 
   const isActive = (path: string) => {
     if (pathname.endsWith('/')) {
@@ -31,6 +35,11 @@ const NavMenu = () => {
   };
 
   const onClose = () => setOpen(false);
+
+  const handleSignOut = async () => {
+    if (!(await onConfirm('로그아웃 하시겠습니까?'))) return;
+    signOutMutation.mutate();
+  };
 
   React.useEffect(() => {
     if (open) {
@@ -68,7 +77,7 @@ const NavMenu = () => {
               </Link>
             </li>
             <li>
-              <Link to="">
+              <Link to={PATH.LOGIN} onClick={handleSignOut}>
                 <IconLogout />
                 로그아웃
               </Link>
