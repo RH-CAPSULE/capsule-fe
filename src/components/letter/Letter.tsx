@@ -11,9 +11,10 @@ import { RHFInput, RHFTextArea } from '../hook-form';
 import styles from './styles.module.scss';
 
 import { IconButton } from '../button';
+import { LetterType } from '../../types/letter';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  type?: 'PRIMARY' | 'LETTER' | 'BORDER';
+  type?: LetterType;
   loading?: boolean;
   className?: string;
 }

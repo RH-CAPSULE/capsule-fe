@@ -10,6 +10,7 @@ import styles from './styles.module.scss';
 // components
 import { Button } from '../../components/button';
 import { Letter } from '../../components/letter';
+import { LetterType } from '../../types/letter';
 
 /**
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
@@ -30,8 +31,6 @@ import { Letter } from '../../components/letter';
 interface IFormValues {
   content: string;
 }
-
-export type LetterType = 'PRIMARY' | 'LETTER' | 'BORDER';
 
 const defaultValues = {
   content: '',
