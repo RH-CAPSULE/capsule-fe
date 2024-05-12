@@ -17,3 +17,5 @@ export { ReactComponent as IconImagePlus } from './icon-image-plus.svg';
 export { ReactComponent as IconImagePlusAqua } from './icon-image-plus-aqua.svg';
 export { ReactComponent as IconMike } from './icon-mike.svg';
 export { ReactComponent as IconMikeAqua } from './icon-mike-aqua.svg';
+export { ReactComponent as IconPlay } from './icon-play.svg';
+export { ReactComponent as IconStop } from './icon-stop.svg';
