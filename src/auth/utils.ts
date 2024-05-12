@@ -87,6 +87,15 @@ export const setSession = (token: IToken) => {
 
 // ----------------------------------------------------------------------
 
+export const removeSession = () => {
+  localStorage.removeItem(ACCESS_TOKEN_KEY!);
+  localStorage.removeItem(REFRESH_TOKEN_KEY!);
+
+  delete axiosInstance.defaults.headers.common.Authorization;
+};
+
+// ----------------------------------------------------------------------
+
 export const getUserId = () => {
   const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY!);
   if (!accessToken) {
