@@ -1,5 +1,11 @@
 import React from 'react';
-import { IconImagePlus, IconMike } from 'src/assets/icons';
+
+import {
+  IconImagePlus,
+  IconImagePlusAqua,
+  IconMike,
+  IconMikeAqua,
+} from 'src/assets/icons';
 import { RHFInput, RHFTextArea } from '../hook-form';
 
 import styles from './styles.module.scss';
@@ -33,9 +39,13 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
               label="이미지 첨부"
               theme="WHITE"
               className="image"
-              prevIcon={IconImagePlus}
+              prevIcon={IconImagePlusAqua}
             />
-            <IconButton theme="WHITE" className="image" prevIcon={IconMike} />
+            <IconButton
+              theme="WHITE"
+              className="image"
+              prevIcon={IconMikeAqua}
+            />
           </>
         ) : (
           <>
