@@ -74,4 +74,21 @@
     background-color: $greige;
     color: $white;
   }
+  &[data-theme='GRAY'] {
+    background-color: $gray-100;
+    color: $white;
+  }
+
+  // iconbutton
+  &.image{
+    @include flexLayout(row, center, center, 5);
+    padding: 0;
+    padding: 0 px(10);
+    width: fit-content;
+    height: 27px;
+    border-radius: px(30);
+  }
+
 }
+
+
