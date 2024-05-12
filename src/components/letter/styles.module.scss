@@ -35,11 +35,33 @@
     & > div {
       & > textarea {
         display: block;
-        height: px(420);
+        max-height: px(420);
+        height: fit-content;
         box-shadow: unset;
       }
     }
   }
+
+  .image{
+    padding-left: px(15);
+    width:100%;
+    text-align: center;
+    @include flexLayout(row, center, flex-start, 6);
+  }
+
+  .removeImage{
+    margin-top: px(15);
+  }
+
+  .uploadedImage{
+    width: auto;
+    margin-top: px(15);
+    max-height: px(160);
+  }
+  .disable {
+    display: none;
+  }
+
 
   // type == PRIMARY
   &.PRIMARY {
