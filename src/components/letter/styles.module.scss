@@ -1,0 +1,86 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.container {
+  padding: px(27) px(23);
+  width: 356px;
+  border-radius: px(15);
+  box-shadow: $boxShadow;
+
+  .toFrom {
+    @include fontStyle(20, 700, $aqua);
+    color: $aqua;
+  }
+
+  .contents{
+    margin: px(15) 0;
+    & > div {
+      & > textarea {
+        display: block;
+        height: px(420);
+        box-shadow: unset;
+      }
+    }
+  }
+
+  // type == PRIMARY
+  &.PRIMARY {
+    background-color: $white;
+    padding: 0;
+    border-radius: px(15);
+
+    .top {
+      border-radius: px(15) px(15) 0 0;
+      padding: px(14);
+      background-color: $aqua;
+      color: $white;
+    }
+    .right {
+      width: px(140);
+      @include flexLayout(row, flex-end, center, 0);
+      color: $white;
+    }
+    .bottom {
+      padding: px(14) px(18);
+      background-color: $aqua;
+      border-radius: 0 0 px(15) px(15);
+      @include flexLayout(row, flex-start, center, 6);
+    }
+    .contents{
+      margin: px(15);
+    }
+    }
+
+  // type == BORDER
+  &.BORDER {
+    background-color: $white;
+    border: px(4) solid $aqua;
+    .top, .toFrom{
+      padding-bottom: px(8);
+      border-bottom: px(2) solid $aqua;
+      width: px(180);
+    }
+    .right{
+      width: px(140);
+    }
+    .bottom {
+      @include flexLayout(row, flex-start, center, 6);
+    }
+  }
+
+  // type == LETTER
+  &.LETTER {
+    background-color: $white;
+    .top {
+      padding-bottom: px(10);
+    }
+    .right {
+      width: px(140);
+      @include flexLayout(row, flex-end, center, 0);
+    }
+    .bottom {
+      @include flexLayout(row, flex-start, center, 6);
+    }
+  }
+
+}
