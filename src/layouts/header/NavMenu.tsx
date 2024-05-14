@@ -8,14 +8,14 @@ import {
 } from 'src/assets/icons';
 import { Drawer } from 'src/components/drawer';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
 import { useSignOut } from 'src/apis/queries/auth/sign-out';
 import { onConfirm } from 'src/utils/rha-alert';
+import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
 
 const NavMenu = () => {
-  const user = useAuthStore((state) => state.user);
+  const { user } = useCachedUser();
 
   const { pathname } = useLocation();
 
