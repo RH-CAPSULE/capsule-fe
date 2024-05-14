@@ -28,7 +28,10 @@ const signUpSchema = Yup.object().shape({
     .max(12, '이름은 12자 이하여야 합니다.'),
   userEmail: Yup.string()
     .required('이메일을 입력해주세요.')
-    .matches(/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i, '이메일 형식이 아닙니다.'),
+    .matches(
+      /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i,
+      '이메일 형식이 아닙니다.'
+    ),
   password: Yup.string()
     .required('비밀번호를 입력해주세요.')
     .matches(
