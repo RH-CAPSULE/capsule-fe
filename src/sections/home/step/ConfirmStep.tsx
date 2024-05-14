@@ -39,7 +39,7 @@ const ConfirmStep = () => {
       <header>
         <IconArrowBack onClick={handleBackStep} />
       </header>
-      <Modal.Title>{currentStep}</Modal.Title>
+      <Modal.Title className={styles.title}>{currentStep}</Modal.Title>
       <Modal.Content>
         <MakingCapsuleBox
           theme={theme}
