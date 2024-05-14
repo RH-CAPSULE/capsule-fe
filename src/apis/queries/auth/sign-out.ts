@@ -1,5 +1,8 @@
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
-import { useAuthStore } from 'src/store/auth';
+import {
+  UseMutationOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { removeSession } from 'src/auth/utils';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +15,8 @@ export const useSignOut = (
   options?: Omit<UseMutationOptions, 'mutationKey'>
 ) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
 
   return useMutation({
     mutationKey: [QUERY_KEY.SIGN_IN],
@@ -23,7 +26,8 @@ export const useSignOut = (
     },
     onSuccess: () => {
       removeSession();
-      setIsLoggedIn(false);
+      // 모든 캐시 제거
+      queryClient.clear();
       navigate(PATH.LOGIN);
     },
     onError: (error) => {

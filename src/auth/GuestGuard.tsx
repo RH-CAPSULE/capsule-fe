@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
+import { useAuth } from 'src/apis/queries/auth/user-info';
 
 // components
 import LoadingScreen from 'src/pages/splash';
 //
 import { PATH } from 'src/routes/path';
-import { useAuthStore } from 'src/store/auth';
 
 // ----------------------------------------------------------------------
 
@@ -13,14 +13,14 @@ type GuestGuardProps = {
 };
 
 export default function GuestGuard({ children }: GuestGuardProps) {
-  const { isLoggedIn, isInitialized } = useAuthStore();
+  const { isLoading, isError: isNotFoundUser } = useAuth();
 
-  if (isLoggedIn) {
-    return <Navigate to={PATH.root} />;
+  if (isLoading) {
+    return <LoadingScreen />;
   }
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
+  if (isNotFoundUser) {
+    return <Navigate to={PATH.root} />;
   }
 
   return <> {children} </>;

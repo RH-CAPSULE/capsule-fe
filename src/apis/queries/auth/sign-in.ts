@@ -3,7 +3,6 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { useAuthStore } from 'src/store/auth';
 import { useSnackbar } from 'notistack';
 import { setSession } from 'src/auth/utils';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,6 @@ export const useSignIn = <T>(
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
 
   return useMutation({
     mutationKey: [QUERY_KEY.SIGN_IN],
@@ -28,7 +26,6 @@ export const useSignIn = <T>(
     },
     onSuccess: (data) => {
       setSession(data);
-      setIsLoggedIn(true);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.USER_INFO] });
       navigate(PATH.HOME);
     },

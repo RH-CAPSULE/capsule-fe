@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAuthStore } from 'src/store/auth';
+import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
 
 const HomeHeader = () => {
-  const user = useAuthStore((state) => state.user);
+  const { user } = useCachedUser();
 
   return (
     <section className={styles.section}>
