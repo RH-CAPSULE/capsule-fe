@@ -29,7 +29,7 @@ const signUpSchema = Yup.object().shape({
   userEmail: Yup.string()
     .required('이메일을 입력해주세요.')
     .matches(
-      /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i,
+      /^[a-zA-Z0-9+-_.]+@[a-z]+\.[a-z]{2,3}/i,
       '이메일 형식이 아닙니다.'
     ),
   password: Yup.string()
