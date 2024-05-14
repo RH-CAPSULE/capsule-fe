@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 // components
 import { PATH } from 'src/routes/path';
 import LoadingScreen from 'src/pages/splash';
 //
-import { useAuthStore } from 'src/store/auth';
+import { useAuth } from 'src/apis/queries/auth/user-info';
 
 // ----------------------------------------------------------------------
 
@@ -13,30 +12,14 @@ type AuthGuardProps = {
 };
 
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const { isLoggedIn, isInitialized } = useAuthStore();
+  const { isLoading, isError: isNotFoundUser } = useAuth();
 
-  const { pathname } = useLocation();
-
-  const [requestedLocation, setRequestedLocation] = useState<string | null>(
-    null
-  );
-
-  if (!isInitialized) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 
-  if (!isLoggedIn) {
-    if (pathname !== requestedLocation) {
-      setRequestedLocation(pathname);
-    }
-    // return <Login />;
+  if (isNotFoundUser) {
     return <Navigate to={PATH.LOGIN} />;
-  }
-
-  if (requestedLocation && pathname !== requestedLocation) {
-    setRequestedLocation(null);
-    // return <Navigate to={requestedLocation} />;
-    return <Navigate to={PATH.root} />;
   }
 
   return <> {children} </>;
