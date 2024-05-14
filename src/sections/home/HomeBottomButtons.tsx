@@ -4,8 +4,8 @@ import { Button } from 'src/components/button';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { copyToClipboard } from 'src/utils/clipboard';
-import { useAuthStore } from 'src/store/auth';
 import { PATH } from 'src/routes/path';
+import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
 
 // ----------------------------------------------------------------------
@@ -24,7 +24,7 @@ interface Props {
 
 const HomeBottomButtons = ({ theme }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
-  const user = useAuthStore((state) => state.user);
+  const { user } = useCachedUser();
 
   const handleCopy = () => {
     copyToClipboard(`${getDomain()}/${user?.id}`);

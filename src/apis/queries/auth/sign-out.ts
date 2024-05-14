@@ -1,5 +1,4 @@
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
-import { useAuthStore } from 'src/store/auth';
 import { useSnackbar } from 'notistack';
 import { removeSession } from 'src/auth/utils';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +12,6 @@ export const useSignOut = (
 ) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
 
   return useMutation({
     mutationKey: [QUERY_KEY.SIGN_IN],
@@ -23,7 +21,6 @@ export const useSignOut = (
     },
     onSuccess: () => {
       removeSession();
-      setIsLoggedIn(false);
       navigate(PATH.LOGIN);
     },
     onError: (error) => {
