@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-
 import {
   IconClose,
   IconImagePlus,
@@ -10,12 +9,13 @@ import {
   IconStop,
 } from 'src/assets/icons';
 import { RHFInput, RHFTextArea } from '../hook-form';
-
+// style
 import styles from './styles.module.scss';
-
+// component
 import { IconButton } from '../button';
-import { LetterType, Letters } from '../../types/letter';
 import ImageUpload from '../image-upload/ImageUpload';
+// type
+import { LetterType, Letters } from '../../types/letter';
 import { Theme } from '../../types';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -42,6 +42,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
     fileInputRef.current?.click();
   };
 
+  // 리팩터링 필요
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [recording, setRecording] = useState(false);
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
@@ -125,13 +126,13 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
       <div className={styles.bottom}>
         <IconButton
           label="이미지 첨부"
-          theme={type === 'PRIMARY' ? 'WHITE' : Theme.AQUA}
+          theme={type === 'PRIMARY' ? '' : Theme.AQUA}
           className="image"
           prevIcon={type === 'PRIMARY' ? IconImagePlusAqua : IconImagePlus}
           onClick={handleButtonClick}
         />
         <IconButton
-          theme={type === 'PRIMARY' ? 'WHITE' : Theme.AQUA}
+          theme={type === 'PRIMARY' ? '' : Theme.AQUA}
           className="image"
           prevIcon={type === 'PRIMARY' ? IconMikeAqua : IconMike}
           onClick={handleRecordButtonClick}
