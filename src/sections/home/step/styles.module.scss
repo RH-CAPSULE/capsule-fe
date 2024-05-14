@@ -6,6 +6,11 @@
   @include flexLayout(row, space-around, center, 8);
 }
 
+.title {
+  font-size: px(24);
+  font-weight: 600;
+}
+
 .modalActionBox {
   @include flexLayout(column, center, center, 8);
 
