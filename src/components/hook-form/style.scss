@@ -4,6 +4,7 @@
 .RHFInput,
 .RHFTextarea {
   width: 100%;
+  position: relative;
   div {
     width: 100%;
     padding-block: px(8);
@@ -25,6 +26,14 @@
       color: $placeholder;
     }
   }
+}
+
+.RHFCloseIcon{
+  position: absolute;
+  right: px(12);
+  top: px(9);
+  cursor: pointer;
+
 }
 
 .RHFTextarea {

@@ -10,17 +10,18 @@ import styles from './styles.module.scss';
 // components
 import { Button } from '../../components/button';
 import { Letter } from '../../components/letter';
+import { Letters, LetterType } from '../../types/letter';
 
 /**
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
  * {
  *   "capsule": {
- *     "userId": 0,
- *     "capsuleBoxId": 0,
- *     "color": "string",
- *     "title": "string",
+ *     "userId": 0,  -> 빠질 것임
+ *     "capsuleBoxId": 0, -> 쿼리에서 가져오면 됨
+ *     "color": "string",  -> 캡슐 색
+ *     "title": "string",  -> to (유저 작성)
  *     "content": "string",
- *     "writer": "string"
+ *     "writer": "string"  -> from (유저 작성)
  *   },
  *   "image": "string",
  *   "audio": "string"
@@ -30,8 +31,6 @@ import { Letter } from '../../components/letter';
 interface IFormValues {
   content: string;
 }
-
-export type LetterType = 'PRIMARY' | 'LETTER' | 'BORDER';
 
 const defaultValues = {
   content: '',
@@ -85,8 +84,8 @@ const WritePad = () => {
             className={styles.item}
             role="button"
             tabIndex={0}
-            onClick={() => handleTypeChange('PRIMARY')}
-            onKeyDown={(event) => handleKeyPress(event, 'PRIMARY')}
+            onClick={() => handleTypeChange(Letters.PRIMARY)}
+            onKeyDown={(event) => handleKeyPress(event, Letters.PRIMARY)}
           >
             1
           </div>
@@ -94,8 +93,8 @@ const WritePad = () => {
             className={styles.item}
             role="button"
             tabIndex={0}
-            onClick={() => handleTypeChange('BORDER')}
-            onKeyDown={(event) => handleKeyPress(event, 'BORDER')}
+            onClick={() => handleTypeChange(Letters.BORDER)}
+            onKeyDown={(event) => handleKeyPress(event, Letters.BORDER)}
           >
             2
           </div>
@@ -103,18 +102,18 @@ const WritePad = () => {
             className={styles.item}
             role="button"
             tabIndex={0}
-            onClick={() => handleTypeChange('LETTER')}
-            onKeyDown={(event) => handleKeyPress(event, 'LETTER')}
+            onClick={() => handleTypeChange(Letters.LETTER)}
+            onKeyDown={(event) => handleKeyPress(event, Letters.LETTER)}
           >
             3
           </div>
         </div>
         <Button
           type="submit"
-          theme="GRAY"
           size="large"
           full
           onClick={handleSubmit(onSubmit, onInvalid)}
+          disabled
         >
           타임캡슐 만들기
         </Button>

@@ -2,6 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import './style.scss';
 import { px } from 'src/utils/styles';
 import Skeleton from '../skeleton';
+import { IconClose } from '../../assets/icons';
 // ----------------------------------------------------------------------
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -22,6 +23,7 @@ export default function RHFInput({
 }: Props) {
   const {
     register,
+    setValue,
     watch,
     formState: { errors },
   } = useFormContext();
@@ -29,6 +31,12 @@ export default function RHFInput({
   const isError = !!errors[name];
 
   const errorMessage = (errors[name]?.message as string) || '';
+
+  const inputValue = watch(name);
+
+  const handleClear = () => {
+    setValue(name, '');
+  };
 
   if (loading) {
     return (
@@ -45,6 +53,7 @@ export default function RHFInput({
       </div>
     );
   }
+
   return (
     <div className="RHFInput">
       <input
@@ -52,6 +61,10 @@ export default function RHFInput({
         {...register(name, { required })}
         {...other}
       />
+      {inputValue && (
+        <IconClose className="RHFCloseIcon" onClick={handleClear} />
+      )}
+
       {isError && <p className="RHFHelperText">{errorMessage}</p>}
     </div>
   );
