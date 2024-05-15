@@ -58,6 +58,10 @@
     background-color: $aqua;
     color: $white;
   }
+  &[data-theme='AQUA-gray'] {
+    background-color: $aqua;
+    color: $gray-200;
+  }
   &[data-theme='MAGENTA'] {
     background-color: $magenta;
     color: $white;
@@ -74,10 +78,6 @@
     background-color: $greige;
     color: $white;
   }
-  &[data-theme='GRAY'] {
-    background-color: $gray-100;
-    color: $white;
-  }
 
   // iconbutton
   &.image{
@@ -88,6 +88,8 @@
     height: 27px;
     border-radius: px(30);
   }
+
+
 
 }
 

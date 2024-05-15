@@ -2,14 +2,32 @@
 @import 'src/theme/utils.scss';
 
 .container {
-  padding: px(27) px(23);
+  padding: px(20) px(22);
   width: 356px;
+  height: 569px;
   border-radius: px(15);
   box-shadow: $boxShadow;
+  box-sizing: border-box;
+
+
+
 
   .toFrom {
     @include fontStyle(20, 700, $aqua);
     color: $aqua;
+    @include flexLayout(row, flex-start, baseline, 5);
+
+    & > div > input {
+      background-color: unset;
+      box-shadow: unset;
+      @include fontStyle(18, 500, $white);
+
+    }
+    & > div > input::placeholder {
+      color: $gray-200;
+      @include fontStyle(18, 500, $white);
+    }
+
   }
 
   .contents{
@@ -17,30 +35,49 @@
     & > div {
       & > textarea {
         display: block;
-        height: px(420);
+        max-height: px(400);
+        height: fit-content;
         box-shadow: unset;
       }
     }
   }
+
+  .audio{
+    margin-bottom: px(10);
+    & > button {
+      padding: 0 px(15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+    }
+  }
+
+
 
   // type == PRIMARY
   &.PRIMARY {
     background-color: $white;
     padding: 0;
     border-radius: px(15);
+    position: relative;
 
     .top {
       border-radius: px(15) px(15) 0 0;
-      padding: px(14);
+      padding: px(10) px(17);
       background-color: $aqua;
       color: $white;
     }
     .right {
-      width: px(140);
-      @include flexLayout(row, flex-end, center, 0);
+      width: 100%;
+      max-width: px(150);
       color: $white;
+      margin-left: px(8);
     }
     .bottom {
+      position: absolute;
+      bottom:0;
+      width:100%;
       padding: px(14) px(18);
       background-color: $aqua;
       border-radius: 0 0 px(15) px(15);
@@ -49,21 +86,29 @@
     .contents{
       margin: px(15);
     }
-    }
+  }
 
   // type == BORDER
   &.BORDER {
     background-color: $white;
     border: px(4) solid $aqua;
+    position: relative;
+
     .top, .toFrom{
-      padding-bottom: px(8);
       border-bottom: px(2) solid $aqua;
       width: px(180);
     }
     .right{
-      width: px(140);
+      width: 100%;
+      max-width: px(150);
+      margin-left: px(8);
+
     }
     .bottom {
+      position: absolute;
+      bottom:0;
+      padding: px(18) 0;
+
       @include flexLayout(row, flex-start, center, 6);
     }
   }
@@ -71,14 +116,24 @@
   // type == LETTER
   &.LETTER {
     background-color: $white;
+    position: relative;
+    //padding: 0;
+
     .top {
-      padding-bottom: px(10);
+      //padding: px(10) 0;
+
     }
     .right {
-      width: px(140);
+      width: 100%;
+      max-width: px(150);
+      margin-left: px(5);
       @include flexLayout(row, flex-end, center, 0);
     }
     .bottom {
+      width:100%;
+      position: absolute;
+      bottom:0;
+      padding: px(18) 0;
       @include flexLayout(row, flex-start, center, 6);
     }
   }

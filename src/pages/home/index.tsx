@@ -41,7 +41,6 @@ const Home = () => {
       <Header />
       <Container>
         <HomeHeader />
-
         {renderContent()}
       </Container>
     </>
