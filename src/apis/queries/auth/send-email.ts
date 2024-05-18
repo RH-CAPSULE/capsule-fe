@@ -20,7 +20,7 @@ export const useSendEmail = (
       return response.data;
     },
     onError: (error) => {
-      enqueueSnackbar(error.message, { variant: 'error' });
+      enqueueSnackbar(error?.message, { variant: 'error' });
     },
     ...options,
   });
