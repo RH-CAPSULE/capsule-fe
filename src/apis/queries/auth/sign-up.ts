@@ -23,7 +23,7 @@ export const useSignUp = <T>(
       navigate(PATH.LOGIN);
     },
     onError: (error) => {
-      enqueueSnackbar(error.message, { variant: 'error' });
+      enqueueSnackbar(error?.message, { variant: 'error' });
     },
     ...options,
   });

@@ -19,7 +19,7 @@ export const useVerifyEmail = (
       return response.data;
     },
     onError: (error) => {
-      enqueueSnackbar(error.message, { variant: 'error' });
+      enqueueSnackbar(error?.message, { variant: 'error' });
     },
     ...options,
   });

@@ -30,7 +30,7 @@ export const useSignIn = <T>(
       navigate(PATH.HOME);
     },
     onError: (error) => {
-      enqueueSnackbar(error.message, { variant: 'error' });
+      enqueueSnackbar(error?.message, { variant: 'error' });
     },
     ...options,
   });
