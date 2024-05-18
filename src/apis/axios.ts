@@ -33,22 +33,26 @@ axiosInstance.interceptors.request.use(
     config.timeout = TIMEOUT_TIME;
     return config;
   },
-  async (error) =>
+  (error) =>
     // 요청 전 에러 처리
     // add error handling before sending the request
-    Promise.reject(error)
+    Promise.reject(
+      (error.response && error.response.data) || 'Something went wrong'
+    )
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error) => {
+  (error) => {
     // error handling
     if (axios.isCancel(error)) {
       // 취소된 요청은 에러로 처리하지 않음
-      return Promise.resolve();
+      Promise.resolve();
     }
 
     // 그 외의 에러는 그대로 반환
-    return Promise.reject(error);
+    return Promise.reject(
+      (error.response && error.response.data) || 'Something went wrong'
+    );
   }
 );
