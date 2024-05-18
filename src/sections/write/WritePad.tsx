@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FieldErrors, FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { enqueueSnackbar } from 'notistack';
 
 // styles
+import axios from 'axios';
 import styles from './styles.module.scss';
 
 // components
@@ -16,7 +17,6 @@ import { Letters, LetterType } from '../../types/letter';
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
  * {
  *   "capsule": {
- *     "userId": 0,  -> 빠질 것임
  *     "capsuleBoxId": 0, -> 쿼리에서 가져오면 됨
  *     "color": "string",  -> 캡슐 색
  *     "title": "string",  -> to (유저 작성)
@@ -29,19 +29,29 @@ import { Letters, LetterType } from '../../types/letter';
  */
 
 interface IFormValues {
+  title: string;
   content: string;
+  writer: string;
 }
 
 const defaultValues = {
+  title: '',
   content: '',
+  writer: '',
 };
 
 const letterSchema = Yup.object().shape({
-  content: Yup.string().required('편지 내용을 입력해주세요.'),
+  title: Yup.string().required('제목을 입력해주세요.'),
+  content: Yup.string().required('내용을 입력해주세요.'),
+  writer: Yup.string().required('작성자를 입력해주세요.'),
 });
 
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+
   const methods = useForm<IFormValues>({
     defaultValues,
     resolver: yupResolver(letterSchema),
@@ -52,8 +62,44 @@ const WritePad = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: IFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: IFormValues) => {
+    try {
+      const formData = new FormData();
+
+      formData.append(
+        'capsule',
+        new Blob(
+          [
+            JSON.stringify({
+              capsuleBoxId: 1,
+              color: type,
+              title: data.title,
+              content: data.content,
+              writer: data.writer,
+            }),
+          ],
+          { type: 'application/json' }
+        )
+      );
+
+      if (fileInputRef.current?.files?.[0]) {
+        formData.append('image', fileInputRef.current.files[0]);
+      }
+
+      if (audioChunks.length > 0) {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        formData.append('audio', audioBlob);
+      }
+
+      const res = await axios.post(
+        'http://15.164.199.14:8080/api/capsule',
+        formData
+      );
+
+      console.log(res);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   const handleTypeChange = (newType: LetterType) => {
@@ -78,7 +124,13 @@ const WritePad = () => {
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
-        <Letter type={type} />
+        <Letter
+          type={type}
+          fileInputRef={fileInputRef}
+          mediaRecorderRef={mediaRecorderRef}
+          audioChunks={audioChunks}
+          setAudioChunks={setAudioChunks}
+        />
         <div className={styles.type}>
           <div
             className={styles.item}

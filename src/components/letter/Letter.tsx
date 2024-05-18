@@ -20,13 +20,25 @@ import { Theme } from '../../types';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
-  loading?: boolean;
+  fileInputRef: React.RefObject<HTMLInputElement>;
+  mediaRecorderRef: React.RefObject<MediaRecorder | null>;
+  audioChunks: Blob[];
+  setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
   className?: string;
 }
 
-const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+const Letter = ({
+  type = 'PRIMARY',
+  fileInputRef,
+  mediaRecorderRef,
+  audioChunks,
+  setAudioChunks,
+  className,
+  ...other
+}: Props) => {
   const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
+  const [recording, setRecording] = useState(false);
+  const [audioDuration, setAudioDuration] = useState<string>('00:00');
 
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
@@ -43,10 +55,6 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
   };
 
   // 리팩터링 필요
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [recording, setRecording] = useState(false);
-  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
-  const [audioDuration, setAudioDuration] = useState<string>('00:00');
 
   const handleRecordButtonClick = async () => {
     if (!recording) {
@@ -54,7 +62,9 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
-        mediaRecorderRef.current = new MediaRecorder(stream);
+        const recorder = new MediaRecorder(stream);
+        // @ts-ignore
+        mediaRecorderRef.current = recorder;
         const startTime = Date.now();
         mediaRecorderRef.current.addEventListener('dataavailable', (event) => {
           setAudioChunks((prevChunks) => [...prevChunks, event.data]);
@@ -139,7 +149,7 @@ const Letter = ({ type = 'PRIMARY', className, ...other }: Props) => {
         />
         <div className={`${styles.toFrom} ${styles.right}`}>
           From..
-          <RHFInput name="title" placeholder="캡슐이가" />
+          <RHFInput name="writer" placeholder="캡슐이가" />
         </div>
       </div>
     </div>
