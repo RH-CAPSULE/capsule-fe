@@ -7,7 +7,7 @@
   @include flexLayout(column, center, center, 0);
 
   .div:first-child{
-    height: 569px;
+    max-height: 569px;
   }
 
   // heading
