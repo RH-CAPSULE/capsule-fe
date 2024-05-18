@@ -3,8 +3,12 @@
 
 .container {
   padding: px(20) px(22);
-  width: 356px;
-  height: 569px;
+  max-width: 356px;
+  width: 85vw;
+  max-height: 569px;
+  //height: 90vh;
+
+
   border-radius: px(15);
   box-shadow: $boxShadow;
   box-sizing: border-box;
