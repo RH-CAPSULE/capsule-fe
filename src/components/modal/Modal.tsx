@@ -1,6 +1,8 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import styles from './styles.module.scss';
 
+const modalRoot = document.getElementById('modal-root')!;
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onClose?: () => void;
@@ -60,7 +62,7 @@ const Modal = ({
 
   if (!innerOpenState) return null;
 
-  return (
+  return createPortal(
     <div
       ref={bgRef}
       tabIndex={0}
@@ -76,7 +78,8 @@ const Modal = ({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
 };
 
