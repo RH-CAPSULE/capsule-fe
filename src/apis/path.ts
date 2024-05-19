@@ -15,6 +15,8 @@ export const PATH_API = {
   MAKE_CAPSULE: '/api/capsule',
   // notice
   NOTICE: '/api/notice',
+  // history
+  HISTORY: '/api/history-capsule-boxes',
 };
 
 /**

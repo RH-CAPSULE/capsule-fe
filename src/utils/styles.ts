@@ -12,3 +12,21 @@ export const themeColor = (theme?: ThemeType) => {
   if (theme === Theme.MAGENTA) return '#bd284a';
   return 'transparent';
 };
+
+/** HEX 색상이 어두운지 밝은지 판별하는 함수 */
+export const isDarkColor = (hexColor: string) => {
+  // '#' 제거
+  if (hexColor.startsWith('#')) {
+    hexColor = hexColor.slice(1);
+  }
+
+  // HEX 값을 RGB로 변환
+  const r = parseInt(hexColor.substring(0, 2), 16);
+  const g = parseInt(hexColor.substring(2, 4), 16);
+  const b = parseInt(hexColor.substring(4, 6), 16);
+
+  // 밝기 계산 (luminance 공식)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  return luminance < 0.5;
+};

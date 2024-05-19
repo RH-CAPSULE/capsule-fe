@@ -60,7 +60,7 @@ export const tokenExpired = (exp: number) => {
     localStorage.removeItem(ACCESS_TOKEN_KEY!);
     localStorage.removeItem(REFRESH_TOKEN_KEY!);
 
-    // window.location.reload();
+    window.location.reload();
     // window.location.href = PATH.login;
   }, timeLeft);
 };
