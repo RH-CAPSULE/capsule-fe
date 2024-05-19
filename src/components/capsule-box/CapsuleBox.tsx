@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconCapsuleBox, IconCapsuleBoxOpen } from 'src/assets/icons';
-import { px, themeColor } from 'src/utils/styles';
+import { isDarkColor, px, themeColor } from 'src/utils/styles';
 import { ICapsuleBox } from 'src/types/capsule';
 import styles from './styles.module.scss';
 import Capsule from '../capsule/Capsule';
@@ -25,7 +25,9 @@ const CapsuleBox = ({
       ) : (
         <IconCapsuleBox fill={boxColor} />
       )}
-      <div className={styles.textBox}>
+      <div
+        className={`${styles.textBox} ${isDarkColor(boxColor) ? styles.dark : ''}`}
+      >
         {closedAt && (
           <p>
             봉인일자

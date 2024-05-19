@@ -23,6 +23,10 @@
     margin-top: em(16);
     text-align: center;
     z-index: 2;
+    @include flexLayout(column, center, center, 8);
+    &.dark {
+      color: $white;
+    }
   }
 
   .capsules {
