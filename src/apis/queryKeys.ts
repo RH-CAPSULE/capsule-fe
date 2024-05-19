@@ -8,4 +8,6 @@ export const QUERY_KEY = {
   MAKE_CAPSULE_BOX: PATH_API.MAKE_CAPSULE_BOX,
   // notice
   NOTICE: PATH_API.NOTICE,
+  // history
+  HISTORY: PATH_API.HISTORY,
 };
