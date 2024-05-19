@@ -29,6 +29,7 @@
     "react-handle-alert": "^0.3.3",
     "react-helmet-async": "^2.0.4",
     "react-hook-form": "^7.51.4",
+    "react-intersection-observer": "^9.10.2",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "sass": "^1.75.0",
