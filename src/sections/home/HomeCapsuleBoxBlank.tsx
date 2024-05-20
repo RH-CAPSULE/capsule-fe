@@ -53,6 +53,12 @@ const HomeCapsuleBoxBlank = () => {
           // 캡슐함 refetch
           queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CAPSULE_BOX] });
         },
+        onError: () => {
+          enqueueSnackbar(
+            '캡슐함 생성에 실패했습니다. 잠시 후 다시 시도해주세요.',
+            { variant: 'error' }
+          );
+        },
       }
     );
   };
