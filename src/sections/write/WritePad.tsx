@@ -6,12 +6,20 @@ import { enqueueSnackbar } from 'notistack';
 
 // styles
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 // components
 import { Button } from '../../components/button';
 import { Letter } from '../../components/letter';
 import { Letters, LetterType } from '../../types/letter';
+import { useMakeCapsuleBox } from '../../apis/queries/capsule';
+import { formatISODate } from '../../utils/date';
+import { QUERY_KEY } from '../../apis/queryKeys';
+import { useMakeCapsule } from '../../apis/queries/capsule/make-capsule';
+import { queryClient } from '../../apis/queryClient';
+import { useSearchParams } from '../../utils/useSearchParam';
+import { PATH } from '../../routes/path';
 
 /**
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
@@ -51,6 +59,10 @@ const WritePad = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+  const navigate = useNavigate();
+
+  const searchParams = useSearchParams();
+  const capsuleBoxId = searchParams.get('id');
 
   const methods = useForm<IFormValues>({
     defaultValues,
@@ -62,7 +74,10 @@ const WritePad = () => {
     formState: { isValid },
   } = methods;
 
+  const makeCapsuleMutate = useMakeCapsule();
+
   const onSubmit = async (data: IFormValues) => {
+    console.log(data);
     try {
       const formData = new FormData();
 
@@ -71,7 +86,7 @@ const WritePad = () => {
         new Blob(
           [
             JSON.stringify({
-              capsuleBoxId: 1,
+              capsuleBoxId,
               color: type,
               title: data.title,
               content: data.content,
@@ -91,12 +106,15 @@ const WritePad = () => {
         formData.append('audio', audioBlob);
       }
 
-      const res = await axios.post(
-        'http://15.164.199.14:8080/api/capsule',
-        formData
-      );
+      console.log(formData.get('capsule'));
 
-      console.log(res);
+      makeCapsuleMutate.mutate(formData, {
+        onSuccess: () => {
+          enqueueSnackbar('캡슐함이 생성되었습니다.', { variant: 'success' });
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MAKE_CAPSULE] });
+          navigate(PATH.HOME);
+        },
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -124,13 +142,16 @@ const WritePad = () => {
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
-        <Letter
-          type={type}
-          fileInputRef={fileInputRef}
-          mediaRecorderRef={mediaRecorderRef}
-          audioChunks={audioChunks}
-          setAudioChunks={setAudioChunks}
-        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Letter
+            type={type}
+            fileInputRef={fileInputRef}
+            mediaRecorderRef={mediaRecorderRef}
+            audioChunks={audioChunks}
+            setAudioChunks={setAudioChunks}
+          />
+        </form>
+
         <div className={styles.type}>
           <div
             className={styles.item}
@@ -165,7 +186,6 @@ const WritePad = () => {
           size="large"
           full
           onClick={handleSubmit(onSubmit, onInvalid)}
-          disabled
         >
           타임캡슐 만들기
         </Button>

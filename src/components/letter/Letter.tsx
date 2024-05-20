@@ -8,6 +8,7 @@ import {
   IconPlay,
   IconStop,
 } from 'src/assets/icons';
+import { FormProvider, useFormContext } from 'react-hook-form';
 import { RHFInput, RHFTextArea } from '../hook-form';
 // style
 import styles from './styles.module.scss';
@@ -25,6 +26,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   audioChunks: Blob[];
   setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
   className?: string;
+  methods?: any;
 }
 
 const Letter = ({
@@ -34,9 +36,9 @@ const Letter = ({
   audioChunks,
   setAudioChunks,
   className,
+  methods,
   ...other
 }: Props) => {
-  const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
 
@@ -47,9 +49,6 @@ const Letter = ({
     return classArr.join(' ');
   }, [type, className]);
 
-  const handleImageUpload = () => {
-    setImageUploaded(true);
-  };
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
@@ -103,7 +102,7 @@ const Letter = ({
         TO..
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <ImageUpload fileInputRef={fileInputRef} onUpload={handleImageUpload} />
+      <ImageUpload fileInputRef={fileInputRef} />
 
       <div className={styles.contents}>
         <div className={styles.audio}>
@@ -126,11 +125,14 @@ const Letter = ({
             />
           )}
         </div>
-        <RHFTextArea
-          name="content"
-          placeholder="내용을 입력해주세요."
-          style={{ height: imageUploaded ? '200px' : '420px' }}
-        />
+        <div
+          className={styles.textarea}
+          // style={{
+          //   height: fileInputRef.current?.value !== '' ? '420px' : '200px',
+          // }}
+        >
+          <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
+        </div>
       </div>
 
       <div className={styles.bottom}>

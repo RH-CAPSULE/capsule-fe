@@ -16,6 +16,7 @@ interface Props
   readonly?: boolean;
   loading?: boolean;
   unit?: string;
+  height?: string;
 }
 
 export default function RHFTextarea({
@@ -24,6 +25,7 @@ export default function RHFTextarea({
   readonly = false,
   required = false,
   loading = false,
+  height = '100%',
   unit,
   ...other
 }: Props) {
@@ -61,7 +63,10 @@ export default function RHFTextarea({
       }) => (
         <div className="RHFTextarea">
           <textarea
-            style={error ? { border: `${px(1)} solid rgb(255, 43, 43)` } : {}}
+            style={{
+              border: error ? `${px(1)} solid rgb(255, 43, 43)` : '',
+              height, // 기본값 설정
+            }}
             value={value}
             onChange={onChange}
             ref={ref}
