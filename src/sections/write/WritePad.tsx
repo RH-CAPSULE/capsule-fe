@@ -21,6 +21,7 @@ import { useMakeCapsule } from '../../apis/queries/capsule/make-capsule';
 import { queryClient } from '../../apis/queryClient';
 import { useSearchParams } from '../../utils/useSearchParam';
 import { PATH } from '../../routes/path';
+import LetterSelector from './LetterSelector';
 
 /**
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
@@ -54,8 +55,6 @@ const letterSchema = Yup.object().shape({
   content: Yup.string().required('내용을 입력해주세요.'),
   writer: Yup.string().required('작성자를 입력해주세요.'),
 });
-
-const Letter = [Letters.PRIMARY, Letters.LETTER, Letters.BORDER];
 
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
@@ -151,33 +150,7 @@ const WritePad = () => {
             setAudioChunks={setAudioChunks}
           />
         </form>
-        <div className={styles.body}>
-          <Swiper
-            initialSlide={0}
-            modules={[A11y]}
-            pagination={{
-              type: 'bullets',
-              clickable: true,
-            }}
-            spaceBetween={15}
-            className="swiperCapsule"
-            onSlideChange={(swiper: ISwiper) =>
-              setType(Letter[swiper.activeIndex])
-            }
-          >
-            {Letter.map((value, index) => (
-              <SwiperSlide key={value} className="slideStyle">
-                <div
-                  className={styles.item}
-                  role="button"
-                  tabIndex={index}
-                  onClick={() => handleTypeChange(Letter[index])}
-                  onKeyDown={(event) => handleKeyPress(event, Letter[index])}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        <LetterSelector type={type} onTypeChange={setType} />
         <Button
           type="submit"
           size="large"
