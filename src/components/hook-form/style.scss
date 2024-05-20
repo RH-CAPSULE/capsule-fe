@@ -37,9 +37,15 @@
 }
 
 .RHFTextarea {
+  //height:100%;
+  //min-height: px(400);
+
+
   textarea {
-    min-height: px(200);
-    height: auto;
+    //margin-bottom: px(85);
+    min-height: 220px;
+    max-height: 280px;
+    //height: inherit;
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -47,6 +53,10 @@
     overflow: hidden;
     resize: none;
   }
+}
+
+.isUse {
+
 }
 
 .RHFHelperText {
