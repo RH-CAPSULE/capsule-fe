@@ -7,6 +7,7 @@ import { copyToClipboard } from 'src/utils/clipboard';
 import { PATH } from 'src/routes/path';
 import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
+import { ICapsuleBox } from '../../types';
 
 // ----------------------------------------------------------------------
 
@@ -18,13 +19,15 @@ const getDomain = () => {
 
 interface Props {
   theme: ThemeType;
+  capsuleBox?: ICapsuleBox;
 }
 
 // ----------------------------------------------------------------------
 
-const HomeBottomButtons = ({ theme }: Props) => {
+const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useCachedUser();
+  const { capsuleBoxId } = capsuleBox || {};
 
   const handleCopy = () => {
     copyToClipboard(`${getDomain()}/${user?.id}`);
@@ -33,7 +36,7 @@ const HomeBottomButtons = ({ theme }: Props) => {
 
   return (
     <section className={`${styles.section} ${styles.bottom}`}>
-      <Link to={PATH.WRITE}>
+      <Link to={`${PATH.WRITE}?id=${capsuleBoxId}`}>
         <Button theme={theme} size="large" full>
           나에게 캡슐 쓰기
         </Button>
