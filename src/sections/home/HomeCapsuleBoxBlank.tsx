@@ -29,8 +29,12 @@ const HomeCapsuleBoxBlank = () => {
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { currentStep, isMakeModalOpen, setIsMakeModalOpen } =
-    useMakeCapsuleStore((state) => state);
+  const {
+    currentStep,
+    isMakeModalOpen,
+    //
+    setIsMakeModalOpen,
+  } = useMakeCapsuleStore((state) => state);
 
   const makeCapsuleBoxMutate = useMakeCapsuleBox();
 
