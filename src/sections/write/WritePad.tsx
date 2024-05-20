@@ -25,18 +25,7 @@ import LetterSelector from './LetterSelector';
 import { useFormData } from '../../hooks/useFormData';
 
 /**
- *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
- * {
- *   "capsule": {
- *     "capsuleBoxId": 0, -> 쿼리에서 가져오면 됨
- *     "color": "string",  -> 캡슐 색
- *     "title": "string",  -> to (유저 작성)
- *     "content": "string",
- *     "writer": "string"  -> from (유저 작성)
- *   },
- *   "image": "string",
- *   "audio": "string"
- * }
+ *  WritePad 사용자가 타임캡슐을 작성하는 페이지
  */
 
 const WritePad = () => {
