@@ -27,23 +27,12 @@
       @include fontStyle(18, 500, $white);
 
     }
+
     & > div > input::placeholder {
       color: $gray-200;
       @include fontStyle(18, 500, $white);
     }
 
-  }
-
-  .contents{
-    margin: px(15) 0;
-    & > div {
-      & > textarea {
-        display: block;
-        max-height: px(400);
-        height: fit-content;
-        box-shadow: unset;
-      }
-    }
   }
 
   .audio{
@@ -87,9 +76,7 @@
       border-radius: 0 0 px(15) px(15);
       @include flexLayout(row, flex-start, center, 6);
     }
-    .contents{
-      margin: px(15);
-    }
+
   }
 
   // type == BORDER
@@ -141,5 +128,25 @@
       @include flexLayout(row, flex-start, center, 6);
     }
   }
+
+}
+
+.textarea {
+  padding-bottom: px(95);
+  & > div {
+    //height: inherit;
+    & > textarea {
+      display: block;
+      max-height: px(330);
+      //height: fit-content;
+      box-shadow: unset;
+    }
+  }
+}
+
+.contents{
+  margin: px(15) 0;
+  //height: 400px;
+  //min-height: 200px;
 
 }
