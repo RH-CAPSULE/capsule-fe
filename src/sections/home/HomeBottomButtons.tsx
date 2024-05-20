@@ -7,7 +7,6 @@ import { copyToClipboard } from 'src/utils/clipboard';
 import { PATH } from 'src/routes/path';
 import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
-import capsuleBox from '../../components/capsule-box/CapsuleBox';
 import { ICapsuleBox } from '../../types';
 
 // ----------------------------------------------------------------------
