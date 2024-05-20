@@ -6,15 +6,16 @@ import { enqueueSnackbar } from 'notistack';
 
 // styles
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y } from 'swiper/modules';
+import { Swiper as ISwiper } from 'swiper/types';
 import styles from './styles.module.scss';
 
 // components
 import { Button } from '../../components/button';
-import { Letter } from '../../components/letter';
+import { Letter as LetterComponent } from '../../components/letter';
 import { Letters, LetterType } from '../../types/letter';
-import { useMakeCapsuleBox } from '../../apis/queries/capsule';
-import { formatISODate } from '../../utils/date';
 import { QUERY_KEY } from '../../apis/queryKeys';
 import { useMakeCapsule } from '../../apis/queries/capsule/make-capsule';
 import { queryClient } from '../../apis/queryClient';
@@ -54,6 +55,8 @@ const letterSchema = Yup.object().shape({
   writer: Yup.string().required('작성자를 입력해주세요.'),
 });
 
+const Letter = [Letters.PRIMARY, Letters.LETTER, Letters.BORDER];
+
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -77,7 +80,6 @@ const WritePad = () => {
   const makeCapsuleMutate = useMakeCapsule();
 
   const onSubmit = async (data: IFormValues) => {
-    console.log(data);
     try {
       const formData = new FormData();
 
@@ -105,8 +107,6 @@ const WritePad = () => {
         const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
         formData.append('audio', audioBlob);
       }
-
-      console.log(formData.get('capsule'));
 
       makeCapsuleMutate.mutate(formData, {
         onSuccess: () => {
@@ -143,7 +143,7 @@ const WritePad = () => {
     <section className={styles.section}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Letter
+          <LetterComponent
             type={type}
             fileInputRef={fileInputRef}
             mediaRecorderRef={mediaRecorderRef}
@@ -151,35 +151,32 @@ const WritePad = () => {
             setAudioChunks={setAudioChunks}
           />
         </form>
-
-        <div className={styles.type}>
-          <div
-            className={styles.item}
-            role="button"
-            tabIndex={0}
-            onClick={() => handleTypeChange(Letters.PRIMARY)}
-            onKeyDown={(event) => handleKeyPress(event, Letters.PRIMARY)}
+        <div className={styles.body}>
+          <Swiper
+            initialSlide={0}
+            modules={[A11y]}
+            pagination={{
+              type: 'bullets',
+              clickable: true,
+            }}
+            spaceBetween={15}
+            className="swiperCapsule"
+            onSlideChange={(swiper: ISwiper) =>
+              setType(Letter[swiper.activeIndex])
+            }
           >
-            1
-          </div>
-          <div
-            className={styles.item}
-            role="button"
-            tabIndex={0}
-            onClick={() => handleTypeChange(Letters.BORDER)}
-            onKeyDown={(event) => handleKeyPress(event, Letters.BORDER)}
-          >
-            2
-          </div>
-          <div
-            className={styles.item}
-            role="button"
-            tabIndex={0}
-            onClick={() => handleTypeChange(Letters.LETTER)}
-            onKeyDown={(event) => handleKeyPress(event, Letters.LETTER)}
-          >
-            3
-          </div>
+            {Letter.map((value, index) => (
+              <SwiperSlide key={value} className="slideStyle">
+                <div
+                  className={styles.item}
+                  role="button"
+                  tabIndex={index}
+                  onClick={() => handleTypeChange(Letter[index])}
+                  onKeyDown={(event) => handleKeyPress(event, Letter[index])}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <Button
           type="submit"
