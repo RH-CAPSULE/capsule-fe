@@ -5,4 +5,5 @@
   width: 100%;
   padding: px(32);
   @include flexLayout(row, space-evenly, flex-start, 16);
+  flex-wrap: wrap;
 }
