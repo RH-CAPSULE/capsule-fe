@@ -25,7 +25,10 @@ const Home = () => {
       return (
         <>
           <HomeCapsuleBox theme={capsuleBox.theme} capsuleBox={capsuleBox} />
-          <HomeBottomButtons theme={capsuleBox?.theme!} />
+          <HomeBottomButtons
+            theme={capsuleBox?.theme!}
+            capsuleBox={capsuleBox}
+          />
         </>
       );
     }

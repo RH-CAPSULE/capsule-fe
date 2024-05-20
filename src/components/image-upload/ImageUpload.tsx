@@ -6,10 +6,9 @@ import styles from './styles.module.scss';
 
 interface props {
   fileInputRef: React.RefObject<HTMLInputElement>;
-  onUpload: () => void;
 }
 
-const ImageUpload = ({ fileInputRef, onUpload }: props) => {
+const ImageUpload = ({ fileInputRef }: props) => {
   const { register } = useFormContext();
   const [imageURL, setImageURL] = useState<string | null>(null);
 
@@ -18,7 +17,6 @@ const ImageUpload = ({ fileInputRef, onUpload }: props) => {
     if (selectedImage) {
       const imageUrl = URL.createObjectURL(selectedImage);
       setImageURL(imageUrl);
-      onUpload();
       register('image', { value: selectedImage });
     }
   };
