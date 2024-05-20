@@ -4,21 +4,13 @@
 .section {
   width: 100%;
   padding: px(32);
-  @include flexLayout(column, center, center, 0);
 
   .div:first-child{
     max-height: 569px;
   }
 
-  // heading
-  .type {
-    margin: px(31) 0;
-    @include flexLayout(row, center, center, 50);
-    .item{ // 임시 생성 추후 보완
-      width: px(65);
-      height: px(65);
-      background-color: $gray-100;
-    }
+  form{
+    min-height:px(450)
   }
 
   &.bottom {
@@ -28,6 +20,38 @@
     a {
       width: 100%;
       text-decoration: none;
+    }
+  }
+}
+.body{
+  & > div> div{
+    display: flex;
+    margin: 15px 0;
+
+    width: px(80);
+    & > div{
+      & > div{
+        width: px(80);
+        max-width: px(80);
+        height: px(80);
+        max-height: px(80);
+        border-radius: 5px;
+      }
+    }
+    // PRIMARY
+    & > div:nth-child(1) > div{
+        background-color: $white;
+        border-top: $aqua 10px solid;
+        border-bottom: $aqua 10px solid;
+    }
+    // LETTER
+    & > div:nth-child(2) > div{
+        background-color: $white;
+    }
+    // BORDER
+    & > div:nth-child(3) > div{
+        border: $aqua 3px solid;
+        background-color: $white;
     }
   }
 }

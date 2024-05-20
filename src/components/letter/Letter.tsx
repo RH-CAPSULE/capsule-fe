@@ -8,7 +8,6 @@ import {
   IconPlay,
   IconStop,
 } from 'src/assets/icons';
-import { FormProvider, useFormContext } from 'react-hook-form';
 import { RHFInput, RHFTextArea } from '../hook-form';
 // style
 import styles from './styles.module.scss';
@@ -16,7 +15,7 @@ import styles from './styles.module.scss';
 import { IconButton } from '../button';
 import ImageUpload from '../image-upload/ImageUpload';
 // type
-import { LetterType, Letters } from '../../types/letter';
+import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -125,12 +124,7 @@ const Letter = ({
             />
           )}
         </div>
-        <div
-          className={styles.textarea}
-          // style={{
-          //   height: fileInputRef.current?.value !== '' ? '420px' : '200px',
-          // }}
-        >
+        <div className={styles.textarea}>
           <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
         </div>
       </div>
