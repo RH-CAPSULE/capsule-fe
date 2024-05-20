@@ -22,6 +22,7 @@ import { queryClient } from '../../apis/queryClient';
 import { useSearchParams } from '../../utils/useSearchParam';
 import { PATH } from '../../routes/path';
 import LetterSelector from './LetterSelector';
+import { useFormData } from '../../hooks/useFormData';
 
 /**
  *  WritePad 는 사용자가 타임캡슐을 작성하는 페이지입니다.
@@ -38,105 +39,17 @@ import LetterSelector from './LetterSelector';
  * }
  */
 
-interface IFormValues {
-  title: string;
-  content: string;
-  writer: string;
-}
-
-const defaultValues = {
-  title: '',
-  content: '',
-  writer: '',
-};
-
-const letterSchema = Yup.object().shape({
-  title: Yup.string().required('제목을 입력해주세요.'),
-  content: Yup.string().required('내용을 입력해주세요.'),
-  writer: Yup.string().required('작성자를 입력해주세요.'),
-});
-
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
-  const navigate = useNavigate();
 
-  const searchParams = useSearchParams();
-  const capsuleBoxId = searchParams.get('id');
-
-  const methods = useForm<IFormValues>({
-    defaultValues,
-    resolver: yupResolver(letterSchema),
+  const { onSubmit, onInvalid, handleSubmit, methods } = useFormData({
+    type,
+    fileInputRef,
+    audioChunks,
   });
-
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
-
-  const makeCapsuleMutate = useMakeCapsule();
-
-  const onSubmit = async (data: IFormValues) => {
-    try {
-      const formData = new FormData();
-
-      formData.append(
-        'capsule',
-        new Blob(
-          [
-            JSON.stringify({
-              capsuleBoxId,
-              color: type,
-              title: data.title,
-              content: data.content,
-              writer: data.writer,
-            }),
-          ],
-          { type: 'application/json' }
-        )
-      );
-
-      if (fileInputRef.current?.files?.[0]) {
-        formData.append('image', fileInputRef.current.files[0]);
-      }
-
-      if (audioChunks.length > 0) {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-        formData.append('audio', audioBlob);
-      }
-
-      makeCapsuleMutate.mutate(formData, {
-        onSuccess: () => {
-          enqueueSnackbar('캡슐함이 생성되었습니다.', { variant: 'success' });
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MAKE_CAPSULE] });
-          navigate(PATH.HOME);
-        },
-      });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
-
-  const handleTypeChange = (newType: LetterType) => {
-    setType(newType);
-  };
-
-  const onInvalid = (error: FieldErrors<IFormValues>) => {
-    if (error.content) {
-      enqueueSnackbar(error.content.message, { variant: 'error' });
-    }
-  };
-
-  const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLDivElement>,
-    newType: LetterType
-  ) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      handleTypeChange(newType);
-    }
-  };
 
   return (
     <section className={styles.section}>
