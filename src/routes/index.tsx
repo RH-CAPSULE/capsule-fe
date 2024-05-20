@@ -5,6 +5,7 @@ import {
   SignUpPage,
   HomePage,
   LoginPage,
+  HistoryPage,
 } from './elements';
 import TestPage from '../_mock/TestPage';
 import BackgroundLayout from '../layouts/background/BackgroundLayout';
@@ -37,6 +38,7 @@ export default function Router() {
         { path: 'api', element: <TestPage /> },
         { path: 'home', element: <HomePage /> },
         { path: 'home/capsule/write', element: <WritePage /> },
+        { path: 'history', element: <HistoryPage /> },
       ],
     },
     // { path: '*', element: <Navigate to="/" replace /> },

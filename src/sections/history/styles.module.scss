@@ -1,0 +1,8 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.list {
+  width: 100%;
+  padding: px(32);
+  @include flexLayout(row, space-evenly, flex-start, 16);
+}
