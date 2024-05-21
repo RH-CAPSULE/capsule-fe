@@ -63,12 +63,21 @@ const SetOpenedDateStep = () => {
   const closedAt = watch('closedAt');
   const openedAt = watch('openedAt');
 
+  // 1달 뒤 날짜
+  const oneMonthLater = format(
+    new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+    'yyyy-MM-dd'
+  );
+
   return (
     <>
       <header>
         <IconArrowBack onClick={handleBackStep} />
       </header>
-      <Modal.Title className={styles.title}>{currentStep}</Modal.Title>
+      <Modal.Title className={styles.title}>
+        {currentStep}
+        <span>개봉 일자는 최소 1달 뒤입니다.</span>
+      </Modal.Title>
       <Modal.Content>
         <MakingCapsuleBox
           theme={theme}
@@ -109,7 +118,7 @@ const SetOpenedDateStep = () => {
             <input
               type="date"
               ref={directSelectInputRef}
-              min={format(new Date(), 'yyyy-MM-dd')}
+              min={oneMonthLater}
               value={openedAt}
               onChange={(e) => setValue('openedAt', e.target.value)}
             />

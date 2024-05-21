@@ -7,8 +7,14 @@
 }
 
 .title {
+  @include flexLayout(column, center, center, 4);
   font-size: px(24);
   font-weight: 600;
+  & > span {
+    font-size: px(13);
+    font-weight: 600;
+    color: $gray-200;
+  }
 }
 
 .modalActionBox {
