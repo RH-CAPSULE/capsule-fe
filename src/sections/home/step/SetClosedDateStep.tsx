@@ -12,10 +12,15 @@ import styles from './styles.module.scss';
 
 // ----------------------------------------------------------------------
 
-enum SelectedDateType {
-  Default = 'default',
-  Direct = 'direct',
+const enum SelectedDateType {
+  OneWeekLater = 'OneWeekLater',
+  TwoWeekLater = 'TwoWeekLater',
 }
+
+const DateValues = {
+  OneWeekLater: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+  TwoWeekLater: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14),
+};
 
 // ----------------------------------------------------------------------
 
@@ -27,8 +32,6 @@ const SetClosedDateStep = () => {
   const [selectedDateType, setSelectedDateType] =
     React.useState<SelectedDateType | null>(null);
 
-  const directSelectInputRef = React.useRef<HTMLInputElement>(null);
-
   const handleBackStep = () => {
     setCurrentStep(MakeCapsuleStep.SelectColor);
   };
@@ -37,16 +40,11 @@ const SetClosedDateStep = () => {
     setCurrentStep(MakeCapsuleStep.SetOpenedDate);
   };
 
-  const onChangeDefaultDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedDateType(e.target.value as SelectedDateType);
-    setValue(
-      'closedAt',
-      format(new Date(Date.now() + 1000 * 60 * 60 * 24 * 14), 'yyyy-MM-dd')
-    );
-  };
-
-  const onChangeDirectDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedDateType(e.target.value as SelectedDateType);
+  const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as SelectedDateType;
+    setSelectedDateType(value);
+    setValue('closedAt', format(DateValues[value], 'yyyy-MM-dd'));
+    console.log(value, format(DateValues[value], 'yyyy-MM-dd'));
   };
 
   const theme = watch('theme');
@@ -62,38 +60,22 @@ const SetClosedDateStep = () => {
         <MakingCapsuleBox theme={theme} closedAt={closedAt} openedAt={null} />
         <div className={styles.radioBox}>
           <Radio
-            label="2주 뒤(기본)"
-            name="select-type-default"
-            value={SelectedDateType.Default}
-            checked={selectedDateType === SelectedDateType.Default}
-            onChange={onChangeDefaultDate}
+            label="1주 뒤(기본)"
+            name="one-week-later"
+            value={SelectedDateType.OneWeekLater}
+            checked={selectedDateType === SelectedDateType.OneWeekLater}
+            onChange={onChangeDate}
           />
           <Radio
-            label="직접 선택"
-            name="select-type-directly"
-            value={SelectedDateType.Direct}
-            checked={selectedDateType === SelectedDateType.Direct}
-            onChange={onChangeDirectDate}
+            label="2주 뒤"
+            name="two-week-later"
+            value={SelectedDateType.TwoWeekLater}
+            checked={selectedDateType === SelectedDateType.TwoWeekLater}
+            onChange={onChangeDate}
           />
         </div>
       </Modal.Content>
       <Modal.Action className={styles.modalActionBox}>
-        {selectedDateType === SelectedDateType.Direct && (
-          <Button
-            className={styles.modalButton}
-            theme={theme}
-            onClick={() => directSelectInputRef.current?.showPicker()}
-          >
-            <input
-              type="date"
-              ref={directSelectInputRef}
-              min={format(new Date(), 'yyyy-MM-dd')}
-              value={closedAt}
-              onChange={(e) => setValue('closedAt', e.target.value)}
-            />
-            개봉일자 설정
-          </Button>
-        )}
         <Button
           disabled={!selectedDateType}
           className={styles.modalButton}
