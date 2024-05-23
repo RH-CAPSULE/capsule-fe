@@ -55,6 +55,7 @@ const Letter = ({
   // 리팩터링 필요
 
   const handleRecordButtonClick = async () => {
+    if (audioChunks.length > 0) return;
     if (!recording) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -95,6 +96,10 @@ const Letter = ({
     mediaRecorderRef.current?.stop();
     setRecording(false);
   };
+  const handleDeleteAudio = () => {
+    setAudioChunks([]);
+    setAudioDuration('00:00');
+  };
 
   return (
     <div className={classes()}>
@@ -124,7 +129,7 @@ const Letter = ({
                 prevIcon={IconPlay}
                 full
               />
-              <IconClose onClick={} />
+              <IconClose onClick={handleDeleteAudio} />
             </>
           )}
         </div>
