@@ -98,7 +98,7 @@ const Letter = ({
   return (
     <div className={classes()}>
       <div className={`${styles.top} ${styles.toFrom}`}>
-        TO..
+        TO.
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
       <ImageUpload fileInputRef={fileInputRef} />
@@ -144,7 +144,7 @@ const Letter = ({
           onClick={handleRecordButtonClick}
         />
         <div className={`${styles.toFrom} ${styles.right}`}>
-          From..
+          From.
           <RHFInput name="writer" placeholder="캡슐이가" />
         </div>
       </div>
