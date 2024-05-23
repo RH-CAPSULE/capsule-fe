@@ -37,12 +37,7 @@ const defaultValues = {
 // ----------------------------------------------------------------------
 
 const InquiryModal = ({ open, onClose }: Props) => {
-  // const { getValues } = useFormContext();
   const useInquiryMutation = useInquiry<IFormValues>();
-
-  const submitInquiry = () => {
-    console.log('submitInquiry');
-  };
 
   const methods = useForm<IFormValues>({
     defaultValues,
@@ -54,9 +49,16 @@ const InquiryModal = ({ open, onClose }: Props) => {
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
-    useInquiryMutation.mutate({
-      content: data.content,
-    });
+    useInquiryMutation.mutate(
+      {
+        content: data.content,
+      },
+      {
+        onSuccess: () => {
+          onClose();
+        },
+      }
+    );
   };
 
   return (
