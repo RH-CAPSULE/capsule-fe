@@ -34,6 +34,8 @@
 
   .audio{
     margin-bottom: px(10);
+    display: flex;
+    gap: 5px;
     & > button {
       padding: 0 px(15);
       display: flex;
@@ -52,6 +54,11 @@
     border-radius: px(15);
     position: relative;
     min-height: px(440);
+    .contents{
+      .audio{
+        margin: 0 15px;
+      }
+    }
 
     .top {
       border-radius: px(15) px(15) 0 0;
