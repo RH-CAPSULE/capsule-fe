@@ -13,6 +13,7 @@ export const PATH_API = {
   CAPSULE_BOX: '/api/capsule-box',
   MAKE_CAPSULE_BOX: '/api/capsule-box',
   MAKE_CAPSULE: '/api/capsule',
+  // MAKE_CAPSULE: '/api//capsule',
   // notice
   NOTICE: '/api/notice',
   // history
