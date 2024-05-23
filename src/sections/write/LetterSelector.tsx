@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y } from 'swiper/modules';
 import { Swiper as ISwiper } from 'swiper/types';
@@ -24,6 +24,11 @@ const LetterSelector: React.FC<LetterSelectorProps> = ({
       onTypeChange(newType);
     }
   };
+
+  useEffect(() => {
+    // This will trigger a re-render after the initial render
+    window.dispatchEvent(new Event('resize'));
+  }, []);
 
   return (
     <div className={styles.body}>
