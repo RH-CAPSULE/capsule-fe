@@ -13,6 +13,9 @@ import { useSignOut } from 'src/apis/queries/auth/sign-out';
 import { onConfirm } from 'src/utils/rha-alert';
 import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
+import { EmailVerifyPurpose } from '../../types';
+import { OTPModal } from '../../components/OTP-modal';
+import InquiryModal from '../../components/inquiry-modal/InquiryModal';
 
 const NavMenu = () => {
   const { user } = useCachedUser();
@@ -20,7 +23,7 @@ const NavMenu = () => {
   const { pathname } = useLocation();
 
   const [open, setOpen] = React.useState(false);
-
+  const [isInquiryModalOpen, setInquiryModalOpen] = React.useState(false);
   const signOutMutation = useSignOut();
 
   const isActive = (path: string) => {
@@ -39,6 +42,10 @@ const NavMenu = () => {
   const handleSignOut = async () => {
     if (!(await onConfirm('로그아웃 하시겠습니까?'))) return;
     signOutMutation.mutate();
+  };
+
+  const handleInquiry = () => {
+    setInquiryModalOpen((prev) => !prev);
   };
 
   React.useEffect(() => {
@@ -71,7 +78,7 @@ const NavMenu = () => {
               </Link>
             </li>
             <li className={activeClassName(PATH.INQUIRY)}>
-              <Link to={PATH.INQUIRY}>
+              <Link to="" onClick={handleInquiry}>
                 <IconMail />
                 문의하기
               </Link>
@@ -86,6 +93,11 @@ const NavMenu = () => {
           {/* <p className={styles.copyright}>copyright © 2024 dochi</p> */}
         </nav>
       </Drawer>
+      <InquiryModal
+        open={isInquiryModalOpen}
+        // purpose={EmailVerifyPurpose.SIGN_UP}
+        onClose={() => setInquiryModalOpen(false)}
+      />
     </>
   );
 };
