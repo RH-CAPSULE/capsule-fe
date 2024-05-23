@@ -15,6 +15,11 @@ export const useInquiry = <T>(
       const response = await axiosInstance.post(PATH_API.INQUIRY, payload);
       return response.data;
     },
+    onSuccess: () => {
+      enqueueSnackbar('문의가 성공적으로 전송되었습니다.', {
+        variant: 'success',
+      });
+    },
     onError: (error) => {
       enqueueSnackbar(error?.message, { variant: 'error' });
     },
