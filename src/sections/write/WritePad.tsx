@@ -1,26 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { FieldErrors, FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { enqueueSnackbar } from 'notistack';
 
 // styles
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y } from 'swiper/modules';
-import { Swiper as ISwiper } from 'swiper/types';
+
 import styles from './styles.module.scss';
 
 // components
 import { Button } from '../../components/button';
 import { Letter as LetterComponent } from '../../components/letter';
 import { Letters, LetterType } from '../../types/letter';
-import { QUERY_KEY } from '../../apis/queryKeys';
-import { useMakeCapsule } from '../../apis/queries/capsule/make-capsule';
-import { queryClient } from '../../apis/queryClient';
-import { useSearchParams } from '../../utils/useSearchParam';
-import { PATH } from '../../routes/path';
+
 import LetterSelector from './LetterSelector';
 import { useFormData } from '../../hooks/useFormData';
 

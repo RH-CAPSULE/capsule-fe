@@ -12,13 +12,11 @@
   box-shadow: $boxShadow;
   box-sizing: border-box;
 
-
-
-
   .toFrom {
     @include fontStyle(20, 700, $aqua);
     color: $aqua;
     @include flexLayout(row, flex-start, baseline, 5);
+
 
     & > div > input {
       background-color: unset;
@@ -53,6 +51,7 @@
     padding: 0;
     border-radius: px(15);
     position: relative;
+    min-height: px(440);
 
     .top {
       border-radius: px(15) px(15) 0 0;
@@ -62,7 +61,7 @@
     }
     .right {
       width: 100%;
-      max-width: px(150);
+      max-width: px(210);
       color: $white;
       margin-left: px(8);
     }
@@ -83,6 +82,8 @@
     background-color: $white;
     border: px(4) solid $aqua;
     position: relative;
+    min-height: px(440);
+
 
     .top, .toFrom{
       border-bottom: px(2) solid $aqua;
@@ -90,7 +91,7 @@
     }
     .right{
       width: 100%;
-      max-width: px(150);
+      max-width: px(210);
       margin-left: px(8);
 
     }
@@ -107,7 +108,8 @@
   &.LETTER {
     background-color: $white;
     position: relative;
-    //padding: 0;
+    min-height: px(440);
+
 
     .top {
       //padding: px(10) 0;
@@ -115,7 +117,7 @@
     }
     .right {
       width: 100%;
-      max-width: px(150);
+      max-width: px(210);
       margin-left: px(5);
       @include flexLayout(row, flex-end, center, 0);
     }
