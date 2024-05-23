@@ -4,20 +4,34 @@
 .inquiryModal {
   background-color: $background !important;
   width: px(300);
+
+  .inquiryTitle{
+    margin-top: 1rem;
+    p{
+      color: $white;
+      @include fontStyle(23, bolder)
+    }
+  }
+
+
   .inquiryContent{
     padding: px(10) px(16);
+
+      .inputBox {
+        textarea {
+          border: none;
+          border-radius: px(8);
+          padding: px(15);
+          width: 100%;
+          min-height: px(120);
+          max-height: px(120);
+        }
+      }
+
   }
 }
 
-.inputBox{
-  textarea{
-    border:none;
-    border-radius: px(8);
-    padding: px(15);
-    height: px(140);
-    width: 100%;
-  }
-}
+
 
 .actionsBox {
   @include flexLayout(column, center, center, 16);

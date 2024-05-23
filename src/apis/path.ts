@@ -18,6 +18,8 @@ export const PATH_API = {
   NOTICE: '/api/notice',
   // history
   HISTORY: '/api/history-capsule-boxes',
+  // inquiry
+  INQUIRY: '/api/inquiry',
 };
 
 /**

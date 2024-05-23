@@ -5,11 +5,19 @@ import { useTimer } from 'src/hooks/useTimer';
 import { useEmailAuthStore } from 'src/store/auth';
 import { useVerifyEmail } from 'src/apis/queries/auth/verify-email';
 import { useSendEmail } from 'src/apis/queries/auth/send-email';
-import { useFormContext } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 import { EmailVerifyPurpose } from 'src/types/auth';
 import { useSnackbar } from 'notistack';
 import { onConfirm } from 'src/utils/rha-alert';
+import { yupResolver } from '@hookform/resolvers/yup';
+import sha256 from 'sha256';
 import styles from './styles.module.scss';
+import FormProvider from '../hook-form/FormProvider';
+import { ICapsuleBox } from '../../types';
+import { formatISODate } from '../../utils/date';
+import { QUERY_KEY } from '../../apis/queryKeys';
+import { useInquiry } from '../../apis/queries/inquiry/inquiry';
+import RHFTextarea from '../hook-form/RHFTextArea';
 
 // ----------------------------------------------------------------------
 
@@ -18,38 +26,64 @@ interface Props {
   onClose: () => void;
 }
 
+interface IFormValues {
+  content: string;
+}
+
+const defaultValues = {
+  content: '',
+};
+
 // ----------------------------------------------------------------------
 
 const InquiryModal = ({ open, onClose }: Props) => {
   // const { getValues } = useFormContext();
+  const useInquiryMutation = useInquiry<IFormValues>();
 
   const submitInquiry = () => {
     console.log('submitInquiry');
   };
 
+  const methods = useForm<IFormValues>({
+    defaultValues,
+  });
+
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
+
+  const onSubmit = (data: IFormValues) => {
+    useInquiryMutation.mutate({
+      content: data.content,
+    });
+  };
+
   return (
     <Modal open={open} onClose={onClose} className={styles.inquiryModal}>
-      <Modal.Title>
-        <p>문의하기</p>
-      </Modal.Title>
-      <Modal.Content className={styles.inquiryContent}>
-        <div className={styles.inputBox}>
-          <textarea
-            placeholder="내용을 입력해주세요"
-            className={styles.textarea}
-          />
-        </div>
-      </Modal.Content>
-      <Modal.Action className={styles.actionsBox}>
-        <Button
-          className={styles.verifyButton}
-          onClick={submitInquiry}
-          // disabled={code.some((digit) => digit === '')}
-          // loading={verifyEmailMutation.isPending}
-        >
-          제출
-        </Button>
-      </Modal.Action>
+      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+        <Modal.Title className={styles.inquiryTitle}>
+          <p>문의하기</p>
+        </Modal.Title>
+        <Modal.Content className={styles.inquiryContent}>
+          <div className={styles.inputBox}>
+            <RHFTextarea
+              name="content"
+              className={styles.input}
+              placeholder="문의할 내용을 작성해주세요"
+            />
+          </div>
+        </Modal.Content>
+        <Modal.Action className={styles.actionsBox}>
+          <Button
+            className={styles.verifyButton}
+            disabled={!isValid}
+            type="submit"
+          >
+            제출
+          </Button>
+        </Modal.Action>
+      </FormProvider>
     </Modal>
   );
 };
