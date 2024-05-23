@@ -84,6 +84,7 @@ const Letter = ({
   };
 
   const handlePlaybackButtonClick = () => {
+    if (audioChunks.length === 0) return;
     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
     const audioURL = URL.createObjectURL(audioBlob);
     const audio = new Audio(audioURL);
@@ -115,13 +116,16 @@ const Letter = ({
             />
           )}
           {audioChunks.length > 0 && (
-            <IconButton
-              label={`재생 (${audioDuration})`}
-              onClick={handlePlaybackButtonClick}
-              theme="AQUA-gray"
-              prevIcon={IconPlay}
-              full
-            />
+            <>
+              <IconButton
+                label={`재생 (${audioDuration})`}
+                onClick={handlePlaybackButtonClick}
+                theme="AQUA-gray"
+                prevIcon={IconPlay}
+                full
+              />
+              <IconClose onClick={} />
+            </>
           )}
         </div>
         <div className={styles.textarea}>
