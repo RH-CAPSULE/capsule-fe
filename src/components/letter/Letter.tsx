@@ -40,6 +40,7 @@ const Letter = ({
 }: Props) => {
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
@@ -84,12 +85,18 @@ const Letter = ({
     }
   };
 
+  console.log(isPlaying);
+
   const handlePlaybackButtonClick = () => {
-    if (audioChunks.length === 0) return;
+    if (audioChunks.length === 0 || isPlaying) return;
     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
     const audioURL = URL.createObjectURL(audioBlob);
     const audio = new Audio(audioURL);
+    setIsPlaying(true);
     audio.play();
+    audio.addEventListener('ended', () => {
+      setIsPlaying(false);
+    });
   };
 
   const handleStopButtonClick = () => {
@@ -128,6 +135,7 @@ const Letter = ({
                 theme="AQUA-gray"
                 prevIcon={IconPlay}
                 full
+                disabled={isPlaying}
               />
               <IconClose onClick={handleDeleteAudio} />
             </>
