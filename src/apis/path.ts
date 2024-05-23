@@ -8,7 +8,7 @@ export const PATH_API = {
   SEND_EMAIL: '/api/auth/mail/send',
   VERIFY_EMAIL: '/api/auth/mail/verify',
   // user
-  USER_INFO: '/api/auth/user',
+  USER_INFO: '/api/user',
   // capsule
   CAPSULE_BOX: '/api/capsule-box',
   MAKE_CAPSULE_BOX: '/api/capsule-box',
