@@ -2,6 +2,7 @@ import React from 'react';
 import { IconCapsuleBox, IconCapsuleBoxOpen } from 'src/assets/icons';
 import { isDarkColor, px, themeColor } from 'src/utils/styles';
 import { ICapsuleBox } from 'src/types/capsule';
+import { isFuture, isPast } from 'date-fns';
 import styles from './styles.module.scss';
 import Capsule from '../capsule/Capsule';
 
@@ -16,11 +17,12 @@ const CapsuleBox = ({
 }: Props) => {
   const boxColor = themeColor(theme);
 
-  const isOpen = new Date() <= new Date(closedAt);
+  // 열렸거나 봉인되기 전
+  const isOpened = isPast(new Date(openedAt)) || isFuture(new Date(closedAt));
 
   return (
     <div className={styles.capsuleBox} {...other}>
-      {isOpen ? (
+      {isOpened ? (
         <IconCapsuleBoxOpen fill={boxColor} />
       ) : (
         <IconCapsuleBox fill={boxColor} />
