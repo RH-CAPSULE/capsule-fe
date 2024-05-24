@@ -7,6 +7,7 @@ export interface ICapsuleBox {
   openedAt: string;
   closedAt: string;
   capsules: string[];
+  hasMyCapsule?: boolean;
 }
 
 // MakeCapsuleStep Type assertion
