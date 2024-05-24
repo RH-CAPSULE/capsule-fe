@@ -11,6 +11,4 @@ export const QUERY_KEY = {
   NOTICE: PATH_API.NOTICE,
   // history
   HISTORY: PATH_API.HISTORY,
-  // inquiry
-  INQUIRY: PATH_API.INQUIRY,
 };
