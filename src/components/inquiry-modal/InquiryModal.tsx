@@ -11,6 +11,7 @@ import { useSnackbar } from 'notistack';
 import { onConfirm } from 'src/utils/rha-alert';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
+import * as Yup from 'yup';
 import styles from './styles.module.scss';
 import FormProvider from '../hook-form/FormProvider';
 import { ICapsuleBox } from '../../types';
@@ -34,6 +35,10 @@ const defaultValues = {
   content: '',
 };
 
+const inquirySchema = Yup.object().shape({
+  content: Yup.string().required('문의 내용을 입력해주세요.'),
+});
+
 // ----------------------------------------------------------------------
 
 const InquiryModal = ({ open, onClose }: Props) => {
@@ -41,6 +46,7 @@ const InquiryModal = ({ open, onClose }: Props) => {
 
   const methods = useForm<IFormValues>({
     defaultValues,
+    resolver: yupResolver(inquirySchema),
   });
 
   const {

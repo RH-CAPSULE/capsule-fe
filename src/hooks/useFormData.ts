@@ -32,7 +32,6 @@ const letterSchema = Yup.object().shape({
   content: Yup.string().required('내용을 입력해주세요.'),
   writer: Yup.string().required('작성자를 입력해주세요.'),
 });
-
 export const useFormData = ({ type, fileInputRef, audioChunks }: props) => {
   const navigate = useNavigate();
   const makeCapsuleMutate = useMakeCapsule();
