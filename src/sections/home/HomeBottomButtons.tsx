@@ -72,7 +72,7 @@ const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
   if (isOpened) {
     return (
       <section className={`${styles.section} ${styles.bottom}`}>
-        <Link to={`${PATH.CAPSULE_LIST}?id=${capsuleBoxId}`}>
+        <Link to={`${PATH.CAPSULE_LIST}/${capsuleBoxId}`}>
           <Button theme={theme} size="large" full>
             캡슐함 열기
           </Button>
