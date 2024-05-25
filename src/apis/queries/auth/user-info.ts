@@ -25,12 +25,16 @@ export const useAuth = <T>(params?: Props) => {
       const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY!);
       const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY!);
 
-      if (!accessToken || !isValidToken(accessToken)) {
-        throw new Error('Error! access 토큰 만료');
+      if (!accessToken) {
+        throw new Error('Error! Not found access token');
       }
 
       if (!refreshToken || !isValidToken(refreshToken)) {
         throw new Error('Error! refresh 토큰 만료');
+      }
+
+      if (!isValidToken(accessToken)) {
+        // refresh access token
       }
 
       setSession({ accessToken, refreshToken });
