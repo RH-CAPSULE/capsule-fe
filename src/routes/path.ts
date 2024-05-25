@@ -12,4 +12,5 @@ export const PATH = {
   HISTORY: '/history',
   // 문의하기
   INQUIRY: '/inquiry',
+  CAPSULE_LIST: '/capsules',
 };
