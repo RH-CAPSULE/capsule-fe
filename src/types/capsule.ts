@@ -1,3 +1,4 @@
+import { LetterType } from './letter';
 import { ThemeType } from './theme';
 import { Union } from './union';
 
@@ -19,3 +20,13 @@ export const MakeCapsuleStep = {
 } as const;
 
 export type MakeCapsuleStepType = Union<typeof MakeCapsuleStep>;
+
+export interface ICapsule {
+  color: string;
+  title: string;
+  writer: string;
+  isMine: boolean;
+  theme: LetterType;
+  capsuleId: number;
+  createdAt: string;
+}
