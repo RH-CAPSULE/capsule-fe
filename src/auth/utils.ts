@@ -1,7 +1,7 @@
 // routes
 import { handleAlert } from 'react-handle-alert';
-import { axiosInstance } from '../apis/axios';
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../static';
+import { axiosInstance } from 'src/apis/axios';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from 'src/static';
 import { IToken } from './types';
 // utils
 
@@ -75,8 +75,7 @@ export const setSession = (token: IToken) => {
 
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
+    const { exp } = jwtDecode(refreshToken);
     tokenExpired(exp);
   } else {
     localStorage.removeItem(ACCESS_TOKEN_KEY!);
