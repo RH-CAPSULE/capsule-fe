@@ -6,6 +6,8 @@ import {
   HomePage,
   LoginPage,
   HistoryPage,
+  CapsuleListPage,
+  CapsuleDetailPage,
 } from './elements';
 import TestPage from '../_mock/TestPage';
 import BackgroundLayout from '../layouts/background/BackgroundLayout';
@@ -39,6 +41,8 @@ export default function Router() {
         { path: 'home', element: <HomePage /> },
         { path: 'home/capsule/write', element: <WritePage /> },
         { path: 'history', element: <HistoryPage /> },
+        { path: 'capsules', element: <CapsuleListPage /> },
+        { path: 'capsules/:id', element: <CapsuleDetailPage /> },
       ],
     },
     // { path: '*', element: <Navigate to="/" replace /> },
