@@ -1,18 +1,18 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Container } from 'src/components/container';
+import { CapsuleList } from 'src/sections/capsule-list';
 
-const CapsulesList = () => {
+const Capsules = () => {
   return (
     <>
       <Helmet>
         <title> Capsule List | Capsule</title>
       </Helmet>
       <Container>
-        <div>하이</div>
+        <CapsuleList />
       </Container>
     </>
   );
 };
 
-export default CapsulesList;
+export default Capsules;
