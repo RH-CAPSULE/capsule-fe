@@ -12,5 +12,7 @@ export const PATH = {
   HISTORY: '/history',
   // 문의하기
   INQUIRY: '/inquiry',
+  // 캡슐 리스트
   CAPSULE_LIST: '/capsules',
+  CAPSULE_DETAIL: '/capsules/detail',
 };
