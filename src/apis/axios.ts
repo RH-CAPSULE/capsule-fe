@@ -64,6 +64,7 @@ axiosInstance.interceptors.response.use(
           return await axiosInstance(originalRequest);
         } catch {
           // 리프레시 토큰도 만료된 경우 로그아웃 처리
+          alert('로그인이 만료되었습니다.');
           localStorage.removeItem(ACCESS_TOKEN_KEY!);
           localStorage.removeItem(REFRESH_TOKEN_KEY!);
 
