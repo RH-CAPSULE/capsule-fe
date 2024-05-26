@@ -66,10 +66,11 @@ export const useFormData = ({ type, fileInputRef, audioChunks }: props) => {
           [
             JSON.stringify({
               capsuleBoxId,
-              color: type,
+              theme: type,
               title: data.title,
               content: data.content,
               writer: data.writer,
+              color: '#f103c7',
             }),
           ],
           { type: 'application/json' }
