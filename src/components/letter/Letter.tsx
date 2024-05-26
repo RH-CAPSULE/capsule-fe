@@ -99,7 +99,6 @@ const Letter = ({
 
       <div className={styles.bottom}>
         <IconButton
-          label="이미지 첨부"
           theme={type === 'PRIMARY' ? '' : Theme.AQUA}
           className="image"
           prevIcon={type === 'PRIMARY' ? IconImagePlusAqua : IconImagePlus}
