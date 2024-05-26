@@ -14,7 +14,7 @@ type Props = {
 
 export const useCapsuleDetail = <T>({ capsuleId, ...other }: Props) => {
   return useQuery({
-    queryKey: [QUERY_KEY.CAPSULE_DETAIL],
+    queryKey: [QUERY_KEY.CAPSULE_DETAIL, capsuleId],
     queryFn: async () => {
       const response = await axiosInstance.get(
         `${PATH_API.CAPSULE_DETAIL}/${capsuleId}`
