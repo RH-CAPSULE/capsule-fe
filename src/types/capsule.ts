@@ -22,11 +22,14 @@ export const MakeCapsuleStep = {
 export type MakeCapsuleStepType = Union<typeof MakeCapsuleStep>;
 
 export interface ICapsule {
-  color: string;
-  title: string;
-  writer: string;
-  isMine: boolean;
-  theme: LetterType;
   capsuleId: number;
+  color: string;
+  theme: LetterType;
+  title: string;
+  content: string;
+  writer: string;
+  imageUrl: string;
+  audioUrl: string;
+  isMine: boolean;
   createdAt: string;
 }
