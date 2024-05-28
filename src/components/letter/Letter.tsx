@@ -39,6 +39,7 @@ const Letter = ({
   methods,
   ...other
 }: Props) => {
+  
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
     if (className) classArr.push(className);
