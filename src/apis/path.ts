@@ -9,6 +9,7 @@ export const PATH_API = {
   VERIFY_EMAIL: '/api/auth/mail/verify',
   // user
   USER_INFO: '/api/user',
+  USER_RESIGN: '/api/user/resign',
   // capsule
   CAPSULE_BOX: '/api/capsule-box',
   MAKE_CAPSULE_BOX: '/api/capsule-box',
