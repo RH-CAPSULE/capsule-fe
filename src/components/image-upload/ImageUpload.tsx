@@ -5,12 +5,13 @@ import { IconClose } from 'src/assets/icons';
 import styles from './styles.module.scss';
 
 interface props {
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  // fileInputRef: React.RefObject<HTMLInputElement>;
 }
 
-const ImageUpload = ({ fileInputRef }: props) => {
-  const { register } = useFormContext();
+const ImageUpload = () => {
+  const { register, watch, setValue } = useFormContext();
   const [imageURL, setImageURL] = useState<string | null>(null);
+  const fileInputRef = watch('fileInputRef');
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
