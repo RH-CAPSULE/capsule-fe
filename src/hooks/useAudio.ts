@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-interface props {
-  audioChunks: Blob[];
-  setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
-}
-
-export const useAudio = ({ audioChunks, setAudioChunks }: props) => {
+export const useAudio = () => {
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
   const [isPlaying, setIsPlaying] = useState(false);
-  const { watch } = useFormContext();
+  const { register, watch, setValue, getValues } = useFormContext();
   const recodeRef = watch('recodeRef');
+  const audioChunks = watch('audioChunks');
 
   const handleRecordButtonClick = async () => {
+    console.log('audioChunks', audioChunks);
     if (audioChunks.length > 0) return;
     if (!recording) {
       try {
@@ -25,7 +22,9 @@ export const useAudio = ({ audioChunks, setAudioChunks }: props) => {
         recodeRef.current = recorder;
         const startTime = Date.now();
         recodeRef.current.addEventListener('dataavailable', (event: any) => {
-          setAudioChunks((prevChunks) => [...prevChunks, event.data]);
+          const prevChunks = getValues('audioChunks');
+
+          setValue('audioChunks', [...prevChunks, event.data]);
           const endTime = Date.now();
           const duration = new Date(endTime - startTime);
           const minutes = duration.getUTCMinutes().toString().padStart(2, '0');
@@ -60,7 +59,7 @@ export const useAudio = ({ audioChunks, setAudioChunks }: props) => {
     setRecording(false);
   };
   const handleDeleteAudio = () => {
-    setAudioChunks([]);
+    setValue('audioChunks', { value: [] });
     setAudioDuration('00:00');
   };
 

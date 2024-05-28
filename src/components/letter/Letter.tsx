@@ -22,21 +22,13 @@ import { useAudio } from '../../hooks/useAudio';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
-  audioChunks: Blob[];
-  setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
   className?: string;
   methods?: any;
 }
 
-const Letter = ({
-  type = 'PRIMARY',
-  audioChunks,
-  setAudioChunks,
-  className,
-  methods,
-  ...other
-}: Props) => {
+const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
   const { register, watch } = useFormContext();
+  const audioChunks = watch('audioChunks');
 
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
@@ -57,7 +49,7 @@ const Letter = ({
     handlePlaybackButtonClick,
     handleStopButtonClick,
     handleDeleteAudio,
-  } = useAudio({ audioChunks, setAudioChunks });
+  } = useAudio();
 
   return (
     <div className={classes()}>
