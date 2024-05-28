@@ -26,7 +26,6 @@ export const useResign = (
     },
     onSuccess: () => {
       removeSession();
-      // 모든 캐시 제거
       queryClient.clear();
       navigate(PATH.LOGIN);
     },

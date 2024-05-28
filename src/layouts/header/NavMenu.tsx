@@ -51,7 +51,7 @@ const NavMenu = () => {
   };
 
   const handleResign = async () => {
-    if (!(await onConfirm('로그아웃 하시겠습니까?'))) return;
+    if (!(await onConfirm('정말 탈퇴 하시겠습니까?'))) return;
     useResignMutation.mutate();
   };
 
