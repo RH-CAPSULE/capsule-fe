@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import React from 'react';
 import { queryClient } from '../apis/queryClient';
 import { QUERY_KEY } from '../apis/queryKeys';
 import { PATH } from '../routes/path';
@@ -14,6 +15,7 @@ interface IFormValues {
   content: string;
   writer: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
+  recodeRef?: React.RefObject<MediaRecorder | null>;
 }
 
 const defaultValues = {
@@ -21,6 +23,7 @@ const defaultValues = {
   content: '',
   writer: '',
   fileInputRef: { current: null },
+  recodeRef: { current: null },
 };
 
 interface props {

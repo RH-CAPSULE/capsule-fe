@@ -22,7 +22,6 @@ import { useAudio } from '../../hooks/useAudio';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
-  mediaRecorderRef: React.RefObject<MediaRecorder | null>;
   audioChunks: Blob[];
   setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
   className?: string;
@@ -31,7 +30,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const Letter = ({
   type = 'PRIMARY',
-  mediaRecorderRef,
   audioChunks,
   setAudioChunks,
   className,
@@ -59,7 +57,7 @@ const Letter = ({
     handlePlaybackButtonClick,
     handleStopButtonClick,
     handleDeleteAudio,
-  } = useAudio({ mediaRecorderRef, audioChunks, setAudioChunks });
+  } = useAudio({ audioChunks, setAudioChunks });
 
   return (
     <div className={classes()}>

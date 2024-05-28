@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 interface props {
-  mediaRecorderRef: React.RefObject<MediaRecorder | null>;
   audioChunks: Blob[];
   setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
 }
 
-export const useAudio = ({
-  mediaRecorderRef,
-  audioChunks,
-  setAudioChunks,
-}: props) => {
+export const useAudio = ({ audioChunks, setAudioChunks }: props) => {
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
   const [isPlaying, setIsPlaying] = useState(false);
+  const { watch } = useFormContext();
+  const recodeRef = watch('recodeRef');
 
   const handleRecordButtonClick = async () => {
     if (audioChunks.length > 0) return;
@@ -24,9 +22,9 @@ export const useAudio = ({
         });
         const recorder = new MediaRecorder(stream);
         // @ts-ignore
-        mediaRecorderRef.current = recorder;
+        recodeRef.current = recorder;
         const startTime = Date.now();
-        mediaRecorderRef.current.addEventListener('dataavailable', (event) => {
+        recodeRef.current.addEventListener('dataavailable', (event: any) => {
           setAudioChunks((prevChunks) => [...prevChunks, event.data]);
           const endTime = Date.now();
           const duration = new Date(endTime - startTime);
@@ -34,13 +32,13 @@ export const useAudio = ({
           const seconds = duration.getUTCSeconds().toString().padStart(2, '0');
           setAudioDuration(`${minutes}:${seconds}`);
         });
-        mediaRecorderRef.current.start();
+        recodeRef.current.start();
         setRecording(true);
       } catch (error) {
         console.error('Error accessing microphone:', error);
       }
     } else {
-      mediaRecorderRef.current?.stop();
+      recodeRef.current?.stop();
       setRecording(false);
     }
   };
@@ -58,7 +56,7 @@ export const useAudio = ({
   };
 
   const handleStopButtonClick = () => {
-    mediaRecorderRef.current?.stop();
+    recodeRef.current?.stop();
     setRecording(false);
   };
   const handleDeleteAudio = () => {
