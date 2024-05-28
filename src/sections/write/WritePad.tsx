@@ -19,22 +19,16 @@ import { useFormData } from '../../hooks/useFormData';
 
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
-  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
 
   const { onSubmit, onInvalid, handleSubmit, methods } = useFormData({
     type,
-    audioChunks,
   });
 
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <LetterComponent
-            type={type}
-            audioChunks={audioChunks}
-            setAudioChunks={setAudioChunks}
-          />
+          <LetterComponent type={type} />
         </form>
         <LetterSelector type={type} onTypeChange={setType} />
         <Button

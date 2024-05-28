@@ -16,6 +16,7 @@ interface IFormValues {
   writer: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
   recodeRef?: React.RefObject<MediaRecorder | null>;
+  audioChunks?: Blob[];
 }
 
 const defaultValues = {
@@ -24,11 +25,11 @@ const defaultValues = {
   writer: '',
   fileInputRef: { current: null },
   recodeRef: { current: null },
+  audioChunks: [],
 };
 
 interface props {
   type: string;
-  audioChunks: Blob[];
 }
 
 const letterSchema = Yup.object().shape({
@@ -37,7 +38,7 @@ const letterSchema = Yup.object().shape({
   writer: Yup.string().required('작성자를 입력해주세요.'),
 });
 
-export const useFormData = ({ type, audioChunks }: props) => {
+export const useFormData = ({ type }: props) => {
   const navigate = useNavigate();
   const makeCapsuleMutate = useMakeCapsule();
 
@@ -84,8 +85,8 @@ export const useFormData = ({ type, audioChunks }: props) => {
         formData.append('image', data.fileInputRef.current.files[0]);
       }
 
-      if (audioChunks.length > 0) {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      if (data.audioChunks?.length && data.audioChunks.length > 0) {
+        const audioBlob = new Blob(data.audioChunks, { type: 'audio/wav' });
         formData.append('audio', audioBlob);
       }
 
