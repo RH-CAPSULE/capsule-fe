@@ -4,9 +4,13 @@ import { IconClose } from 'src/assets/icons';
 
 import styles from './styles.module.scss';
 
-const ImageUpload = () => {
+interface props {
+  src?: string;
+}
+
+const ImageUpload = ({ src }: props) => {
   const { register, watch, setValue } = useFormContext();
-  const [imageURL, setImageURL] = useState<string | null>(null);
+  const [imageURL, setImageURL] = useState<string | null>(src || null);
   const fileInputRef = watch('fileInputRef');
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
