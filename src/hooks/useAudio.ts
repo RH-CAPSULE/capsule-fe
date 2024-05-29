@@ -7,7 +7,7 @@ export const useAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { register, watch, setValue, getValues } = useFormContext();
   const recodeRef = watch('recodeRef');
-  const audioChunks = watch('audioChunks');
+  const audioChunks = watch('audioChunks') || [];
 
   const handleRecordButtonClick = async () => {
     console.log('audioChunks', audioChunks);
@@ -22,7 +22,7 @@ export const useAudio = () => {
         recodeRef.current = recorder;
         const startTime = Date.now();
         recodeRef.current.addEventListener('dataavailable', (event: any) => {
-          const prevChunks = getValues('audioChunks');
+          const prevChunks = getValues('audioChunks') || [];
 
           setValue('audioChunks', [...prevChunks, event.data]);
           const endTime = Date.now();
@@ -59,7 +59,7 @@ export const useAudio = () => {
     setRecording(false);
   };
   const handleDeleteAudio = () => {
-    setValue('audioChunks', { value: [] });
+    setValue('audioChunks', []);
     setAudioDuration('00:00');
   };
 
