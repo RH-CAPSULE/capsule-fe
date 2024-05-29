@@ -18,7 +18,6 @@ import ImageUpload from '../image-upload/ImageUpload';
 // type
 import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
-import { useAudio } from '../../hooks/useAudio';
 import AudioUpload from '../audio-upload/ImageUpload';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
