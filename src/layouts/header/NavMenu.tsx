@@ -16,6 +16,7 @@ import styles from './styles.module.scss';
 import { EmailVerifyPurpose } from '../../types';
 import { OTPModal } from '../../components/OTP-modal';
 import InquiryModal from '../../components/inquiry-modal/InquiryModal';
+import { useResign } from '../../apis/queries/auth/user-resign';
 
 const NavMenu = () => {
   const { user } = useCachedUser();
@@ -25,6 +26,7 @@ const NavMenu = () => {
   const [open, setOpen] = React.useState(false);
   const [isInquiryModalOpen, setInquiryModalOpen] = React.useState(false);
   const signOutMutation = useSignOut();
+  const useResignMutation = useResign();
 
   const isActive = (path: string) => {
     if (pathname.endsWith('/')) {
@@ -46,6 +48,11 @@ const NavMenu = () => {
 
   const handleInquiry = () => {
     setInquiryModalOpen((prev) => !prev);
+  };
+
+  const handleResign = async () => {
+    if (!(await onConfirm('정말 탈퇴 하시겠습니까?'))) return;
+    useResignMutation.mutate();
   };
 
   React.useEffect(() => {
@@ -87,6 +94,12 @@ const NavMenu = () => {
               <Link to="" onClick={handleSignOut}>
                 <IconLogout />
                 로그아웃
+              </Link>
+            </li>
+            <li>
+              <Link to="" onClick={handleResign}>
+                <IconLogout />
+                탈퇴하기
               </Link>
             </li>
           </ul>
