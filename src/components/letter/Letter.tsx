@@ -1,12 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import {
-  IconClose,
   IconImagePlus,
   IconImagePlusAqua,
   IconMike,
   IconMikeAqua,
-  IconPlay,
-  IconStop,
 } from 'src/assets/icons';
 import { useFormContext } from 'react-hook-form';
 import { RHFInput, RHFTextArea } from '../hook-form';
@@ -18,16 +15,14 @@ import ImageUpload from '../image-upload/ImageUpload';
 // type
 import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
-import { useAudio } from '../../hooks/useAudio';
 import AudioUpload from '../audio-upload/ImageUpload';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
-  className?: string;
-  methods?: any;
+  readonly?: boolean;
 }
 
-const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
+const Letter = ({ type = 'PRIMARY', readonly, className, ...other }: Props) => {
   const { watch } = useFormContext();
   const audioButtonRef = watch('audioButtonRef');
 
