@@ -5,12 +5,12 @@
   width: 100%;
   padding: px(32);
 
-  .div:first-child{
-    max-height: 569px;
+  .div:first-child {
+    max-height: px(569);
   }
 
-  form{
-    min-height:px(450)
+  form {
+    min-height: px(450);
   }
 
   &.bottom {
@@ -23,35 +23,48 @@
     }
   }
 }
-.body{
-  & > div> div{
+.body {
+  & > div > div {
     display: flex;
-    margin: 15px 0;
+    margin: px(15) 0;
 
-    width: px(80);
-    & > div{
-      & > div{
-        width: px(80);
-        max-width: px(80);
-        height: px(80);
-        max-height: px(80);
+    width: px(60);
+    & > div {
+      & > div {
+        width: px(60);
+        max-width: px(60);
+        height: px(60);
+        max-height: px(60);
         border-radius: 5px;
       }
     }
     // PRIMARY
-    & > div:nth-child(1) > div{
-        background-color: $white;
-        border-top: $aqua 10px solid;
-        border-bottom: $aqua 10px solid;
+    & > div:nth-child(1) > div {
+      background-color: $white;
+      border-top: $aqua px(10) solid;
+      border-bottom: $aqua px(10) solid;
     }
     // LETTER
-    & > div:nth-child(2) > div{
-        background-color: $white;
+    & > div:nth-child(2) > div {
+      background-color: $white;
     }
     // BORDER
-    & > div:nth-child(3) > div{
-        border: $aqua 3px solid;
-        background-color: $white;
+    & > div:nth-child(3) > div {
+      border: $aqua 3px solid;
+      background-color: $white;
+    }
+  }
+
+  .swiperLetter {
+    width: px(calc(60 * 2 + 60 * 1.2 + 16 * 3));
+    margin-inline: auto;
+
+    .swiperSlide {
+      margin-inline: px(8);
+      transition: 0.2s;
+      .active {
+        transform: scale(1.2);
+      }
     }
   }
 }
