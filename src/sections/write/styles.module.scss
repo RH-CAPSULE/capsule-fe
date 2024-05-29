@@ -3,14 +3,20 @@
 
 .section {
   width: 100%;
+  flex: 1;
   padding: px(32);
+  padding-top: px(64);
+  @include flexLayout(column, space-between, center, 0);
 
   .div:first-child {
     max-height: px(569);
   }
 
   form {
+    width: 100%;
+    flex: 1;
     min-height: px(450);
+    @include flexLayout(column, center, center, 0);
   }
 
   &.bottom {
@@ -23,7 +29,10 @@
     }
   }
 }
+
 .body {
+  margin-top: px(16);
+
   & > div > div {
     display: flex;
     margin: px(15) 0;
