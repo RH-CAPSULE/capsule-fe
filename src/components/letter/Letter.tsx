@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   IconClose,
   IconImagePlus,
@@ -19,6 +19,7 @@ import ImageUpload from '../image-upload/ImageUpload';
 import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
+import AudioUpload from '../audio-upload/ImageUpload';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
@@ -27,8 +28,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
-  const { register, watch } = useFormContext();
-  const audioChunks = watch('audioChunks');
+  const { watch } = useFormContext();
+  const audioButtonRef = watch('audioButtonRef');
 
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
@@ -40,16 +41,10 @@ const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
     const fileInputRef = watch('fileInputRef');
     fileInputRef.current?.click();
   };
-
-  const {
-    isPlaying,
-    recording,
-    audioDuration,
-    handleRecordButtonClick,
-    handlePlaybackButtonClick,
-    handleStopButtonClick,
-    handleDeleteAudio,
-  } = useAudio();
+  const handleRecordButtonClick = () => {
+    // @ts-ignore
+    audioButtonRef?.current?.triggerRecord();
+  };
 
   return (
     <div className={classes()}>
@@ -58,32 +53,8 @@ const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
       <ImageUpload />
-
       <div className={styles.contents}>
-        <div className={styles.audio}>
-          {recording && (
-            <IconButton
-              label="녹음 중지"
-              onClick={handleStopButtonClick}
-              theme="AQUA-gray"
-              prevIcon={IconStop}
-              full
-            />
-          )}
-          {audioChunks.length > 0 && (
-            <>
-              <IconButton
-                label={`재생 (${audioDuration})`}
-                onClick={handlePlaybackButtonClick}
-                theme="AQUA-gray"
-                prevIcon={IconPlay}
-                full
-                disabled={isPlaying}
-              />
-              <IconClose onClick={handleDeleteAudio} />
-            </>
-          )}
-        </div>
+        <AudioUpload />
         <div className={styles.textarea}>
           <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
         </div>
