@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   IconClose,
   IconImagePlus,
@@ -8,6 +8,7 @@ import {
   IconPlay,
   IconStop,
 } from 'src/assets/icons';
+import { useFormContext } from 'react-hook-form';
 import { RHFInput, RHFTextArea } from '../hook-form';
 // style
 import styles from './styles.module.scss';
@@ -18,27 +19,18 @@ import ImageUpload from '../image-upload/ImageUpload';
 import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
+import AudioUpload from '../audio-upload/ImageUpload';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
-  fileInputRef: React.RefObject<HTMLInputElement>;
-  mediaRecorderRef: React.RefObject<MediaRecorder | null>;
-  audioChunks: Blob[];
-  setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
   className?: string;
   methods?: any;
 }
 
-const Letter = ({
-  type = 'PRIMARY',
-  fileInputRef,
-  mediaRecorderRef,
-  audioChunks,
-  setAudioChunks,
-  className,
-  methods,
-  ...other
-}: Props) => {
+const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
+  const { watch } = useFormContext();
+  const audioButtonRef = watch('audioButtonRef');
+
   const classes = React.useCallback(() => {
     const classArr = [styles.container, styles[type]];
     if (className) classArr.push(className);
@@ -46,18 +38,13 @@ const Letter = ({
   }, [type, className]);
 
   const handleButtonClick = () => {
+    const fileInputRef = watch('fileInputRef');
     fileInputRef.current?.click();
   };
-
-  const {
-    isPlaying,
-    recording,
-    audioDuration,
-    handleRecordButtonClick,
-    handlePlaybackButtonClick,
-    handleStopButtonClick,
-    handleDeleteAudio,
-  } = useAudio({ mediaRecorderRef, audioChunks, setAudioChunks });
+  const handleRecordButtonClick = () => {
+    // @ts-ignore
+    audioButtonRef?.current?.triggerRecord();
+  };
 
   return (
     <div className={classes()}>
@@ -65,33 +52,9 @@ const Letter = ({
         TO.
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <ImageUpload fileInputRef={fileInputRef} />
-
+      <ImageUpload />
       <div className={styles.contents}>
-        <div className={styles.audio}>
-          {recording && (
-            <IconButton
-              label="녹음 중지"
-              onClick={handleStopButtonClick}
-              theme="AQUA-gray"
-              prevIcon={IconStop}
-              full
-            />
-          )}
-          {audioChunks.length > 0 && (
-            <>
-              <IconButton
-                label={`재생 (${audioDuration})`}
-                onClick={handlePlaybackButtonClick}
-                theme="AQUA-gray"
-                prevIcon={IconPlay}
-                full
-                disabled={isPlaying}
-              />
-              <IconClose onClick={handleDeleteAudio} />
-            </>
-          )}
-        </div>
+        <AudioUpload />
         <div className={styles.textarea}>
           <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
         </div>

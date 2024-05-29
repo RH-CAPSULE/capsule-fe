@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import React, { useRef } from 'react';
 import { queryClient } from '../apis/queryClient';
 import { QUERY_KEY } from '../apis/queryKeys';
 import { PATH } from '../routes/path';
@@ -13,18 +14,24 @@ interface IFormValues {
   title: string;
   content: string;
   writer: string;
+  fileInputRef?: React.RefObject<HTMLInputElement>;
+  recodeRef?: React.RefObject<MediaRecorder | null>;
+  audioChunks?: Blob[];
+  audioButtonRef?: React.RefObject<HTMLButtonElement>;
 }
 
 const defaultValues = {
   title: '',
   content: '',
   writer: '',
+  fileInputRef: { current: null },
+  recodeRef: { current: null },
+  audioChunks: [],
+  audioButtonRef: { current: null },
 };
 
 interface props {
   type: string;
-  fileInputRef: React.RefObject<HTMLInputElement>;
-  audioChunks: Blob[];
 }
 
 const letterSchema = Yup.object().shape({
@@ -33,7 +40,7 @@ const letterSchema = Yup.object().shape({
   writer: Yup.string().required('작성자를 입력해주세요.'),
 });
 
-export const useFormData = ({ type, fileInputRef, audioChunks }: props) => {
+export const useFormData = ({ type }: props) => {
   const navigate = useNavigate();
   const makeCapsuleMutate = useMakeCapsule();
 
@@ -77,12 +84,12 @@ export const useFormData = ({ type, fileInputRef, audioChunks }: props) => {
         )
       );
 
-      if (fileInputRef.current?.files?.[0]) {
-        formData.append('image', fileInputRef.current.files[0]);
+      if (data.fileInputRef?.current?.files?.[0]) {
+        formData.append('image', data.fileInputRef.current.files[0]);
       }
 
-      if (audioChunks.length > 0) {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      if (data.audioChunks?.length && data.audioChunks.length > 0) {
+        const audioBlob = new Blob(data.audioChunks, { type: 'audio/wav' });
         formData.append('audio', audioBlob);
       }
 
