@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-interface props {
-  mediaRecorderRef: React.RefObject<MediaRecorder | null>;
-  audioChunks: Blob[];
-  setAudioChunks: React.Dispatch<React.SetStateAction<Blob[]>>;
-}
-
-export const useAudio = ({
-  mediaRecorderRef,
-  audioChunks,
-  setAudioChunks,
-}: props) => {
+export const useAudio = () => {
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
   const [isPlaying, setIsPlaying] = useState(false);
+  const { register, watch, setValue, getValues } = useFormContext();
+  const recodeRef = watch('recodeRef');
+  const audioChunks = watch('audioChunks') || [];
 
   const handleRecordButtonClick = async () => {
+    console.log('audioChunks', audioChunks);
     if (audioChunks.length > 0) return;
     if (!recording) {
       try {
@@ -24,23 +19,25 @@ export const useAudio = ({
         });
         const recorder = new MediaRecorder(stream);
         // @ts-ignore
-        mediaRecorderRef.current = recorder;
+        recodeRef.current = recorder;
         const startTime = Date.now();
-        mediaRecorderRef.current.addEventListener('dataavailable', (event) => {
-          setAudioChunks((prevChunks) => [...prevChunks, event.data]);
+        recodeRef.current.addEventListener('dataavailable', (event: any) => {
+          const prevChunks = getValues('audioChunks') || [];
+
+          setValue('audioChunks', [...prevChunks, event.data]);
           const endTime = Date.now();
           const duration = new Date(endTime - startTime);
           const minutes = duration.getUTCMinutes().toString().padStart(2, '0');
           const seconds = duration.getUTCSeconds().toString().padStart(2, '0');
           setAudioDuration(`${minutes}:${seconds}`);
         });
-        mediaRecorderRef.current.start();
+        recodeRef.current.start();
         setRecording(true);
       } catch (error) {
         console.error('Error accessing microphone:', error);
       }
     } else {
-      mediaRecorderRef.current?.stop();
+      recodeRef.current?.stop();
       setRecording(false);
     }
   };
@@ -58,11 +55,11 @@ export const useAudio = ({
   };
 
   const handleStopButtonClick = () => {
-    mediaRecorderRef.current?.stop();
+    recodeRef.current?.stop();
     setRecording(false);
   };
   const handleDeleteAudio = () => {
-    setAudioChunks([]);
+    setValue('audioChunks', []);
     setAudioDuration('00:00');
   };
 

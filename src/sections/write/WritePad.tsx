@@ -19,27 +19,16 @@ import { useFormData } from '../../hooks/useFormData';
 
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
 
   const { onSubmit, onInvalid, handleSubmit, methods } = useFormData({
     type,
-    fileInputRef,
-    audioChunks,
   });
 
   return (
     <section className={styles.section}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <LetterComponent
-            type={type}
-            fileInputRef={fileInputRef}
-            mediaRecorderRef={mediaRecorderRef}
-            audioChunks={audioChunks}
-            setAudioChunks={setAudioChunks}
-          />
+          <LetterComponent type={type} />
         </form>
         <LetterSelector type={type} onTypeChange={setType} />
         <Button
