@@ -5,14 +5,18 @@ import { IconClose, IconPlay, IconStop } from 'src/assets/icons';
 import styles from './styles.module.scss';
 import { IconButton } from '../button';
 
-const AudioUpload = forwardRef((props, ref) => {
+interface props {
+  audio_init?: string;
+}
+
+const AudioUpload = forwardRef(({ audio_init }: props, ref) => {
   const { watch, getValues, setValue } = useFormContext();
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const audioChunks = audio_init ? [audio_init] : watch('audioChunks') || [];
   const recodeRef = watch('recodeRef');
-  const audioChunks = watch('audioChunks') || [];
   const audioButtonRef = watch('audioButtonRef');
 
   const handleRecordButtonClick = async () => {

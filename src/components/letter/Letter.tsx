@@ -1,12 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
-  IconClose,
   IconImagePlus,
   IconImagePlusAqua,
   IconMike,
   IconMikeAqua,
-  IconPlay,
-  IconStop,
 } from 'src/assets/icons';
 import { useFormContext } from 'react-hook-form';
 import { RHFInput, RHFTextArea } from '../hook-form';
@@ -51,9 +48,13 @@ const Letter = ({ type = 'PRIMARY', className, methods, ...other }: Props) => {
         TO.
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <ImageUpload />
+      <ImageUpload
+      // src={src}
+      />
       <div className={styles.contents}>
-        <AudioUpload />
+        <AudioUpload
+        // audio_init={audio_init}
+        />
         <div className={styles.textarea}>
           <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
         </div>
