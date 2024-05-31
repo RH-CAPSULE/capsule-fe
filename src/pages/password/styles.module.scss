@@ -1,0 +1,24 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.layout {
+  min-height: 100vh;
+  background-image: url('../../assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+  animation: background 60s ease infinite;
+  max-height: 100vh;
+  overflow: auto;
+
+  @keyframes background {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
