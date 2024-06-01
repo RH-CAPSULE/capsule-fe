@@ -16,25 +16,20 @@ import styles from './styles.module.scss';
 // ----------------------------------------------------------------------
 
 interface IFormValues {
-  password: string;
-  passwordConfirm: string;
+  userEmail: string;
 }
 
 const signUpSchema = Yup.object().shape({
-  password: Yup.string()
-    .required('비밀번호를 입력해주세요.')
+  userEmail: Yup.string()
+    .required('이메일을 입력해주세요.')
     .matches(
-      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{8,}$/,
-      '비밀번호는 특수문자, 숫자를 포함하여 8자리 이상이어야 합니다.'
+      /^[a-zA-Z0-9+-_.]+@[a-z]+\.[a-z]{2,3}/i,
+      '이메일 형식이 아닙니다.'
     ),
-  passwordConfirm: Yup.string()
-    .required('비밀번호 확인을 입력해주세요.')
-    .oneOf([Yup.ref('password'), ''], '비밀번호를 다시 입력해주세요.'),
 });
 
 const defaultValues = {
-  password: '',
-  passwordConfirm: '',
+  userEmail: '',
 };
 
 // ----------------------------------------------------------------------
@@ -102,58 +97,27 @@ const IdentityForm = () => {
   return (
     <section className={styles.section}>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <RHFInput
-          name="userName"
-          placeholder="이름"
-          inputMode="email"
-          autoComplete="username"
-        />
+        <p className={styles.description}>
+          * 가입 시 작성한 이메일을 입력해주세요.
+        </p>
         <RHFInput
           name="userEmail"
           placeholder="이메일"
           inputMode="email"
           autoComplete="email"
         />
-        <RHFInput
-          type="password"
-          name="password"
-          placeholder="비밀번호"
-          autoComplete="current-password"
-        />
-        <RHFInput
-          type="password"
-          name="passwordConfirm"
-          placeholder="비밀번호 확인"
-        />
-
-        <p className={styles.description}>
-          * 비밀번호는 특수문자, 숫자를 포함하여
-          <br />
-          8자리 이상이어야 합니다.
-        </p>
-
-        {isAuthenticated ? (
-          <Button
-            type="submit"
-            disabled={!isValid}
-            loading={signUpMutation.isPending}
-          >
-            회원가입
-          </Button>
-        ) : (
-          <Button
-            onClick={sendEmail}
-            disabled={!!errors.userEmail || !watch('userEmail')}
-            loading={sendEmailMutation.isPending}
-          >
-            이메일 인증하기
-          </Button>
-        )}
+        <Button
+          onClick={sendEmail}
+          disabled={!!errors.userEmail || !watch('userEmail')}
+          loading={sendEmailMutation.isPending}
+        >
+          인증 요청
+        </Button>
 
         {/* OTP Modal */}
         <OTPModal
           open={isOtpModalOpen}
-          purpose={EmailVerifyPurpose.SIGN_UP}
+          purpose={EmailVerifyPurpose.RESET_PASSWORD}
           onClose={() => setIsOtpModalOpen(false)}
         />
       </FormProvider>
