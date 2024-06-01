@@ -3,6 +3,7 @@ export const PATH_API = {
   SIGN_IN: '/api/auth/sign-in',
   SIGN_UP: '/api/auth/sign-up',
   SIGN_OUT: '/api/auth/sign-out',
+  PASSWORD_RESET: '/api/auth/reset-pw',
   // refresh token
   TOKEN_REISSUE: '/api/auth/token-reissue',
   SEND_EMAIL: '/api/auth/mail/send',

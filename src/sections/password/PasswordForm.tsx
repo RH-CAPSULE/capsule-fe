@@ -75,7 +75,7 @@ const PasswordForm = () => {
         <RHFInput
           type="password"
           name="password"
-          placeholder="비밀번호"
+          placeholder="새 비밀번호 입력"
           autoComplete="current-password"
         />
         <RHFInput
@@ -86,7 +86,7 @@ const PasswordForm = () => {
         <Button
           type="submit"
           disabled={!!errors.userEmail || !watch('userEmail')}
-          loading={sendEmailMutation.isPending}
+          loading={signUpMutation.isPending}
         >
           확인
         </Button>
