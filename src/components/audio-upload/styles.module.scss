@@ -1,22 +1,21 @@
 @import 'src/theme/variables.scss';
 @import 'src/theme/utils.scss';
 
-
-.image{
+.audio {
   padding-left: px(15);
-  width:100%;
+  width: 100%;
   text-align: center;
   @include flexLayout(row, center, flex-start, 6);
 }
 
-.removeImage{
+.removeImage {
   margin-top: px(15);
 }
 
-.uploadedImage{
+.uploadedImage {
   width: auto;
   margin-top: px(15);
-  max-width:px(350);
+  max-width: px(350);
   max-height: px(160);
 }
 .disable {
