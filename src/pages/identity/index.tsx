@@ -4,11 +4,7 @@ import React from 'react';
 import { Container } from 'src/components/container';
 import { Helmet } from 'react-helmet-async';
 import styles from './styles.module.scss';
-import {
-  IdentityForm,
-  IdentityHeader,
-  IdentityReturn,
-} from '../../sections/identity';
+import { IdentityForm, IdentityHeader } from '../../sections/identity';
 import { BackHeader } from '../../layouts/header';
 
 const IdentityPage = () => (
