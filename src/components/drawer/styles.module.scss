@@ -1,5 +1,5 @@
-@import 'src/theme/variables.scss';
-@import 'src/theme/utils.scss';
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
 
 .drawerContainer {
   position: fixed;
@@ -9,9 +9,22 @@
   min-height: 100vh;
   background: #000000cc;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   z-index: 100;
   color: #000;
+
+  &:has(.right) {
+    justify-content: flex-end;
+  }
+  &:has(.left) {
+    justify-content: flex-start;
+  }
+  &:has(.top) {
+    align-items: flex-start;
+  }
+  &:has(.bottom) {
+    align-items: flex-end;
+  }
 
   .drawerBox {
     min-width: px(220);
@@ -19,8 +32,26 @@
     min-height: 100vh;
     animation: 0.2s rightIn ease forwards;
     background-color: $white;
+
+    &.right {
+      animation: 0.2s rightIn ease forwards;
+    }
+    &.left {
+      animation: 0.2s leftIn ease forwards;
+    }
+    &.top {
+      animation: 0.2s topIn ease forwards;
+    }
+    &.bottom {
+      width: 100%;
+      border-top-left-radius: px(32);
+      border-top-right-radius: px(32);
+      animation: 0.2s bottomIn ease forwards;
+    }
   }
 
+  // keyframes
+  // right
   @keyframes rightIn {
     from {
       transform: translateX(100%);
@@ -36,6 +67,63 @@
     }
     to {
       transform: translateX(100%);
+    }
+  }
+
+  // left
+  @keyframes leftIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes leftOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  // top
+  @keyframes topIn {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes topOut {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  // bottom
+  @keyframes bottomIn {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bottomOut {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
     }
   }
 }

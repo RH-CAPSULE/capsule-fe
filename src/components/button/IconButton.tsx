@@ -33,7 +33,12 @@ const IconButton = ({
   ...other
 }: Props) => {
   const classes = React.useCallback(() => {
-    const classArr = [styles.button, styles[size], styles[className]];
+    const classArr = [
+      styles.button,
+      styles[size],
+      styles[className],
+      styles.iconButton,
+    ];
     if (full) classArr.push(styles.full);
 
     return classArr.join(' ');
