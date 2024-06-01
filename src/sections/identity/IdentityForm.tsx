@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { Button } from 'src/components/button';
-import { RHFInput, FormProvider } from 'src/components/hook-form';
-import { useSignUp } from 'src/apis/queries/auth/sign-up';
+import { FormProvider, RHFInput } from 'src/components/hook-form';
 import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import sha256 from 'sha256';
 import React from 'react';
 import { useEmailAuthStore } from 'src/store/auth';
 import { OTPModal } from 'src/components/OTP-modal';
 import { useSendEmail } from 'src/apis/queries/auth/send-email';
 import { EmailVerifyPurpose } from 'src/types/auth';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
+import { PATH } from '../../routes/path';
 
 // ----------------------------------------------------------------------
 
@@ -38,10 +38,8 @@ const IdentityForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [isOtpModalOpen, setIsOtpModalOpen] = React.useState<boolean>(false);
 
-  const { endAt, isAuthenticated, setEndAt, setIsAuthenticated } =
-    useEmailAuthStore((state) => state);
-
-  const signUpMutation = useSignUp<Omit<IFormValues, 'passwordConfirm'>>();
+  const { endAt, setEndAt } = useEmailAuthStore((state) => state);
+  const navigate = useNavigate();
 
   const methods = useForm<IFormValues>({
     defaultValues,
@@ -51,22 +49,9 @@ const IdentityForm = () => {
 
   const {
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { errors },
     watch,
   } = methods;
-
-  const onSubmit = (data: IFormValues) => {
-    const { password } = data;
-
-    signUpMutation.mutate(
-      {
-        password: sha256(password),
-      },
-      {
-        onSuccess: () => setIsAuthenticated(false),
-      }
-    );
-  };
 
   const sendEmailMutation = useSendEmail();
 
@@ -96,7 +81,7 @@ const IdentityForm = () => {
 
   return (
     <section className={styles.section}>
-      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <FormProvider methods={methods} onSubmit={handleSubmit(sendEmail)}>
         <p className={styles.description}>
           * 가입 시 작성한 이메일을 입력해주세요.
         </p>
@@ -107,7 +92,7 @@ const IdentityForm = () => {
           autoComplete="email"
         />
         <Button
-          onClick={sendEmail}
+          type="submit"
           disabled={!!errors.userEmail || !watch('userEmail')}
           loading={sendEmailMutation.isPending}
         >
@@ -118,7 +103,10 @@ const IdentityForm = () => {
         <OTPModal
           open={isOtpModalOpen}
           purpose={EmailVerifyPurpose.RESET_PASSWORD}
-          onClose={() => setIsOtpModalOpen(false)}
+          onClose={() => {
+            setIsOtpModalOpen(false);
+            navigate(PATH.PASSWORD_INIT);
+          }}
         />
       </FormProvider>
     </section>
