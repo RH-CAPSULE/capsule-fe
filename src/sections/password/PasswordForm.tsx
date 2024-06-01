@@ -1,17 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { Button } from 'src/components/button';
-import { RHFInput, FormProvider } from 'src/components/hook-form';
-import { useSignUp } from 'src/apis/queries/auth/sign-up';
+import { FormProvider, RHFInput } from 'src/components/hook-form';
 import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
 import React from 'react';
 import { useEmailAuthStore } from 'src/store/auth';
-import { OTPModal } from 'src/components/OTP-modal';
-import { useSendEmail } from 'src/apis/queries/auth/send-email';
-import { EmailVerifyPurpose } from 'src/types/auth';
-import { useParams } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { usePasswordInit } from '../../apis/queries/auth/password-init';
 
@@ -44,6 +39,8 @@ const defaultValues = {
 const PasswordForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { userEmail } = useEmailAuthStore((state) => state);
+
+  console.log(userEmail);
 
   const resetPwMutation =
     usePasswordInit<Omit<IFormValues, 'passwordConfirm'>>();
@@ -85,7 +82,7 @@ const PasswordForm = () => {
         />
         <Button
           type="submit"
-          disabled={!!errors.passwordConfirm || !watch('userEmail')}
+          disabled={!!errors.passwordConfirm || !isValid}
           loading={resetPwMutation.isPending}
         >
           확인
