@@ -56,6 +56,7 @@ export const tokenExpired = (exp: number) => {
 
   expiredTimer = setTimeout(() => {
     handleAlert('로그인이 만료되었습니다.');
+    alert('로그인이 만료되었습니다.');
 
     localStorage.removeItem(ACCESS_TOKEN_KEY!);
     localStorage.removeItem(REFRESH_TOKEN_KEY!);

@@ -1,0 +1,21 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.list {
+  width: 100%;
+  padding: px(32);
+  display: grid;
+  grid-gap: px(8);
+
+  .capsule {
+    margin-bottom: px(32);
+    @include flexLayout(column, center, center, 16);
+    padding: px(8);
+    cursor: pointer;
+  }
+
+  p {
+    @include truncate();
+    z-index: 1;
+  }
+}

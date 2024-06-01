@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y } from 'swiper/modules';
 import { Swiper as ISwiper } from 'swiper/types';
 import { Letters, LetterType } from '../../types/letter';
 import styles from './styles.module.scss';
@@ -16,12 +15,25 @@ const LetterSelector: React.FC<LetterSelectorProps> = ({
   type,
   onTypeChange,
 }) => {
+  const swiperRef = React.useRef<ISwiper | null>(null);
+
   const handleKeyPress = (
     event: React.KeyboardEvent<HTMLDivElement>,
     newType: LetterType
   ) => {
     if (event.key === 'Enter' || event.key === ' ') {
       onTypeChange(newType);
+    }
+    const index = Letter.indexOf(newType);
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
+    }
+  };
+
+  const handleClick = (index: number) => {
+    onTypeChange(Letter[index]);
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
     }
   };
 
@@ -30,28 +42,30 @@ const LetterSelector: React.FC<LetterSelectorProps> = ({
     window.dispatchEvent(new Event('resize'));
   }, []);
 
+  const currentSlide = Letter.indexOf(type);
+
   return (
     <div className={styles.body}>
       <Swiper
         initialSlide={0}
-        modules={[A11y]}
-        pagination={{
-          type: 'bullets',
-          clickable: true,
+        slidesPerView={3}
+        pagination={{ clickable: true }}
+        centeredSlides
+        className={styles.swiperLetter}
+        onSwiper={(swiper: ISwiper) => {
+          swiperRef.current = swiper;
         }}
-        spaceBetween={15}
-        className="swiperCapsule"
         onSlideChange={(swiper: ISwiper) =>
           onTypeChange(Letter[swiper.activeIndex])
         }
       >
         {Letter.map((value, index) => (
-          <SwiperSlide key={value} className="slideStyle">
+          <SwiperSlide key={value} className={styles.swiperSlide}>
             <div
-              className={styles.item}
+              className={`${styles.item} ${index === currentSlide ? styles.active : ''}`}
               role="button"
               tabIndex={index}
-              onClick={() => onTypeChange(Letter[index])}
+              onClick={() => handleClick(index)}
               onKeyDown={(event) => handleKeyPress(event, Letter[index])}
             />
           </SwiperSlide>

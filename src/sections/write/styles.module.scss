@@ -1,16 +1,22 @@
-@import 'src/theme/variables.scss';
-@import 'src/theme/utils.scss';
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
 
 .section {
   width: 100%;
+  flex: 1;
   padding: px(32);
+  padding-top: px(64);
+  @include flexLayout(column, space-between, center, 0);
 
-  .div:first-child{
-    max-height: 569px;
+  .div:first-child {
+    max-height: px(569);
   }
 
-  form{
-    min-height:px(450)
+  form {
+    width: 100%;
+    flex: 1;
+    min-height: px(450);
+    @include flexLayout(column, center, center, 0);
   }
 
   &.bottom {
@@ -23,35 +29,77 @@
     }
   }
 }
-.body{
-  & > div> div{
-    display: flex;
-    margin: 15px 0;
 
-    width: px(80);
-    & > div{
-      & > div{
-        width: px(80);
-        max-width: px(80);
-        height: px(80);
-        max-height: px(80);
+.body {
+  margin-top: px(16);
+
+  & > div > div {
+    display: flex;
+    margin: px(15) 0;
+
+    width: px(60);
+    & > div {
+      & > div {
+        width: px(60);
+        max-width: px(60);
+        height: px(60);
+        max-height: px(60);
         border-radius: 5px;
       }
     }
     // PRIMARY
-    & > div:nth-child(1) > div{
-        background-color: $white;
-        border-top: $aqua 10px solid;
-        border-bottom: $aqua 10px solid;
+    & > div:nth-child(1) > div {
+      background-color: $white;
+      border-top: $aqua px(10) solid;
+      border-bottom: $aqua px(10) solid;
     }
     // LETTER
-    & > div:nth-child(2) > div{
-        background-color: $white;
+    & > div:nth-child(2) > div {
+      background-color: $white;
     }
     // BORDER
-    & > div:nth-child(3) > div{
-        border: $aqua 3px solid;
-        background-color: $white;
+    & > div:nth-child(3) > div {
+      border: $aqua 3px solid;
+      background-color: $white;
+    }
+  }
+
+  .swiperLetter {
+    width: px(calc(60 * 2 + 60 * 1.2 + 16 * 3));
+    margin-inline: auto;
+
+    .swiperSlide {
+      margin-inline: px(8);
+      transition: 0.2s;
+      .active {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.colorSelector {
+  width: 100%;
+  @include flexLayout(column, center, center, 8);
+  background-color: $background !important;
+
+  .colorSelectorTitle {
+    margin-block: px(16);
+    font-size: px(20);
+    font-weight: 700;
+    color: $white;
+  }
+
+  .colorSelectorContent {
+    width: 100%;
+    @include flexLayout(column, center, center, 16);
+    padding: px(32);
+    background-color: $white;
+    position: relative;
+
+    input {
+      opacity: 0;
+      position: absolute;
     }
   }
 }

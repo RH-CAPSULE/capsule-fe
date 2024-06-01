@@ -20,6 +20,12 @@ export const HomePage = Loadable(lazy(() => import('../pages/home')));
 export const HistoryPage = Loadable(lazy(() => import('../pages/history')));
 export const WritePage = Loadable(lazy(() => import('../pages/write')));
 export const PasswordPage = Loadable(lazy(() => import('../pages/password')));
+export const CapsuleListPage = Loadable(
+  lazy(() => import('../pages/capsules'))
+);
+export const CapsuleDetailPage = Loadable(
+  lazy(() => import('../pages/capsules/detail'))
+);
 
 // export const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 // export const Page403 = Loadable(lazy(() => import('../pages/Page403')));
