@@ -9,6 +9,7 @@ import {
   IdentityHeader,
   IdentityReturn,
 } from '../../sections/identity';
+import { BackHeader } from '../../layouts/header';
 
 const IdentityPage = () => (
   // eslint-disable-next-line no-console
@@ -16,6 +17,7 @@ const IdentityPage = () => (
     <Helmet>
       <title> identity verification | Capsule</title>
     </Helmet>
+    <BackHeader />
     <Container>
       <IdentityHeader />
       <IdentityForm />
