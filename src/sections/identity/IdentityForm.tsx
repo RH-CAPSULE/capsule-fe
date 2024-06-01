@@ -10,6 +10,7 @@ import { OTPModal } from 'src/components/OTP-modal';
 import { useSendEmail } from 'src/apis/queries/auth/send-email';
 import { EmailVerifyPurpose } from 'src/types/auth';
 import { useNavigate } from 'react-router-dom';
+import sha256 from 'sha256';
 import styles from './styles.module.scss';
 import { PATH } from '../../routes/path';
 
@@ -38,7 +39,7 @@ const IdentityForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [isOtpModalOpen, setIsOtpModalOpen] = React.useState<boolean>(false);
 
-  const { endAt, setEndAt } = useEmailAuthStore((state) => state);
+  const { endAt, setEndAt, setUserEmail } = useEmailAuthStore((state) => state);
   const navigate = useNavigate();
 
   const methods = useForm<IFormValues>({
@@ -73,6 +74,7 @@ const IdentityForm = () => {
           enqueueSnackbar('이메일로 인증번호가 전송되었습니다.', {
             variant: 'success',
           });
+          setUserEmail(watch('userEmail'));
           setEndAt(Date.now() + 1000 * 60 * 3);
         },
       }

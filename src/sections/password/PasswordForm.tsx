@@ -11,7 +11,9 @@ import { useEmailAuthStore } from 'src/store/auth';
 import { OTPModal } from 'src/components/OTP-modal';
 import { useSendEmail } from 'src/apis/queries/auth/send-email';
 import { EmailVerifyPurpose } from 'src/types/auth';
+import { useParams } from 'react-router-dom';
 import styles from './styles.module.scss';
+import { usePasswordInit } from '../../apis/queries/auth/password-init';
 
 // ----------------------------------------------------------------------
 
@@ -41,8 +43,10 @@ const defaultValues = {
 
 const PasswordForm = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const { userEmail } = useEmailAuthStore((state) => state);
 
-  const signUpMutation = useSignUp<Omit<IFormValues, 'passwordConfirm'>>();
+  const resetPwMutation =
+    usePasswordInit<Omit<IFormValues, 'passwordConfirm'>>();
 
   const methods = useForm<IFormValues>({
     defaultValues,
@@ -59,14 +63,10 @@ const PasswordForm = () => {
   const onSubmit = (data: IFormValues) => {
     const { password } = data;
 
-    signUpMutation.mutate(
-      {
-        password: sha256(password),
-      },
-      {
-        onSuccess: () => setIsAuthenticated(false),
-      }
-    );
+    resetPwMutation.mutate({
+      userEmail,
+      password: sha256(password),
+    });
   };
 
   return (
@@ -85,8 +85,8 @@ const PasswordForm = () => {
         />
         <Button
           type="submit"
-          disabled={!!errors.userEmail || !watch('userEmail')}
-          loading={signUpMutation.isPending}
+          disabled={!!errors.passwordConfirm || !watch('userEmail')}
+          loading={resetPwMutation.isPending}
         >
           확인
         </Button>
