@@ -1,0 +1,17 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.section {
+  width: 100%;
+  flex: 1;
+  padding: px(32);
+  padding-top: px(64);
+  @include flexLayout(column, space-between, center, 0);
+
+  form {
+    width: 100%;
+    flex: 1;
+    min-height: px(450);
+    @include flexLayout(column, center, center, 0);
+  }
+}
