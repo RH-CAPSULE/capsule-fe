@@ -1,23 +1,26 @@
 import React from 'react';
-import { SignUpForm, SignUpLoginReturn } from 'src/sections/sign-up';
 
 // styles
 import { Container } from 'src/components/container';
 import { Helmet } from 'react-helmet-async';
 import styles from './styles.module.scss';
-import SignUpHeader from '../../sections/sign-up/SignUpHeader';
+import {
+  IdentityForm,
+  IdentityHeader,
+  IdentityReturn,
+} from '../../sections/identity';
 
-const PasswordPage = () => (
+const IdentityPage = () => (
   // eslint-disable-next-line no-console
   <div className={styles.layout}>
     <Helmet>
-      <title> Sign up | Capsule</title>
+      <title> identity verification | Capsule</title>
     </Helmet>
     <Container>
-      <PasswordHeader />
-      <PasswordForm />
-      <PasswordReturn />
+      <IdentityHeader />
+      <IdentityForm />
+      <IdentityReturn />
     </Container>
   </div>
 );
-export default PasswordPage;
+export default IdentityPage;
