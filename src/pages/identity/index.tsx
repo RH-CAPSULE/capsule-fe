@@ -19,7 +19,6 @@ const IdentityPage = () => (
     <Container>
       <IdentityHeader />
       <IdentityForm />
-      <IdentityReturn />
     </Container>
   </div>
 );
