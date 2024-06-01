@@ -1,11 +1,14 @@
 import React from 'react';
-import { SignUpForm, SignUpLoginReturn } from 'src/sections/sign-up';
 
 // styles
 import { Container } from 'src/components/container';
 import { Helmet } from 'react-helmet-async';
 import styles from './styles.module.scss';
-import SignUpHeader from '../../sections/sign-up/SignUpHeader';
+import {
+  PasswordForm,
+  PasswordHeader,
+  PasswordReturn,
+} from '../../sections/password';
 
 const PasswordPage = () => (
   // eslint-disable-next-line no-console
