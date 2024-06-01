@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 const PasswordHeader = () => {
   return (
     <section className={styles.section}>
-      <h1>적어줘 타임캡슐!</h1>
+      <h1>비밀번호 재설정</h1>
       <Capsule className={styles.capsule} />
     </section>
   );
