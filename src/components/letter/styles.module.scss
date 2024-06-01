@@ -1,39 +1,47 @@
-@import 'src/theme/variables.scss';
-@import 'src/theme/utils.scss';
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
 
 .container {
+  width: 100%;
+  height: 100%;
   padding: px(20) px(22);
-  width:100%;
-  max-height: 569px;
-  //height: 90vh;
-
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   border-radius: px(15);
   box-shadow: $boxShadow;
   box-sizing: border-box;
 
+  .img {
+    width: 100%;
+    padding: px(12);
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
   .toFrom {
     @include fontStyle(20, 700, $aqua);
     color: $aqua;
+    flex-shrink: 0;
     @include flexLayout(row, flex-start, baseline, 5);
-
 
     & > div > input {
       background-color: unset;
       box-shadow: unset;
       @include fontStyle(18, 500, $white);
-
     }
 
     & > div > input::placeholder {
       color: $gray-200;
       @include fontStyle(18, 500, $white);
     }
-
   }
 
-  .audio{
-    margin-bottom: px(10);
+  .audio {
+    padding: px(12);
     display: flex;
     gap: 5px;
     & > button {
@@ -41,11 +49,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-
     }
   }
-
-
+  audio {
+    width: 100%;
+  }
 
   // type == PRIMARY
   &.PRIMARY {
@@ -53,12 +61,6 @@
     padding: 0;
     border-radius: px(15);
     position: relative;
-    min-height: px(440);
-    .contents{
-      .audio{
-        margin: 0 15px;
-      }
-    }
 
     .top {
       border-radius: px(15) px(15) 0 0;
@@ -73,15 +75,15 @@
       margin-left: px(8);
     }
     .bottom {
+      flex-shrink: 0;
       position: absolute;
-      bottom:0;
-      width:100%;
+      bottom: 0;
+      width: 100%;
       padding: px(14) px(18);
       background-color: $aqua;
       border-radius: 0 0 px(15) px(15);
       @include flexLayout(row, flex-start, center, 6);
     }
-
   }
 
   // type == BORDER
@@ -89,22 +91,21 @@
     background-color: $white;
     border: px(4) solid $aqua;
     position: relative;
-    min-height: px(440);
 
-
-    .top, .toFrom{
+    .top,
+    .toFrom {
       border-bottom: px(2) solid $aqua;
       width: px(180);
     }
-    .right{
+    .right {
       width: 100%;
       max-width: px(210);
       margin-left: px(8);
-
     }
     .bottom {
+      flex-shrink: 0;
       position: absolute;
-      bottom:0;
+      bottom: 0;
       padding: px(18) 0;
 
       @include flexLayout(row, flex-start, center, 6);
@@ -115,13 +116,10 @@
   &.LETTER {
     background-color: $white;
     position: relative;
-    min-height: px(440);
 
-
-    .top {
-      //padding: px(10) 0;
-
-    }
+    // .top {
+    //padding: px(10) 0;
+    // }
     .right {
       width: 100%;
       max-width: px(210);
@@ -129,32 +127,30 @@
       @include flexLayout(row, flex-end, center, 0);
     }
     .bottom {
-      width:100%;
+      flex-shrink: 0;
+      width: 100%;
       position: absolute;
-      bottom:0;
+      bottom: 0;
       padding: px(18) 0;
       @include flexLayout(row, flex-start, center, 6);
     }
   }
-
 }
 
 .textarea {
+  width: 100%;
   padding-bottom: px(95);
   & > div {
-    //height: inherit;
     & > textarea {
       display: block;
       max-height: px(330);
-      //height: fit-content;
       box-shadow: unset;
     }
   }
 }
 
-.contents{
-  margin: px(15) 0;
-  //height: 400px;
-  //min-height: 200px;
-
+.contents {
+  @include flexLayout(column, flex-start, flex-start, 8);
+  padding: px(12);
+  flex-grow: 1;
 }
