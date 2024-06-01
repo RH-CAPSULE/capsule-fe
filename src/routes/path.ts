@@ -3,7 +3,7 @@ export const PATH = {
   // auth
   LOGIN: '/auth/sign-in',
   SIGN_UP: '/auth/sign-up',
-  PASSWORD_INIT: '/password-init',
+  PASSWORD_INIT: '/auth/password-init',
   // main
   HOME: '/home',
   // capsule
