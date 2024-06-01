@@ -26,7 +26,7 @@ const Letter = ({ type = 'PRIMARY', readonly, className, ...other }: Props) => {
   const { watch } = useFormContext();
   const audioButtonRef = watch('audioButtonRef');
 
-  const classes = React.useCallback(() => {
+  const classes = React.useMemo(() => {
     const classArr = [styles.container, styles[type]];
     if (className) classArr.push(className);
     return classArr.join(' ');
@@ -42,13 +42,13 @@ const Letter = ({ type = 'PRIMARY', readonly, className, ...other }: Props) => {
   };
 
   return (
-    <div className={classes()}>
+    <div className={classes}>
       <div className={`${styles.top} ${styles.toFrom}`}>
         TO.
         <RHFInput name="title" placeholder="캡슐에게.." />
       </div>
-      <ImageUpload />
       <div className={styles.contents}>
+        <ImageUpload />
         <AudioUpload />
         <div className={styles.textarea}>
           <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
