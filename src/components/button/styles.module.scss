@@ -80,7 +80,7 @@
   }
 
   // iconbutton
-  &.image{
+  &.image {
     @include flexLayout(row, center, center, 5);
     padding: 0;
     padding: 0 px(10);
@@ -89,8 +89,8 @@
     border-radius: px(30);
   }
 
-
-
+  &.iconButton {
+    padding-inline: px(16);
+    @include flexLayout(row, space-between, center, 5);
+  }
 }
-
-
