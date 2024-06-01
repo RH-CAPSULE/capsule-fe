@@ -45,11 +45,7 @@ export default function RHFTextarea({
   }
 
   if (readonly) {
-    return (
-      <div className="RHFTextarea">
-        <div dangerouslySetInnerHTML={{ __html: watch()[name] }} />
-      </div>
-    );
+    return <div className="RHFTextarea">{watch(name)}</div>;
   }
   return (
     <Controller
