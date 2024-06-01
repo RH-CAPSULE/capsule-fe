@@ -20,12 +20,8 @@
     width: px(232);
     @include flexLayout(column, center, center, 8);
 
-    .description {
-      color: $gray-200;
-      font-weight: 600;
-      font-size: px(11);
-      text-align: center;
-      margin-bottom: px(16);
+    button {
+      margin-top: px(50);
     }
   }
 
