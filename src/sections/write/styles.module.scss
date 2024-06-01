@@ -1,5 +1,5 @@
-@import 'src/theme/variables.scss';
-@import 'src/theme/utils.scss';
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
 
 .section {
   width: 100%;
@@ -74,6 +74,32 @@
       .active {
         transform: scale(1.2);
       }
+    }
+  }
+}
+
+.colorSelector {
+  width: 100%;
+  @include flexLayout(column, center, center, 8);
+  background-color: $background !important;
+
+  .colorSelectorTitle {
+    margin-block: px(16);
+    font-size: px(20);
+    font-weight: 700;
+    color: $white;
+  }
+
+  .colorSelectorContent {
+    width: 100%;
+    @include flexLayout(column, center, center, 16);
+    padding: px(32);
+    background-color: $white;
+    position: relative;
+
+    input {
+      opacity: 0;
+      position: absolute;
     }
   }
 }
