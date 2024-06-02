@@ -5,10 +5,12 @@ import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useEmailAuthStore } from 'src/store/auth';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { usePasswordInit } from '../../apis/queries/auth/password-init';
+import { PATH } from '../../routes/path';
 
 // ----------------------------------------------------------------------
 
@@ -37,10 +39,14 @@ const defaultValues = {
 // ----------------------------------------------------------------------
 
 const PasswordForm = () => {
-  const { enqueueSnackbar } = useSnackbar();
   const { userEmail } = useEmailAuthStore((state) => state);
+  const navigate = useNavigate();
 
-  console.log(userEmail);
+  useEffect(() => {
+    if (!userEmail) {
+      navigate(PATH.IDENTITY);
+    }
+  }, [userEmail, navigate]);
 
   const resetPwMutation =
     usePasswordInit<Omit<IFormValues, 'passwordConfirm'>>();
@@ -54,7 +60,6 @@ const PasswordForm = () => {
   const {
     handleSubmit,
     formState: { isValid, errors },
-    watch,
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
