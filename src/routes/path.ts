@@ -4,6 +4,7 @@ export const PATH = {
   LOGIN: '/auth/sign-in',
   SIGN_UP: '/auth/sign-up',
   PASSWORD_INIT: '/auth/password-init',
+  IDENTITY: '/auth/identity',
   // main
   HOME: '/home',
   // capsule

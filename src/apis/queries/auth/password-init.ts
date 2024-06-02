@@ -1,7 +1,9 @@
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { PATH_API } from '../../path';
+import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../axios';
+
+import { PATH_API } from '../../path';
 import { PATH } from '../../../routes/path';
 
 interface Payload {
@@ -13,6 +15,7 @@ export const usePasswordInit = (
   options?: Omit<UseMutationOptions<any, any, Payload>, 'mutationKey'>
 ) => {
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async (payload: Payload) => {
