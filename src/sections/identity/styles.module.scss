@@ -1,0 +1,50 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.section {
+  width: px(232);
+  @include flexLayout(column, center, center, 0);
+
+  // login-header
+  h1 {
+    font-size: px(32);
+    color: $white;
+  }
+
+  .capsule {
+    margin-block: px(32);
+  }
+
+  // SignUp-form
+  form {
+    width: px(232);
+    @include flexLayout(column, center, center, 8);
+
+    .description {
+      color: $gray-200;
+      font-weight: 600;
+      font-size: px(11);
+      text-align: center;
+    }
+    button {
+      margin-top: px(50);
+    }
+  }
+
+  // SignUp-login-return
+  .authOptions {
+    @include flexLayout(row, center, center, 12);
+    margin-block: px(16);
+    a {
+      color: $gray-200;
+      font-weight: 700;
+      font-size: px(11);
+      text-decoration: underline;
+    }
+    span {
+      width: px(1);
+      height: px(11);
+      background-color: $gray-100;
+    }
+  }
+}
