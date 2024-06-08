@@ -5,6 +5,7 @@ import {
   IconLogout,
   IconMail,
   IconMenu,
+  IconResign,
 } from 'src/assets/icons';
 import { Drawer } from 'src/components/drawer';
 import { Link, useLocation } from 'react-router-dom';
@@ -98,7 +99,7 @@ const NavMenu = () => {
             </li>
             <li>
               <Link to="" onClick={handleResign}>
-                <IconLogout />
+                <IconResign />
                 탈퇴하기
               </Link>
             </li>

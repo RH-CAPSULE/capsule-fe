@@ -6,6 +6,7 @@ export { ReactComponent as IconHome } from './icon-home.svg';
 export { ReactComponent as IconMail } from './icon-mail.svg';
 export { ReactComponent as IconClose } from './icon-close.svg';
 export { ReactComponent as IconGoogle } from './icon-google.svg';
+export { ReactComponent as IconResign } from './icon-resign.svg';
 export { ReactComponent as IconLogout } from './icon-logout.svg';
 export { ReactComponent as IconHistory } from './icon-history.svg';
 export { ReactComponent as IconFacebook } from './icon-facebook.svg';
