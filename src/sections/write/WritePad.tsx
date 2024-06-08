@@ -25,11 +25,18 @@ interface IFormValues {
   content: string;
   writer: string;
   color: string;
-  fileInputRef?: React.RefObject<HTMLInputElement>;
-  recodeRef?: React.RefObject<MediaRecorder | null>;
   audioChunks?: Blob[];
-  audioButtonRef?: React.RefObject<HTMLButtonElement>;
+  recodeRef?: React.RefObject<MediaRecorder | null>;
+  /*
+   * react hook form 버그 발견
+   * 타입 직접 적용하면 setValue에서 타입체킹 무한루프 발생.
+   * 나중에 확인 예정
+   */
+  fileInputRef?: any;
+  audioButtonRef?: any;
 }
+// fileInputRef?: React.RefObject<HTMLInputElement>;
+// audioButtonRef?: React.RefObject<HTMLButtonElement>;
 
 const defaultValues = {
   title: '',
@@ -55,7 +62,7 @@ const letterSchema = Yup.object().shape({
 const WritePad = () => {
   const [type, setType] = useState<LetterType>('PRIMARY');
   const [colorSelectorOpen, setColorSelectorOpen] = useState(false);
-  const colorSelectorRef = useRef();
+  const colorSelectorRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
   const makeCapsuleMutate = useMakeCapsule();
@@ -156,7 +163,7 @@ const WritePad = () => {
             <input
               type="color"
               value={values.color}
-              onChange={(e) => setValue('color', e.target.value)}
+              onChange={(e) => setValue('color', e.target.value as any)}
               ref={colorSelectorRef}
             />
           </Modal.Content>
