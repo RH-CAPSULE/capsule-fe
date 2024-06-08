@@ -14,8 +14,6 @@ import { useSignOut } from 'src/apis/queries/auth/sign-out';
 import { onConfirm } from 'src/utils/rha-alert';
 import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import styles from './styles.module.scss';
-import { EmailVerifyPurpose } from '../../types';
-import { OTPModal } from '../../components/OTP-modal';
 import InquiryModal from '../../components/inquiry-modal/InquiryModal';
 import { useResign } from '../../apis/queries/auth/user-resign';
 

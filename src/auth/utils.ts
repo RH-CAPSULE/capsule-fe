@@ -2,6 +2,7 @@
 import { handleAlert } from 'react-handle-alert';
 import { axiosInstance } from 'src/apis/axios';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from 'src/static';
+import { PATH_API } from 'src/apis/path';
 import { IToken } from './types';
 // utils
 
@@ -37,14 +38,42 @@ export const isValidToken = (accessToken: string) => {
 
 // ----------------------------------------------------------------------
 
+const tokenRefresh = async () => {
+  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY!);
+  if (refreshToken) {
+    try {
+      const response = await axiosInstance.post(PATH_API.TOKEN_REISSUE, {
+        refreshToken,
+      });
+
+      const newAccessToken = response.data.accessToken;
+      localStorage.setItem(ACCESS_TOKEN_KEY!, newAccessToken);
+
+      axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+
+      const { exp } = jwtDecode(newAccessToken);
+      tokenExpired(exp);
+
+      return newAccessToken;
+    } catch {
+      handleAlert('로그인이 만료되었습니다.');
+
+      localStorage.removeItem(ACCESS_TOKEN_KEY!);
+      localStorage.removeItem(REFRESH_TOKEN_KEY!);
+
+      window.location.reload();
+    }
+  }
+};
+
 export const tokenExpired = (exp: number) => {
   // eslint-disable-next-line prefer-const
   let expiredTimer;
 
   const currentTime = Date.now();
 
+  // 만료 되기 5분 전에 토큰 갱신
   // Test token expires after 10s
-  // const timeLeft = currentTime + 10000 - currentTime; // ~10s
   const timeLeft = exp * 1000 - currentTime;
 
   clearTimeout(expiredTimer);
@@ -55,14 +84,7 @@ export const tokenExpired = (exp: number) => {
   }
 
   expiredTimer = setTimeout(() => {
-    handleAlert('로그인이 만료되었습니다.');
-    alert('로그인이 만료되었습니다.');
-
-    localStorage.removeItem(ACCESS_TOKEN_KEY!);
-    localStorage.removeItem(REFRESH_TOKEN_KEY!);
-
-    window.location.reload();
-    // window.location.href = PATH.login;
+    tokenRefresh();
   }, timeLeft);
 };
 
@@ -76,7 +98,7 @@ export const setSession = (token: IToken) => {
 
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-    const { exp } = jwtDecode(refreshToken);
+    const { exp } = jwtDecode(accessToken);
     tokenExpired(exp);
   } else {
     localStorage.removeItem(ACCESS_TOKEN_KEY!);
