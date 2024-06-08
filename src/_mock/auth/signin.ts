@@ -6,7 +6,7 @@ import { API_DOMAIN } from '../../static';
 export const signInHandler = http.post(
   `${API_DOMAIN}${PATH_API.SIGN_IN}`,
   async ({ request, params, cookies }) => {
-    // const { email, password } = (await request.json()) as any;
+    // const { email, password-init } = (await request.json()) as any;
 
     await sleep(1000);
 
