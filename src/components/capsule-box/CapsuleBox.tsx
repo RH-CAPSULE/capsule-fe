@@ -1,10 +1,11 @@
 import React from 'react';
 import { IconCapsuleBox, IconCapsuleBoxOpen } from 'src/assets/icons';
-import { isDarkColor, px, themeColor } from 'src/utils/styles';
+import { isDarkColor, em, themeColor } from 'src/utils/styles';
 import { ICapsuleBox } from 'src/types/capsule';
 import { isFuture, isPast } from 'date-fns';
 import styles from './styles.module.scss';
 import Capsule from '../capsule/Capsule';
+import { capsuleCoordinates } from './coordinates';
 
 type Props = ICapsuleBox & React.HTMLAttributes<HTMLDivElement>;
 
@@ -44,17 +45,34 @@ const CapsuleBox = ({
         )}
       </div>
       <div className={styles.capsules}>
-        {capsules.map((color, i) => (
-          <Capsule
-            key={i}
-            color={color}
-            width={px(80)}
-            className={styles.capsule}
-          />
-        ))}
+        <Capsules capsules={capsules} />
       </div>
     </div>
   );
 };
 
 export default CapsuleBox;
+
+// ----------------------------------------------------------------------
+const Capsules = React.memo(({ capsules }: Pick<ICapsuleBox, 'capsules'>) => {
+  return (
+    <div className={styles.capsules}>
+      {capsules.map((color, i) => {
+        const { x, y, rotate } = capsuleCoordinates[i];
+        return (
+          <Capsule
+            key={i}
+            color={color}
+            width={em(100)}
+            className={styles.capsule}
+            style={{
+              left: em(x),
+              bottom: em(y),
+              transform: `rotate(${rotate}deg)`,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+});
