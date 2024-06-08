@@ -3,6 +3,9 @@ import { Theme, ThemeType } from 'src/types/theme';
 /** rem to pixel */
 export const px = (pixel: number) => `${pixel / 16}rem`;
 
+/** to em */
+export const em = (pixel: number) => `${pixel / 16}em`;
+
 /** get theme color */
 export const themeColor = (theme?: ThemeType) => {
   if (theme === Theme.AQUA) return '#8db6cc';
