@@ -18,6 +18,11 @@ export const LoginPage = Loadable(lazy(() => import('../pages/login')));
 export const SignUpPage = Loadable(lazy(() => import('../pages/sign-up')));
 export const HomePage = Loadable(lazy(() => import('../pages/home')));
 export const HistoryPage = Loadable(lazy(() => import('../pages/history')));
+export const WritePage = Loadable(lazy(() => import('../pages/write')));
+export const IdentityPage = Loadable(lazy(() => import('../pages/identity')));
+export const PasswordInitPage = Loadable(
+  lazy(() => import('../pages/password-init'))
+);
 export const CapsuleListPage = Loadable(
   lazy(() => import('../pages/capsules'))
 );

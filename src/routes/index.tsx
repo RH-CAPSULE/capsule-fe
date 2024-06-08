@@ -6,6 +6,9 @@ import {
   HomePage,
   LoginPage,
   HistoryPage,
+  WritePage,
+  IdentityPage,
+  PasswordInitPage,
   CapsuleListPage,
   CapsuleDetailPage,
 } from './elements';
@@ -13,7 +16,7 @@ import TestPage from '../_mock/TestPage';
 import BackgroundLayout from '../layouts/background/BackgroundLayout';
 import AuthGuard from '../auth/AuthGuard';
 import { PATH } from './path';
-import WritePage from '../pages/write';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -24,6 +27,8 @@ export default function Router() {
       children: [
         { path: 'sign-in', element: <LoginPage /> },
         { path: 'sign-up', element: <SignUpPage /> },
+        { path: 'identity', element: <IdentityPage /> },
+        { path: 'password-init', element: <PasswordInitPage /> },
       ],
     },
     // App
