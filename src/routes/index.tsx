@@ -45,6 +45,7 @@ export default function Router() {
         { path: 'capsules/detail/:id', element: <CapsuleDetailPage /> },
       ],
     },
-    // { path: '*', element: <Navigate to="/" replace /> },
+    // { path: '*', element: <Navigate to="/404" replace /> },
+    { path: '*', element: <Navigate to="/" replace /> },
   ]);
 }

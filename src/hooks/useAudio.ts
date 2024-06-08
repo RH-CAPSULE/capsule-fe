@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 export const useAudio = () => {
   const [recording, setRecording] = useState(false);
   const [audioDuration, setAudioDuration] = useState<string>('00:00');
   const [isPlaying, setIsPlaying] = useState(false);
-  const { register, watch, setValue, getValues } = useFormContext();
+  const { watch, setValue, getValues } = useFormContext();
   const recodeRef = watch('recodeRef');
   const audioChunks = watch('audioChunks') || [];
 
