@@ -5,7 +5,8 @@
   width: 100%;
   padding: px(32);
   display: grid;
-  grid-gap: px(8);
+  // grid-gap: px(8);
+  grid-template-columns: repeat(3, 1fr);
 
   .capsule {
     margin-bottom: px(32);
