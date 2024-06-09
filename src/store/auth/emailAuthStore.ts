@@ -11,7 +11,7 @@ interface State {
 interface Action {
   setEndAt: (endAt: Time) => void;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
-  userEmail: (email: string) => void;
+  setUserEmail: (email: string) => void;
 }
 
 const useEmailAuthStore = devtools<State & Action>((set) => ({

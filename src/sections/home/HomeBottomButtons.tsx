@@ -7,8 +7,10 @@ import { copyToClipboard } from 'src/utils/clipboard';
 import { PATH } from 'src/routes/path';
 import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import { isFuture, isPast } from 'date-fns';
+import { useMakeCapsuleStore } from 'src/store/capsule';
 import styles from './styles.module.scss';
 import { ICapsuleBox } from '../../types';
+import MakeCapsuleModal from './MakeCapsuleModal';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +30,10 @@ interface Props {
 const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useCachedUser();
+  const setIsMakeModalOpen = useMakeCapsuleStore(
+    (state) => state.setIsMakeModalOpen
+  );
+
   const { capsuleBoxId, hasMyCapsule, closedAt, openedAt } = capsuleBox || {};
 
   const handleCopy = () => {
@@ -77,9 +83,15 @@ const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
             캡슐함 열기
           </Button>
         </Link>
-        <Button theme={theme} size="large" full onClick={handleCopy}>
+        <Button
+          theme={theme}
+          size="large"
+          full
+          onClick={() => setIsMakeModalOpen(true)}
+        >
           새 캡슐함 만들러 가기
         </Button>
+        <MakeCapsuleModal />
       </section>
     );
   }

@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { Button } from 'src/components/button';
 import { FormProvider, RHFInput } from 'src/components/hook-form';
-import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sha256 from 'sha256';
@@ -48,8 +47,7 @@ const PasswordForm = () => {
     }
   }, [userEmail, navigate]);
 
-  const resetPwMutation =
-    usePasswordInit<Omit<IFormValues, 'passwordConfirm'>>();
+  const resetPwMutation = usePasswordInit();
 
   const methods = useForm<IFormValues>({
     defaultValues,

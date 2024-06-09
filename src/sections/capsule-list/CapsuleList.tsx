@@ -11,20 +11,13 @@ const getRandomRotation = () => {
   return `${Math.floor(Math.random() * 360)}deg`;
 };
 
-// 1, 2, 3 중 랜덤으로 선택
-const getRandomGridColumn = () => {
-  const columns = Math.floor(Math.random() * 3) + 1;
-  return `span ${columns}`;
-};
-
 const CapsuleComponent = ({ title, capsuleId, ...other }: ICapsule & any) => {
   const [rotation] = React.useState(getRandomRotation());
-  const [gridColumn] = React.useState(getRandomGridColumn());
 
   return (
-    <div className={styles.capsule} style={{ gridColumn }}>
+    <div className={styles.capsule}>
       <div style={{ transform: `rotate(${rotation})` }}>
-        <Capsule {...other} />
+        <Capsule {...other} width="6rem" />
       </div>
       <p>{title}</p>
     </div>

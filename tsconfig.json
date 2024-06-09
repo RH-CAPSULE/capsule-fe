@@ -7,6 +7,7 @@
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "maxNodeModuleJsDepth": 10,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -20,5 +21,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }
