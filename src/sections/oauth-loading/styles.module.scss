@@ -1,0 +1,27 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.section {
+  width: px(232);
+  @include flexLayout(column, center, center, 0);
+
+  // login-header
+  h1 {
+    font-size: px(32);
+    color: $white;
+  }
+
+  .capsule {
+    margin-block: px(32);
+  }
+
+  // SignUp-form
+  form {
+    width: px(232);
+    @include flexLayout(column, center, center, 8);
+
+    button {
+      margin-top: px(50);
+    }
+  }
+}

@@ -5,6 +5,7 @@ export const PATH = {
   SIGN_UP: '/auth/sign-up',
   PASSWORD_INIT: '/auth/password-init',
   IDENTITY: '/auth/identity',
+  OAUTH_LOADING: '/oauth-loading',
   // main
   HOME: '/home',
   // capsule

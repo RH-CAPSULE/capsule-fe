@@ -29,6 +29,9 @@ export const CapsuleListPage = Loadable(
 export const CapsuleDetailPage = Loadable(
   lazy(() => import('../pages/capsules/detail'))
 );
+export const OAuthLoadingPage = Loadable(
+  lazy(() => import('../pages/oauth-loading'))
+);
 
 // export const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 // export const Page403 = Loadable(lazy(() => import('../pages/Page403')));

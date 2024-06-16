@@ -11,6 +11,7 @@ export const PATH_API = {
   // user
   USER_INFO: '/api/user',
   USER_RESIGN: '/api/user/resign',
+  USER_PATCH: '/api/user',
   // capsule
   CAPSULE_BOX: '/api/capsule-box',
   MAKE_CAPSULE_BOX: '/api/capsule-box',
