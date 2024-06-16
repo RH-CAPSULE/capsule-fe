@@ -11,6 +11,7 @@ import {
   PasswordInitPage,
   CapsuleListPage,
   CapsuleDetailPage,
+  OAuthLoadingPage,
 } from './elements';
 import TestPage from '../_mock/TestPage';
 import BackgroundLayout from '../layouts/background/BackgroundLayout';
@@ -49,6 +50,11 @@ export default function Router() {
         { path: 'capsules/:id', element: <CapsuleListPage /> },
         { path: 'capsules/detail/:id', element: <CapsuleDetailPage /> },
       ],
+    },
+    // oauth loading
+    {
+      path: 'oauth-loading',
+      element: <OAuthLoadingPage />,
     },
     // { path: '*', element: <Navigate to="/404" replace /> },
     { path: '*', element: <Navigate to="/" replace /> },
