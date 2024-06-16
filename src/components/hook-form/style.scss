@@ -20,6 +20,7 @@
     box-sizing: border-box;
     box-shadow: $boxShadow;
     background-color: $white;
+    font-family: inherit;
 
     &::placeholder {
       color: $placeholder;
@@ -50,9 +51,6 @@
     overflow: hidden;
     resize: none;
   }
-}
-
-.isUse {
 }
 
 .RHFHelperText {
