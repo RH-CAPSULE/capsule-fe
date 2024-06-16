@@ -1,6 +1,7 @@
 import { IconGoogle } from 'src/assets/icons';
 import { Button } from 'src/components/button';
 import { axiosInstance } from 'src/apis/axios';
+import { PATH } from 'src/routes/path';
 import styles from './styles.module.scss';
 
 const LoginWithSocial = () => {
@@ -11,7 +12,7 @@ const LoginWithSocial = () => {
       `/oauth/${provider}/sign-in-uri`,
       {
         params: {
-          'redirect-uri': `${window.location.origin}/home`,
+          'redirect-uri': `${window.location.origin}${PATH.OAUTH_LOADING}`,
         },
       }
     );
