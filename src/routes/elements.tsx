@@ -40,8 +40,8 @@ export const GuestWritePage = Loadable(
   lazy(() => import('../pages/guest/write'))
 );
 
+export const Page404 = Loadable(lazy(() => import('../pages/404')));
 // export const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 // export const Page403 = Loadable(lazy(() => import('../pages/Page403')));
-// export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
 
 // components
