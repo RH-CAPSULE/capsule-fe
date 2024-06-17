@@ -2,4 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* 크롬, 사파리 및 최신 Edge용 */
+  -moz-tap-highlight-color: transparent; /* 구형 파이어폭스용 */
 }
