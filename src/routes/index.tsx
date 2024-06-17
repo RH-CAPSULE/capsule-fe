@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
 import {
   // APP
@@ -17,7 +17,6 @@ import {
   Page404,
 } from './elements';
 import TestPage from '../_mock/TestPage';
-import BackgroundLayout from '../layouts/background/BackgroundLayout';
 import AuthGuard from '../auth/AuthGuard';
 import { PATH } from './path';
 
@@ -28,7 +27,6 @@ export default function Router() {
     // auth
     {
       path: 'auth',
-      element: <BackgroundLayout />,
       children: [
         { path: 'sign-in', element: <LoginPage /> },
         { path: 'sign-up', element: <SignUpPage /> },
@@ -41,7 +39,7 @@ export default function Router() {
       path: '',
       element: (
         <AuthGuard>
-          <BackgroundLayout />
+          <Outlet />
         </AuthGuard>
       ),
       children: [
@@ -57,7 +55,6 @@ export default function Router() {
     // Guest
     {
       path: 'guest',
-      element: <BackgroundLayout />,
       children: [
         { element: <Navigate to={PATH.GUEST_HOME} replace />, index: true },
         { path: ':capsuleBoxId', element: <GuestHomePage /> },
