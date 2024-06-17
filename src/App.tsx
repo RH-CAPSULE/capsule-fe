@@ -29,6 +29,7 @@ function App() {
                 color: '#fff',
                 fontSize: px(12),
                 paddingInline: px(8),
+                fontFamily: 'inherit',
               }}
               onClick={() => closeSnackbar(key)}
             >
