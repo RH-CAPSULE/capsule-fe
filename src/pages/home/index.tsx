@@ -12,41 +12,32 @@ import {
 } from 'src/sections/home';
 import { useCapsuleBox } from 'src/apis/queries/capsule/capsule-box';
 import { ICapsuleBox } from 'src/types/capsule';
+import LoadingSuspense from 'src/components/loading-suspense';
 
 const Home = () => {
   const { data: capsuleBox, isLoading } = useCapsuleBox<ICapsuleBox>();
 
-  const renderContent = () => {
-    if (isLoading) {
-      return <p>Loading ...</p>;
-    }
-
-    if (capsuleBox) {
-      return (
-        <>
-          <HomeCapsuleBox theme={capsuleBox.theme} capsuleBox={capsuleBox} />
-          <HomeBottomButtons
-            theme={capsuleBox?.theme!}
-            capsuleBox={capsuleBox}
-          />
-        </>
-      );
-    }
-
-    return <HomeCapsuleBoxBlank />;
-  };
-
   return (
-    <>
+    <LoadingSuspense isLoading={isLoading}>
       <Helmet>
         <title> Home | Capsule</title>
       </Helmet>
       <Header />
       <Container>
         <HomeHeader />
-        {renderContent()}
+        {capsuleBox ? (
+          <>
+            <HomeCapsuleBox theme={capsuleBox.theme} capsuleBox={capsuleBox} />
+            <HomeBottomButtons
+              theme={capsuleBox?.theme!}
+              capsuleBox={capsuleBox}
+            />
+          </>
+        ) : (
+          <HomeCapsuleBoxBlank />
+        )}
       </Container>
-    </>
+    </LoadingSuspense>
   );
 };
 export default Home;
