@@ -1,11 +1,9 @@
-import React from 'react';
 import { ThemeType } from 'src/types/theme';
 import { Button } from 'src/components/button';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { copyToClipboard } from 'src/utils/clipboard';
 import { PATH } from 'src/routes/path';
-import { useCachedUser } from 'src/apis/queries/auth/user-info';
 import { isFuture, isPast } from 'date-fns';
 import { useMakeCapsuleStore } from 'src/store/capsule';
 import styles from './styles.module.scss';
@@ -29,7 +27,6 @@ interface Props {
 
 const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
-  const { user } = useCachedUser();
   const setIsMakeModalOpen = useMakeCapsuleStore(
     (state) => state.setIsMakeModalOpen
   );
@@ -37,7 +34,7 @@ const HomeBottomButtons = ({ theme, capsuleBox }: Props) => {
   const { capsuleBoxId, hasMyCapsule, closedAt, openedAt } = capsuleBox || {};
 
   const handleCopy = () => {
-    copyToClipboard(`${getDomain()}/${user?.id}`);
+    copyToClipboard(`${getDomain()}/guest/${capsuleBoxId}`);
     enqueueSnackbar('링크가 복사되었습니다.', { variant: 'success' });
   };
 

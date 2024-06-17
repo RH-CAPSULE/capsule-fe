@@ -16,6 +16,7 @@ import { QUERY_KEY } from 'src/apis/queryKeys';
 import { PATH } from 'src/routes/path';
 import { Modal } from 'src/components/modal';
 import { Capsule } from 'src/components/capsule';
+import { useMakeGuestCapsule } from 'src/apis/queries/guest';
 import styles from './styles.module.scss';
 // styles
 import LetterSelector from './LetterSelector';
@@ -59,13 +60,16 @@ const letterSchema = Yup.object().shape({
 /**
  *  WritePad 사용자가 타임캡슐을 작성하는 페이지
  */
-const WritePad = () => {
+const WritePad = ({ isGuest = false }: { isGuest?: boolean }) => {
   const [type, setType] = useState<LetterType>('PRIMARY');
   const [colorSelectorOpen, setColorSelectorOpen] = useState(false);
   const colorSelectorRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
   const makeCapsuleMutate = useMakeCapsule();
+
+  // guest
+  const makeGuestCapsuleMutate = useMakeGuestCapsule();
 
   const [searchParams] = useSearchParams();
   const capsuleBoxId = searchParams.get('id');
@@ -119,6 +123,11 @@ const WritePad = () => {
       if (data.audioChunks?.length && data.audioChunks.length > 0) {
         const audioBlob = new Blob(data.audioChunks, { type: 'audio/wav' });
         formData.append('audio', audioBlob);
+      }
+
+      if (isGuest) {
+        makeGuestCapsuleMutate.mutate(formData);
+        return;
       }
 
       makeCapsuleMutate.mutate(formData, {

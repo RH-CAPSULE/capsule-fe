@@ -1,0 +1,32 @@
+@import 'src/theme/variables.scss';
+@import 'src/theme/utils.scss';
+
+.section {
+  width: 100%;
+  padding: px(32);
+  @include flexLayout(column, center, center, 0);
+
+  // heading
+  h1 {
+    font-size: px(32);
+    color: $white;
+    // TODO: feat inner shadow
+    // font-weight: bold;
+    // background-color: #565656;
+    // color: transparent;
+    // text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
+    // -webkit-background-clip: text;
+    // -moz-background-clip: text;
+    // background-clip: text;
+  }
+
+  &.bottom {
+    margin-top: px(16);
+    @include flexLayout(column, center, center, 8);
+
+    a {
+      width: 100%;
+      text-decoration: none;
+    }
+  }
+}
