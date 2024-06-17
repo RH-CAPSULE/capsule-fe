@@ -33,7 +33,7 @@ const CapsuleList = () => {
 
   const navigate = useNavigate();
 
-  const isNotData = !data;
+  const isNotData = !data?.pages[0]?.content?.length;
 
   React.useEffect(() => {
     if (inView && hasNextPage) {
