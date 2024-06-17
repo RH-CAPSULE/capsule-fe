@@ -9,7 +9,7 @@ const WritePage = () => {
   return (
     <>
       <Helmet>
-        <title> Home | Capsule</title>
+        <title> Write | Capsule</title>
       </Helmet>
       <BackHeader />
       <Container>
