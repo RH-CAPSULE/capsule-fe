@@ -25,6 +25,9 @@ export const PATH_API = {
   HISTORY: '/api/history-capsule-boxes',
   // inquiry
   INQUIRY: '/api/inquiry',
+  // guest
+  GUEST_CAPSULE_BOX: '/api/guest/capsule-box',
+  GUEST_WRITE: '/api/guest/capsule',
 };
 
 /**
