@@ -28,12 +28,18 @@ const CapsuleList = () => {
   const { id: capsuleBoxId } = useParams();
 
   const { ref, inView } = useInView();
-  const { data, isFetched, hasNextPage, isFetchingNextPage, fetchNextPage } =
-    useCapsuleList({ capsuleBoxId, enabled: !!capsuleBoxId });
+  const {
+    data,
+    isLoading,
+    isFetched,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useCapsuleList({ capsuleBoxId, enabled: !!capsuleBoxId });
 
   const navigate = useNavigate();
 
-  const isNotData = !data?.pages[0]?.content?.length;
+  const isNotData = !isLoading && !data?.pages[0]?.content?.length;
 
   React.useEffect(() => {
     if (inView && hasNextPage) {

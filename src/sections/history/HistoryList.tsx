@@ -12,6 +12,7 @@ const HistoryList = () => {
   const { ref, inView } = useInView();
   const {
     data,
+    isLoading,
     isFetched,
     hasNextPage,
     isFetchingNextPage,
@@ -21,7 +22,7 @@ const HistoryList = () => {
 
   const navigate = useNavigate();
 
-  const isNotData = !data?.pages[0]?.content?.length;
+  const isNotData = !isLoading && !data?.pages[0]?.content?.length;
 
   React.useEffect(() => {
     if (inView && hasNextPage) {
