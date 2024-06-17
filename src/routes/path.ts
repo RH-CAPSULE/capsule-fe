@@ -17,4 +17,7 @@ export const PATH = {
   // 캡슐 리스트
   CAPSULE_LIST: '/capsules',
   CAPSULE_DETAIL: '/capsules/detail',
+  // guest
+  GUEST_HOME: '/guest',
+  GUEST_WRITE: '/guest/write',
 };

@@ -1,11 +1,10 @@
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-// layouts
 import { Container } from 'src/components/container';
 import { BackHeader } from 'src/layouts/header';
-// sections
 import { WritePad } from 'src/sections/write';
 
-const WritePage = () => {
+const GuestWrite = () => {
   return (
     <>
       <Helmet>
@@ -13,10 +12,10 @@ const WritePage = () => {
       </Helmet>
       <BackHeader />
       <Container>
-        <WritePad />
+        <WritePad isGuest />
       </Container>
     </>
   );
 };
 
-export default WritePage;
+export default GuestWrite;

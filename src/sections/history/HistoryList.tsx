@@ -21,7 +21,7 @@ const HistoryList = () => {
 
   const navigate = useNavigate();
 
-  const isNotData = !data;
+  const isNotData = !data?.pages[0]?.content?.length;
 
   React.useEffect(() => {
     if (inView && hasNextPage) {
@@ -38,7 +38,7 @@ const HistoryList = () => {
               {group.content.map((capsuleBox) => (
                 <CapsuleBox
                   onClick={() =>
-                    navigate(`${PATH.HISTORY}/${capsuleBox.capsuleBoxId}`)
+                    navigate(`${PATH.CAPSULE_LIST}/${capsuleBox.capsuleBoxId}`)
                   }
                   style={{ fontSize: px(10) }}
                   key={capsuleBox.capsuleBoxId}
