@@ -23,7 +23,7 @@
     cursor: not-allowed;
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: scale(0.95);
   }
 

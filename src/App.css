@@ -2,4 +2,28 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* 크롬, 사파리 및 최신 Edge용 */
+  -moz-tap-highlight-color: transparent; /* 구형 파이어폭스용 */
+}
+
+#root {
+  min-height: 100vh;
+  background-image: url('./assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+  animation: background 60s ease infinite;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+@keyframes background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
