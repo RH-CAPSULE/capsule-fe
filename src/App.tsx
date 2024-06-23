@@ -7,6 +7,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Router from './routes';
 import { queryClient } from './apis/queryClient';
 import { px } from './utils/styles';
+import ScrollToTop from './components/scroll-to-top';
 
 function App() {
   const notistackRef = React.createRef<any>();
@@ -29,6 +30,7 @@ function App() {
                 color: '#fff',
                 fontSize: px(12),
                 paddingInline: px(8),
+                fontFamily: 'inherit',
               }}
               onClick={() => closeSnackbar(key)}
             >
@@ -38,6 +40,7 @@ function App() {
           autoHideDuration={3000}
         >
           <BrowserRouter>
+            <ScrollToTop />
             <Router />
           </BrowserRouter>
         </SnackbarProvider>
