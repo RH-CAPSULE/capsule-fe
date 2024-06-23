@@ -8,6 +8,7 @@ import { useOAuthSignIn } from 'src/apis/queries/auth';
 import { NameChange } from 'src/sections/oauth-loading';
 import { setSession } from 'src/auth/utils';
 import styles from './styles.module.scss';
+import SplashPage from '../splash';
 
 interface Response {
   accessToken: string;
@@ -26,7 +27,7 @@ const OAuthLoading = () => {
 
   const renderContent = () => {
     if (isLoading) {
-      return <p>로그인 중...</p>;
+      return <SplashPage />;
     }
 
     if (!code || !data || isError) {
