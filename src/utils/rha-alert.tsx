@@ -31,6 +31,7 @@ export const onConfirm = async (message: string) => {
           color: '#757575',
           borderColor: 'transparent',
           boxShadow: `0 0 ${px(8)} 0 rgba(0, 0, 0, 0.08)`,
+          fontFamily: 'inherit',
         },
       },
       confirmButton: {
@@ -39,6 +40,7 @@ export const onConfirm = async (message: string) => {
           flex: 1,
           textAlign: 'center',
           backgroundColor: '#59d4c7',
+          fontFamily: 'inherit',
         },
       },
     }

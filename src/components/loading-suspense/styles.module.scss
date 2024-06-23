@@ -1,0 +1,30 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.layout {
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: auto;
+  display: grid;
+  place-items: center;
+
+  & > main {
+    @include flexLayout(column, space-between, center, 128);
+    h1 {
+      font-size: px(40);
+      color: $white;
+      animation: fadeOut 1s forwards;
+    }
+
+    .capsule {
+      margin-block: px(32);
+      animation: fadeOut 1.2s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
