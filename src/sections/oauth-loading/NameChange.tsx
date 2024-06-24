@@ -47,9 +47,9 @@ const NameChange = ({ token }: { token: IToken }) => {
   } = methods;
 
   const onSubmit = (data: IFormValues) => {
+    setSession(token);
     nameChangeMutation.mutate(data, {
       onSuccess: () => {
-        setSession(token);
         navigate(PATH.HOME);
       },
     });
