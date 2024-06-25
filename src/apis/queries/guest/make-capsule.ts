@@ -1,4 +1,8 @@
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
+import {
+  UseMutationOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from 'src/routes/path';
@@ -6,11 +10,13 @@ import { addCapsuleHistory } from 'src/utils/localStoregeWriteHandler';
 import { axiosInstance } from '../../axios';
 import { PATH_API } from '../../path';
 import { useGuestCapsuleBox } from './capsule-box';
+import { QUERY_KEY } from 'src/apis/queryKeys';
 
 export const useMakeGuestCapsule = <T>(
   options?: Omit<UseMutationOptions<any, any, T>, 'mutationKey'>
 ) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const { data } = useGuestCapsuleBox();
   const { capsuleBoxId } = data || {};
@@ -26,6 +32,8 @@ export const useMakeGuestCapsule = <T>(
       });
       // 작성한 기록 남기기
       addCapsuleHistory(capsuleBoxId!);
+
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CAPSULE_BOX] });
 
       // navigate replace
       navigate(`${PATH.GUEST_HOME}/${capsuleBoxId}`, { replace: true });
