@@ -133,7 +133,7 @@ const WritePad = ({ isGuest = false }: { isGuest?: boolean }) => {
       makeCapsuleMutate.mutate(formData, {
         onSuccess: () => {
           enqueueSnackbar('캡슐함이 생성되었습니다.', { variant: 'success' });
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MAKE_CAPSULE] });
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CAPSULE_BOX] });
           navigate(PATH.HOME);
         },
       });
