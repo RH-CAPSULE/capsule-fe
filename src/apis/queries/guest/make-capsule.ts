@@ -33,7 +33,9 @@ export const useMakeGuestCapsule = <T>(
       // 작성한 기록 남기기
       addCapsuleHistory(capsuleBoxId!);
 
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CAPSULE_BOX] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.GUEST_CAPSULE_BOX],
+      });
 
       // navigate replace
       navigate(`${PATH.GUEST_HOME}/${capsuleBoxId}`, { replace: true });
