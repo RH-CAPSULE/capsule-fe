@@ -22,19 +22,19 @@ const Button = ({
   className = '',
   ...other
 }: Props) => {
-  const classes = React.useCallback(() => {
+  const classes = (() => {
     const classArr = [styles.button, styles[size]];
     if (full) classArr.push(styles.full);
     if (className) classArr.push(className);
 
     return classArr.join(' ');
-  }, [full, size, className]);
+  })();
 
   return (
     <button
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={classes()}
+      className={classes}
       {...other}
       data-loading={loading}
       data-theme={theme}
