@@ -35,9 +35,12 @@ export const useAuth = <T>(params?: Props) => {
 
       if (!isValidToken(accessToken)) {
         // refresh access token
-        accessToken = await axiosInstance.post(PATH_API.TOKEN_REISSUE, {
+        const tokenResponse = await axiosInstance.post(PATH_API.TOKEN_REISSUE, {
           refreshToken,
         });
+
+        // eslint-disable-next-line prefer-destructuring
+        accessToken = tokenResponse.data.accessToken;
       }
 
       setSession({ accessToken, refreshToken });
