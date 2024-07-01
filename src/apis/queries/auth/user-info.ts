@@ -22,7 +22,7 @@ export const useAuth = <T>(params?: Props) => {
       if (!localStorageAvailable()) {
         throw new Error('Error! 인증 정보를 가져올 수 없음');
       }
-      const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY!);
+      let accessToken = localStorage.getItem(ACCESS_TOKEN_KEY!);
       const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY!);
 
       if (!accessToken) {
@@ -35,6 +35,9 @@ export const useAuth = <T>(params?: Props) => {
 
       if (!isValidToken(accessToken)) {
         // refresh access token
+        accessToken = await axiosInstance.post(PATH_API.TOKEN_REISSUE, {
+          refreshToken,
+        });
       }
 
       setSession({ accessToken, refreshToken });
