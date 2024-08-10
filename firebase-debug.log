@@ -1,0 +1,26 @@
+[debug] [2024-08-10T19:07:18.592Z] ----------------------------------------------------------------------
+[debug] [2024-08-10T19:07:18.594Z] Command:       /opt/homebrew/Cellar/node/22.3.0/bin/node /opt/homebrew/bin/firebase deploy --only hosting
+[debug] [2024-08-10T19:07:18.595Z] CLI Version:   13.11.4
+[debug] [2024-08-10T19:07:18.595Z] Platform:      darwin
+[debug] [2024-08-10T19:07:18.595Z] Node Version:  v22.3.0
+[debug] [2024-08-10T19:07:18.595Z] Time:          Sun Aug 11 2024 04:07:18 GMT+0900 (대한민국 표준시)
+[debug] [2024-08-10T19:07:18.596Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-10T19:07:18.648Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-10T19:07:18.649Z] > authorizing via signed-in user (drxxn00@gmail.com)
+[debug] [2024-08-10T19:07:18.649Z] [iam] checking project moment-capsule for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-08-10T19:07:18.650Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/moment-capsule:testIamPermissions [none]
+[debug] [2024-08-10T19:07:18.650Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/moment-capsule:testIamPermissions x-goog-quota-user=projects/moment-capsule
+[debug] [2024-08-10T19:07:18.650Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/moment-capsule:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-10T19:07:19.223Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/moment-capsule:testIamPermissions 200
+[debug] [2024-08-10T19:07:19.223Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/moment-capsule:testIamPermissions {}
+[debug] [2024-08-10T19:07:19.223Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project moment-capsule:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2024-08-10T19:07:19.224Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/moment-capsule [none]
+[debug] [2024-08-10T19:07:19.628Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/moment-capsule 403
+[debug] [2024-08-10T19:07:19.628Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/moment-capsule {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2024-08-10T19:07:19.629Z] HTTP Error: 403, The caller does not have permission
+[error] 
+[error] Error: Assertion failed: resolving hosting target of a site with no site name or target name. This should have caused an error earlier
