@@ -39,7 +39,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   }
 
   if (isNotFoundUser) {
-    return <Navigate to={`${PATH.LOGIN}#wepp-install-modal`} />;
+    return <Navigate to={PATH.LOGIN} />;
   }
 
   return <> {children} </>;
