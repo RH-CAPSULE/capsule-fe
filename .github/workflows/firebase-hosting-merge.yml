@@ -6,6 +6,11 @@ on:
   push:
     branches:
       - main
+env:
+  REACT_APP_API_DOMAIN: '${{ secrets.REACT_APP_API_DOMAIN }}'
+  REACT_APP_ACCESS_TOKEN_KEY: '${{ secrets.REACT_APP_ACCESS_TOKEN_KEY }}'
+  REACT_APP_REFRESH_TOKEN_KEY: '${{ secrets.REACT_APP_REFRESH_TOKEN_KEY }}'
+  REACT_APP_WRITE_HISTORY_KEY: '${{ secrets.REACT_APP_WRITE_HISTORY_KEY }}'
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
