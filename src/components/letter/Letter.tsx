@@ -15,7 +15,8 @@ import ImageUpload from '../image-upload/ImageUpload';
 // type
 import { LetterType } from '../../types/letter';
 import { Theme } from '../../types';
-import AudioUpload from '../audio-upload/ImageUpload';
+import RecordDrawer from './record-drawer/record-drawer';
+import AudioView from './audio-view';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: LetterType;
@@ -24,7 +25,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const Letter = ({ type = 'PRIMARY', readonly, className, ...other }: Props) => {
   const { watch } = useFormContext();
-  const audioButtonRef = watch('audioButtonRef');
 
   const classes = React.useMemo(() => {
     const classArr = [styles.container, styles[type]];
@@ -36,44 +36,53 @@ const Letter = ({ type = 'PRIMARY', readonly, className, ...other }: Props) => {
     const fileInputRef = watch('fileInputRef');
     fileInputRef.current?.click();
   };
+
+  //! 바꿈
+  const [isRecordDrawerOpen, setIsRecordDrawerOpen] = React.useState(false);
   const handleRecordButtonClick = () => {
-    // @ts-ignore
-    audioButtonRef?.current?.triggerRecord();
+    setIsRecordDrawerOpen(true);
   };
 
   return (
-    <div className={classes}>
-      <div className={`${styles.top} ${styles.toFrom}`}>
-        TO.
-        <RHFInput name="title" placeholder="캡슐에게.." />
-      </div>
-      <div className={styles.contents}>
-        <ImageUpload />
-        <AudioUpload />
-        <div className={styles.textarea}>
-          <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
+    <>
+      <div className={classes}>
+        <div className={`${styles.top} ${styles.toFrom}`}>
+          TO.
+          <RHFInput name="title" placeholder="캡슐에게.." />
         </div>
-      </div>
+        <div className={styles.contents}>
+          <ImageUpload />
+          {/* <AudioUpload /> */}
+          <AudioView />
+          <div className={styles.textarea}>
+            <RHFTextArea name="content" placeholder="내용을 입력해주세요." />
+          </div>
+        </div>
 
-      <div className={styles.bottom}>
-        <IconButton
-          theme={type === 'PRIMARY' ? '' : Theme.AQUA}
-          className="image"
-          prevIcon={type === 'PRIMARY' ? IconImagePlusAqua : IconImagePlus}
-          onClick={handleButtonClick}
-        />
-        <IconButton
-          theme={type === 'PRIMARY' ? '' : Theme.AQUA}
-          className="image"
-          prevIcon={type === 'PRIMARY' ? IconMikeAqua : IconMike}
-          onClick={handleRecordButtonClick}
-        />
-        <div className={`${styles.toFrom} ${styles.right}`}>
-          From.
-          <RHFInput name="writer" placeholder="캡슐이가" />
+        <div className={styles.bottom}>
+          <IconButton
+            theme={type === 'PRIMARY' ? '' : Theme.AQUA}
+            className="image"
+            prevIcon={type === 'PRIMARY' ? IconImagePlusAqua : IconImagePlus}
+            onClick={handleButtonClick}
+          />
+          <IconButton
+            theme={type === 'PRIMARY' ? '' : Theme.AQUA}
+            className="image"
+            prevIcon={type === 'PRIMARY' ? IconMikeAqua : IconMike}
+            onClick={handleRecordButtonClick}
+          />
+          <div className={`${styles.toFrom} ${styles.right}`}>
+            From.
+            <RHFInput name="writer" placeholder="캡슐이가" />
+          </div>
         </div>
       </div>
-    </div>
+      <RecordDrawer
+        isOpen={isRecordDrawerOpen}
+        onClose={() => setIsRecordDrawerOpen(false)}
+      />
+    </>
   );
 };
 
