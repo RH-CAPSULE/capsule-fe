@@ -1,0 +1,72 @@
+@import '/src/theme/variables.scss';
+@import '/src/theme/utils.scss';
+
+.drawerContainer {
+  flex: 1;
+  padding: px(20);
+  padding-bottom: px(40);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: px(16);
+
+  button {
+    all: initial;
+    font: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .drawerHeader {
+    width: 100%;
+    text-align: center;
+    font-size: px(20);
+  }
+
+  .drawerBody {
+    .recordStatus {
+      position: relative;
+      width: 100%;
+      height: px(48);
+      border-radius: px(8);
+      background-color: $aqua;
+      display: flex;
+      align-items: center;
+      padding-inline: px(16);
+      .recordingAnimation {
+        width: px(16);
+        height: px(16);
+        border-radius: 50%;
+        animation: recording 1s infinite;
+      }
+      .recordTime {
+        position: absolute;
+        right: px(16);
+      }
+    }
+  }
+
+  .drawerFooter {
+    display: flex;
+    justify-content: space-between;
+
+    .recordButton {
+      background-color: $aqua;
+      border-radius: 50%;
+      padding: px(8);
+    }
+  }
+}
+
+@keyframes recording {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
