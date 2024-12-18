@@ -155,3 +155,36 @@
   padding: px(12);
   flex-grow: 1;
 }
+
+.recordStatus {
+  position: relative;
+  width: 100%;
+  height: px(48);
+  border-radius: px(8);
+  background-color: $aqua;
+  display: flex;
+  align-items: center;
+  padding-inline: px(16);
+  button {
+    all: initial;
+    font: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .recordingAnimation {
+    width: px(16);
+    height: px(16);
+    border-radius: 50%;
+    animation: recording 1s infinite;
+  }
+  .recordTime {
+    position: absolute;
+    right: px(16);
+  }
+  .audioRemoveBtn {
+    position: absolute;
+    top: px(-12);
+    right: px(-12);
+  }
+}

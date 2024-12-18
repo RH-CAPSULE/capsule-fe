@@ -26,15 +26,16 @@ interface IFormValues {
   content: string;
   writer: string;
   color: string;
-  audioChunks?: Blob[];
-  recodeRef?: React.RefObject<MediaRecorder | null>;
+  // audioChunks?: Blob[];
+  // recodeRef?: React.RefObject<MediaRecorder | null>;
   /*
    * react hook form 버그 발견
    * 타입 직접 적용하면 setValue에서 타입체킹 무한루프 발생.
    * 나중에 확인 예정
    */
   fileInputRef?: any;
-  audioButtonRef?: any;
+  audioBlob?: Blob | null;
+  // audioButtonRef?: any;
 }
 // fileInputRef?: React.RefObject<HTMLInputElement>;
 // audioButtonRef?: React.RefObject<HTMLButtonElement>;
@@ -45,9 +46,7 @@ const defaultValues = {
   writer: '',
   color: '#F53C40',
   fileInputRef: { current: null },
-  recodeRef: { current: null },
-  audioChunks: [],
-  audioButtonRef: { current: null },
+  audioBlob: null,
 };
 
 const letterSchema = Yup.object().shape({
@@ -120,9 +119,8 @@ const WritePad = ({ isGuest = false }: { isGuest?: boolean }) => {
         formData.append('image', data.fileInputRef.current.files[0]);
       }
 
-      if (data.audioChunks?.length && data.audioChunks.length > 0) {
-        const audioBlob = new Blob(data.audioChunks, { type: 'audio/wav' });
-        formData.append('audio', audioBlob);
+      if (data.audioBlob) {
+        formData.append('audio', data.audioBlob);
       }
 
       if (isGuest) {
