@@ -64,9 +64,9 @@ const RecordDrawer = ({ isOpen, onClose }: Props) => {
   };
 
   const handleSave = () => {
+    setValue('audioBlob', recordManager.audioBlob);
     recordManager.initRecording();
     audioManager.handleStop();
-    setValue('audioBlob', recordManager.audioBlob);
     onClose();
   };
 
